@@ -35,7 +35,7 @@ public class SysConfig extends AbstractBean{
 	private String	mConfigValue;
 	private String	mMemo;
 	private int		mPConfigId;
-	private int		mDisable;
+	private int		mDisabled;
 	private int		mLevelDepth;
 	
 	public SysConfig() {
@@ -87,14 +87,13 @@ public class SysConfig extends AbstractBean{
 	public void setPConfigId(int pConfigId) {
 		mPConfigId = pConfigId;
 	}
-	@Column(name="Disable",nullable=false,columnDefinition="int default 0")
-	public int getDisable() {
-		return mDisable;
+	@Column(name="Disabled",nullable=false,columnDefinition="int default 0")
+	public int getDisabled() {
+		return mDisabled;
 	}
-	public void setDisable(int disable) {
-		mDisable = disable;
+	public void setDisabled(int disable) {
+		mDisabled = disable;
 	}
-
 	@Column(name="LevelDepth",nullable=false,columnDefinition="int default -1")
 	public int getLevelDepth() {
 		return mLevelDepth;

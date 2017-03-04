@@ -113,11 +113,11 @@ public class SystemManagerBase implements SystemManager {
 		try {
 			if (isChecked) {
 				model = new SysDataAuth();
-				model.setDataAuthId(rs.getInt("DataAuthId"));
+				model.setAuthId(rs.getInt("DataAuthId"));
 				model.setKeyCode(rs.getString("DataAuthKeyCode"));
-				model.setDataAuthName(rs.getString("DataAuthName"));
+				model.setAuthName(rs.getString("DataAuthName"));
 				model.setMemo(rs.getString("Memo"));
-				model.setDisable(rs.getInt("Disabled"));
+				model.setDisabled(rs.getInt("Disabled"));
 				model.setDbDeleted(rs.getInt("DbDeleted"));
 				model.setDbCreateBy(rs.getInt("DbCreateBy"));
 				model.setDbLastUpdateBy(rs.getInt("DbLastUpdateBy"));

@@ -9,9 +9,7 @@ public class SysSequence extends AbstractBean{
 
 	private String	mKeyName;
 	private int		mNextValue;
-	private Date	mLastUpdateTime;
-	
-	
+	private Date	mGeneratedTime;
 	
 	public SysSequence() {
 		super();
@@ -45,28 +43,18 @@ public class SysSequence extends AbstractBean{
 		mNextValue = nextValue;
 	}
 
-
-
-
-
-
 	/**
 	 * @return the lastUpdateTime
 	 */
-	public Date getLastUpdateTime() {
-		return mLastUpdateTime;
+	public Date getGeneratedTime() {
+		return mGeneratedTime;
 	}
-
-
-
-
-
-
+	
 	/**
-	 * @param lastUpdateTime the lastUpdateTime to set
+	 * @param generatedTime the lastUpdateTime to set
 	 */
-	public void setLastUpdateTime(Date lastUpdateTime) {
-		mLastUpdateTime = lastUpdateTime;
+	public void setGeneratedTime(Date generatedTime) {
+		mGeneratedTime = generatedTime;
 	}
 
 

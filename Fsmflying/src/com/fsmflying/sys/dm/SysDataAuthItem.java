@@ -24,9 +24,9 @@ public class SysDataAuthItem extends AbstractBean{
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
-	private int		mItemId;
-	private int		mDataAuthId;
-	private String	mItemName;
+	private int		mAuthItemId;
+	private int		mAuthId;
+	private String	mAuthItemName;
 	private String	mTransferCode;
 	private String	mMemo;
 	
@@ -37,29 +37,29 @@ public class SysDataAuthItem extends AbstractBean{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
-	@Column(name="ItemId",nullable=false)
-	public int getItemId() {
-		return mItemId;
+	@Column(name="AuthItemId",nullable=false)
+	public int getAuthItemId() {
+		return mAuthItemId;
 	}
-	public void setItemId(int dataAuthItemId) {
-		mItemId = dataAuthItemId;
+	public void setAuthItemId(int dataAuthItemId) {
+		mAuthItemId = dataAuthItemId;
 	}
-	@Column(name="DataAuthId",nullable=false)
-	public int getDataAuthId() {
-		return mDataAuthId;
-	}
-
-	public void setDataAuthId(int dataAuthId) {
-		mDataAuthId = dataAuthId;
+	@Column(name="AuthId",nullable=false)
+	public int getAuthId() {
+		return mAuthId;
 	}
 
-	@Column(name="ItemName",nullable=false)
-	public String getItemName() {
-		return mItemName;
+	public void setAuthId(int dataAuthId) {
+		mAuthId = dataAuthId;
 	}
 
-	public void setDataAuthItemName(String dataAuthItemName) {
-		mItemName = dataAuthItemName;
+	@Column(name="AuthItemName",nullable=false)
+	public String getAuthItemName() {
+		return mAuthItemName;
+	}
+
+	public void setAuthItemName(String dataAuthItemName) {
+		mAuthItemName = dataAuthItemName;
 	}
 	@Column(name="TransferCode",nullable=false)
 	public String getTransferCode() {

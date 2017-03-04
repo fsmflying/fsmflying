@@ -28,11 +28,11 @@ public class SysDataAuth extends AbstractBean{
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
-	public int 		mDataAuthId;
-	public String 	mDataAuthName;
+	public int 		mAuthId;
+	public String 	mAuthName;
 	public String 	mKeyCode;
 	public String 	mMemo;
-	public int 		mDisable;
+	public int 		mDisabled;
 	
 	private Set<SysDataAuthItem> items = new HashSet<SysDataAuthItem>();
 	
@@ -48,13 +48,13 @@ public class SysDataAuth extends AbstractBean{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
-	@Column(name="DataAuthId",nullable=false)
-	public int getDataAuthId() {
-		return mDataAuthId;
+	@Column(name="AuthId",nullable=false)
+	public int getAuthId() {
+		return mAuthId;
 	}
 
-	public void setDataAuthId(int dataAuthId) {
-		mDataAuthId = dataAuthId;
+	public void setAuthId(int dataAuthId) {
+		mAuthId = dataAuthId;
 	}
 	@Column(name="KeyCode",nullable=false)
 	public String getKeyCode() {
@@ -64,13 +64,13 @@ public class SysDataAuth extends AbstractBean{
 	public void setKeyCode(String dataAuthKeyCode) {
 		mKeyCode = dataAuthKeyCode;
 	}
-	@Column(name="DataAuthName",nullable=false)
-	public String getDataAuthName() {
-		return mDataAuthName;
+	@Column(name="AuthName",nullable=false)
+	public String getAuthName() {
+		return mAuthName;
 	}
 	
-	public void setDataAuthName(String dataAuthName) {
-		mDataAuthName = dataAuthName;
+	public void setAuthName(String dataAuthName) {
+		mAuthName = dataAuthName;
 	}
 	@Column(name="Memo")
 	public String getMemo() {
@@ -80,13 +80,13 @@ public class SysDataAuth extends AbstractBean{
 	public void setMemo(String memo) {
 		mMemo = memo;
 	}
-	@Column(name="Disable",nullable=false,columnDefinition="int default 0")
-	public int getDisable() {
-		return mDisable;
+	@Column(name="Disabled",nullable=false,columnDefinition="int default 0")
+	public int getDisabled() {
+		return mDisabled;
 	}
 
-	public void setDisable(int disabled) {
-		mDisable = disabled;
+	public void setDisabled(int disabled) {
+		mDisabled = disabled;
 	}
 	
 	@Override

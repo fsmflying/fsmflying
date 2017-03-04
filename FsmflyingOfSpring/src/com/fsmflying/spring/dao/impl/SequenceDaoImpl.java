@@ -82,10 +82,10 @@ public class SequenceDaoImpl implements SequenceDao {
 			if (list.size() == 0) {
 
 				this.mJdbcTemplate
-						.update("insert sys_sequences(keyname,nextvalue,lastupdatetime) values(?,?,?)",
+						.update("insert sys_sequences(keyname,nextvalue,GeneratedTime) values(?,?,?)",
 								keyname, 1 + increment, lastUpdateTime);
 				this.mJdbcTemplate
-						.update("insert sys_sequencehistories(keyname,gtvalue,gttime) values(?,?,?)",
+						.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
 								keyname, 1, lastUpdateTime);
 				return 1;
 			} else {
@@ -96,16 +96,16 @@ public class SequenceDaoImpl implements SequenceDao {
 				if (model.getNextValue() == -1
 						|| (Integer.MAX_VALUE - model.getNextValue() < increment)) {
 					this.mJdbcTemplate
-							.update("update sys_sequences set nextvalue=?,lastupdatetime=? where keyname=?",
+							.update("update sys_sequences set nextvalue=?,GeneratedTime=? where keyname=?",
 									-1, lastUpdateTime, keyname);
 					return -1;
 				}
 				this.mJdbcTemplate
-						.update("update sys_sequences set nextvalue=?,lastupdatetime=? where keyname=?",
+						.update("update sys_sequences set nextvalue=?,GeneratedTime=? where keyname=?",
 							model.getNextValue() + increment, lastUpdateTime,
 							keyname);
 			this.mJdbcTemplate
-					.update("insert sys_sequencehistories(keyname,gtvalue,gttime) values(?,?,?)",
+					.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
 							keyname, model.getNextValue(),
 							model.getLastUpdateTime());
 			return model.getNextValue();
@@ -140,7 +140,7 @@ public class SequenceDaoImpl implements SequenceDao {
 		if (list.size() == 0) {
 
 			this.mJdbcTemplate
-					.update("insert sys_sequences(keyname,nextvalue,lastupdatetime) values(?,?,?)",
+					.update("insert sys_sequences(keyname,nextvalue,GeneratedTime) values(?,?,?)",
 							keyname, increment * (generateCount - 1) + 2,
 							lastUpdateTime);
 			for (int i = 0; i < nextIds.length; i++) {
@@ -150,12 +150,12 @@ public class SequenceDaoImpl implements SequenceDao {
 					nextIds[i] = -1;
 					if ((i > 0) && (nextIds[i - 1] == -1))
 						this.mJdbcTemplate
-								.update("insert sys_sequencehistories(keyname,gtvalue,gttime) values(?,?,?)",
+								.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
 										keyname, -1, lastUpdateTime);
 					continue;
 				}
 				this.mJdbcTemplate
-						.update("insert sys_sequencehistories(keyname,gtvalue,gttime) values(?,?,?)",
+						.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
 								keyname, nextIds[i], lastUpdateTime);
 			}
 			return nextIds;
@@ -164,14 +164,14 @@ public class SequenceDaoImpl implements SequenceDao {
 					"select * from sys_sequences where keyname=?",
 					new Object[] { keyname }, new SysSequenceMapper());
 			this.mJdbcTemplate
-					.update("update sys_sequences set nextvalue=?,lastupdatetime=? where keyname=?",
+					.update("update sys_sequences set nextvalue=?,GeneratedTime=? where keyname=?",
 							model.getNextValue() + increment
 									* (generateCount - 1) + 1, lastUpdateTime,
 							keyname);
 			for (int i = 0; i < nextIds.length; i++) {
 				nextIds[i] = increment * i + model.getNextValue();
 				this.mJdbcTemplate
-						.update("insert sys_sequencehistories(keyname,gtvalue,gttime) values(?,?,?)",
+						.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
 								keyname, nextIds[i], lastUpdateTime);
 			}
 			return nextIds;

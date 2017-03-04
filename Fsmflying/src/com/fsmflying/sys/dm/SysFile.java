@@ -28,82 +28,82 @@ public class SysFile extends AbstractBean{
 	private String 	mFileExtName;
 	private int 	mFileGroupId;
 	private String 	mFileAddress;
-	private int 	mFileLength;
+	private long 	mFileLength;
 	private int		mFileType;
 	private String	mMemo;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
 	@Column(name="FileId",nullable=false)
-	public int getmFileId() {
+	public int getFileId() {
 		return mFileId;
 	}
 
-	public void setmFileId(int mFileId) {
+	public void setFileId(int mFileId) {
 		this.mFileId = mFileId;
 	}
 
 
 	@Column(name="FileName",nullable=false)
-	public String getmFileName() {
+	public String getFileName() {
 		return mFileName;
 	}
 
-	public void setmFileName(String mFileName) {
+	public void setFileName(String mFileName) {
 		this.mFileName = mFileName;
 	}
 	@Column(name="FileExtName")
-	public String getmFileExtName() {
+	public String getFileExtName() {
 		return mFileExtName;
 	}
 
 	
-	public void setmFileExtName(String mFileExtName) {
+	public void setFileExtName(String mFileExtName) {
 		this.mFileExtName = mFileExtName;
 	}
 	
 	@Column(name="FileGroupId")
-	public int getmFileGroupId() {
+	public int getFileGroupId() {
 		return mFileGroupId;
 	}
 
-	public void setmFileGroupId(int mFileGroupId) {
+	public void setFileGroupId(int mFileGroupId) {
 		this.mFileGroupId = mFileGroupId;
 	}
 	
 	@Column(name="FileAddress",nullable=false)
-	public String getmFileAddress() {
+	public String getFileAddress() {
 		return mFileAddress;
 	}
 
-	public void setmFileAddress(String mFileAddress) {
+	public void setFileAddress(String mFileAddress) {
 		this.mFileAddress = mFileAddress;
 	}
 	
-	@Column(name="FileLength",nullable=false,columnDefinition="int default 0")
-	public int getmFileLength() {
+	@Column(name="FileLength",nullable=false,columnDefinition="long default 0")
+	public long getFileLength() {
 		return mFileLength;
 	}
 
-	public void setmFileLength(int mFileLength) {
+	public void setFileLength(long mFileLength) {
 		this.mFileLength = mFileLength;
 	}
 
 	@Column(name="FileType")
-	public int getmFileType() {
+	public int getFileType() {
 		return mFileType;
 	}
 
-	public void setmFileType(int mFileType) {
+	public void setFileType(int mFileType) {
 		this.mFileType = mFileType;
 	}
 
 	@Column(name="Memo")
-	public String getmMemo() {
+	public String getMemo() {
 		return mMemo;
 	}
 
-	public void setmMemo(String mMemo) {
+	public void setMemo(String mMemo) {
 		this.mMemo = mMemo;
 	}
 
@@ -134,6 +134,17 @@ public class SysFile extends AbstractBean{
 	public Date getDbCreateTime() {
 		return super.getDbCreateTime();
 	}
+
+	@Override
+	public String toString() {
+		return "SysFile [mFileId=" + mFileId + ", mFileName=" + mFileName
+				+ ", mFileExtName=" + mFileExtName + ", mFileGroupId="
+				+ mFileGroupId + ", mFileAddress=" + mFileAddress
+				+ ", mFileLength=" + mFileLength + ", mFileType=" + mFileType
+				+ ", mMemo=" + mMemo + "]";
+	}
+	
+	
 	/*
 	@Override
 	@Column(name="DbLastUpdateBy",nullable=false,columnDefinition="int default -1")

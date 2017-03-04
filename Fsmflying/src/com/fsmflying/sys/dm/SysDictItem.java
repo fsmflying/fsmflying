@@ -23,9 +23,9 @@ public class SysDictItem extends AbstractBean {
 
 	private int mItemId;
 	private String mItemName;
-	private String mItemValue;
+	private String mItemCode;
 	private String mDisplayName;
-	// private int mDirId;
+	private int mDirId;
 	private int mShowOrder;
 	private int mIsDefault;
 	private String mMemo;
@@ -36,11 +36,11 @@ public class SysDictItem extends AbstractBean {
 		super();
 	}
 
-	public SysDictItem(String itemName, String itemValue, String displayName,
+	public SysDictItem(String itemName, String itemCode, String displayName,
 			int showOrder, int isDefault, String memo) {
 		super();
 		mItemName = itemName;
-		mItemValue = itemValue;
+		mItemCode = itemCode;
 		mDisplayName = displayName;
 		mShowOrder = showOrder;
 		mIsDefault = isDefault;
@@ -77,13 +77,13 @@ public class SysDictItem extends AbstractBean {
 		mItemName = itemName;
 	}
 
-	@Column(name = "ItemValue")
-	public String getItemValue() {
-		return mItemValue;
+	@Column(name = "ItemCode")
+	public String getItemCode() {
+		return mItemCode;
 	}
 
-	public void setItemValue(String itemValue) {
-		mItemValue = itemValue;
+	public void setItemCode(String itemCode) {
+		mItemCode = itemCode;
 	}
 
 	@Column(name = "DisplayName")
@@ -169,5 +169,13 @@ public class SysDictItem extends AbstractBean {
 	public Date getDbLastUpdateTime() {
 		// TODO Auto-generated method stub
 		return super.getDbLastUpdateTime();
+	}
+
+	public int getDirId() {
+		return mDirId;
+	}
+
+	public void setDirId(int dirId) {
+		mDirId = dirId;
 	}
 }
