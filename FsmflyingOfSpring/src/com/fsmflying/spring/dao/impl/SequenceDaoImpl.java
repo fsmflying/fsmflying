@@ -55,7 +55,7 @@ public class SequenceDaoImpl implements SequenceDao {
 			SysSequence model = new SysSequence();
 			model.setKeyName(rs.getString("KeyName"));
 			model.setNextValue(rs.getInt("NextValue"));
-			model.setLastUpdateTime(rs.getDate("LastUpdateTime"));
+			model.setLastUpdateTime(rs.getDate("GeneratedTime"));
 			return model;
 		}
 	}
