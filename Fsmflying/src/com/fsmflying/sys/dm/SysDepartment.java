@@ -22,7 +22,7 @@ public class SysDepartment extends AbstractBean {
 	private static final long serialVersionUID = 1L;
 
 	private int mDeptId;
-	private int mPDeptId;
+	private int mParentDeptId;
 	private int mCompanyId;
 	private String mDeptName;
 	private String mDeptNo;
@@ -59,13 +59,13 @@ public class SysDepartment extends AbstractBean {
 		mDeptId = deptId;
 	}
 
-	@Column(name = "PDeptId", nullable = false, columnDefinition = "int default -1")
-	public int getPDeptId() {
-		return mPDeptId;
+	@Column(name = "ParentDeptId", nullable = false, columnDefinition = "int default -1")
+	public int getParentDeptId() {
+		return mParentDeptId;
 	}
 
-	public void setPDeptId(int pDeptId) {
-		mPDeptId = pDeptId;
+	public void setParentDeptId(int parentDeptId) {
+		mParentDeptId = parentDeptId;
 	}
 
 	// public int getCompanyId() {

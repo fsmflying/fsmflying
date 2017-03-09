@@ -77,13 +77,13 @@ public class SystemManagerImpl implements SystemManager {
 				e = new SysUser();
 				e.setUserId(rs.getInt("UserId"));
 				e.setUsername(rs.getString("Userpwd"));
-				e.setPassword(rs.getString("Password"));
+				e.setUserPwd(rs.getString("Password"));
 				e.setNickname(rs.getString("Nickname"));
 				e.setIPPolicy(rs.getInt("IPPolicy"));
 
 				e.setIPAddress(rs.getString("IPAddress"));
 				e.setLastLoginTime(rs.getDate("LastLoginTime"));
-				e.setDisabledPolicy(rs.getInt("DisabledPolicy"));
+				e.setStatus(rs.getInt("DisabledPolicy"));
 				e.setDisabledMinutes(rs.getInt("DisabledMinutes"));
 				e.setDisabledTime(rs.getDate("DisabledTime"));
 
@@ -91,7 +91,7 @@ public class SystemManagerImpl implements SystemManager {
 				e.setPwdPromptQuestion(rs.getString("PWDPrompt_Question"));
 				e.setPwdProtectQuestion(rs.getString("PWDProtectQuestion"));
 				e.setPwdProtectAnswer(rs.getString("PWDProtectAnswer"));
-				e.setPwdResetEmail(rs.getString("PWDResetEmail"));
+				e.setEmail(rs.getString("PWDResetEmail"));
 
 				e.setDbDeleted(rs.getInt("DbDeleted"));
 				e.setDbCreateBy(rs.getInt("DbCreateBy"));
@@ -163,21 +163,22 @@ public class SystemManagerImpl implements SystemManager {
 			if (isChecked) {
 				model = new SysCompany();
 				model.setCompanyId(rs.getInt("CompanyId"));
-				model.setPCompanyId(rs.getInt("PCompanyId"));
+				model.setParentCompanyId(rs.getInt("ParentCompanyId"));
 				model.setCompanyNo(rs.getString("CompanyNo"));
 				model.setAutoNo(rs.getString("AutoNo"));
 				model.setShortName(rs.getString("ShortName"));
 				model.setFullName(rs.getString("FullName"));
-				model.setEstablishedDate(rs.getDate("EstablishedDate"));
+				model.setRegisterationDate(rs.getDate("RegisterationDate"));
 				model.setShowOrder(rs.getInt("ShowOrder"));
-				model.setContacts(rs.getString("Contacts"));
+				model.setContactPerson(rs.getString("ContactPerson"));
 				model.setContactAddress(rs.getString("ContactAddress"));
 				model.setContactPhone(rs.getString("ContactPhone"));
-				model.setContactMPhone(rs.getString("ContactMPhone"));
+//				model.setContactMPhone(rs.getString("ContactMPhone"));
 				model.setContactFax(rs.getString("ContactFax"));
 				model.setContactEmail(rs.getString("ContactEmail"));
 				model.setContactPostalCode(rs.getString("ContactPostalCode"));
-				model.setBusinessScope(rs.getString("BusinessScope"));
+				model.setScopeOfBusiness(rs.getString("ScopeOfBusiness"));
+				model.setMemo(rs.getString("Memo"));
 				model.setFlag(rs.getInt("Flag"));
 				model.setDbDeleted(rs.getInt("DbDeleted"));
 				model.setDbCreateBy(rs.getInt("DbCreateBy"));

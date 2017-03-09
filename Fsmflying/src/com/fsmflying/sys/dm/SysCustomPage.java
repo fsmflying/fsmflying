@@ -29,7 +29,7 @@ public class SysCustomPage extends AbstractBean{
 	
 	private	int		mCustomPageId;
 	private String	mCustomPageName;
-	private String	mSysName;
+	private String	mAppName;
 	private String	mSourceUrl;
 	private String	mDestinationUrl;
 	private int		mHandleWay;
@@ -60,12 +60,12 @@ public class SysCustomPage extends AbstractBean{
 	}
 
 	@Column(name="SysName",nullable=false)
-	public String getSysName() {
-		return mSysName;
+	public String getAppName() {
+		return mAppName;
 	}
 
-	public void setSysName(String sysName) {
-		mSysName = sysName;
+	public void setAppName(String sysName) {
+		mAppName = sysName;
 	}
 
 
@@ -86,14 +86,26 @@ public class SysCustomPage extends AbstractBean{
 	public void setDestinationUrl(String destinationUrl) {
 		mDestinationUrl = destinationUrl;
 	}
-
-	@Column(name="HandleWay",nullable=false)
-	public int getHandleWay() {
+	
+	/**
+	 * 获取自定义页面的跳转方式，当系统检测到访问指定源地址(SourceUrl)的请求时，自动将其跳转到一个新的页面:<br/>
+	 * [0]:表示智能跳转，如果有发向源地址(SourceUrl)的请求，则自动将请求其跳转到"custom/{appname}/{SourceUrl}";<br/>
+	 * [1]:表示直接跳转，如果有发向源地址(SourceUrl)的请求，则直接将其跳转到此记录中配置的目录地址(DestinationUrl);<br/>
+	 * @return 页面的跳转方式
+	 */
+	@Column(name="TranslationType",nullable=false)
+	public int getTranslationType() {
 		return mHandleWay;
 	}
-
-	public void setHandleWay(int handleWay) {
-		mHandleWay = handleWay;
+	
+	/**
+	 * 获取自定义页面的跳转方式，当系统检测到访问指定源地址(SourceUrl)的请求时，自动将其跳转到一个新的页面:<br/>
+	 * [0]:表示智能跳转，如果有发向源地址(SourceUrl)的请求，则自动将请求其跳转到"custom/{appname}/{SourceUrl}"
+	 * [1]:表示直接跳转，如果有发向源地址(SourceUrl)的请求，则直接将其跳转到此记录中配置的目录地址(DestinationUrl)
+	 * @param translationType
+	 */
+	public void setTranslationType(int translationType) {
+		mHandleWay = translationType;
 	}
 
 	@Column(name="Memo")

@@ -49,14 +49,14 @@ public class ExampleDbHelper {
 					model = new SysUser();
 					model.setUserId(rs.getInt("UserId"));
 					model.setUsername(rs.getString("Username"));
-					model.setPassword(rs.getString("Userpwd"));
+					model.setUserPwd(rs.getString("Userpwd"));
 					model.setNickname(rs.getString("Nickname"));
 					model.setIPPolicy(rs.getInt("IPPolicy"));
 
 					model.setIPAddress(rs.getString("IPAddress"));
 					model.setLastLoginTime(com.fsmflying.helpers.Helper
 							.parseDate(rs.getString("LastLoginTime")));
-					model.setDisabledPolicy(rs.getInt("DisabledPolicy"));
+					model.setStatus(rs.getInt("DisabledPolicy"));
 					model.setDisabledMinutes(rs.getInt("DisabledMinutes"));
 					model.setDisabledTime(com.fsmflying.helpers.Helper
 							.parseDate(rs.getString("DisabledTime")));
@@ -68,7 +68,7 @@ public class ExampleDbHelper {
 					model.setPwdProtectQuestion(rs
 							.getString("PWDProtectQuestion"));
 					model.setPwdProtectAnswer(rs.getString("PWDProtectAnswer"));
-					model.setPwdResetEmail(rs.getString("PWDResetEmail"));
+					model.setEmail(rs.getString("PWDResetEmail"));
 
 					model.setDbDeleted(rs.getInt("DbDeleted"));
 					model.setDbCreateBy(rs.getInt("DbCreateBy"));
@@ -93,7 +93,7 @@ public class ExampleDbHelper {
 		List<SysUser> list = getUserList();
 		for (SysUser user : list) {
 			if (user.getUsername().equals(username)
-					&& user.getPassword().equals(Helper.getMD5(password)))
+					&& user.getUserPwd().equals(Helper.getMD5(password)))
 				return true;
 		}
 		return false;
@@ -164,28 +164,29 @@ public class ExampleDbHelper {
 				while (rs.next()) {
 					model = new SysCompany();
 					model.setCompanyId(rs.getInt("CompanyId"));
-					model.setPCompanyId(rs.getInt("PCompanyId"));
+					model.setParentCompanyId(rs.getInt("ParentCompanyId"));
 					model.setCompanyNo(rs.getString("CompanyNo"));
 					model.setAutoNo(rs.getString("AutoNo"));
 					model.setShortName(rs.getString("ShortName"));
 
 					model.setFullName(rs.getString("FullName"));
-					model.setEstablishedDate(com.fsmflying.helpers.Helper
-							.parseDate(rs.getString("EstablishedDate")));
+					model.setRegisterationDate(com.fsmflying.helpers.Helper
+							.parseDate(rs.getString("RegisterationDate")));
 					model.setShowOrder(rs.getInt("ShowOrder"));
-					model.setContacts(rs.getString("Contacts"));
+					model.setContactPerson(rs.getString("ContactPerson"));
 					model.setContactAddress(rs.getString("ContactAddress"));
 
 					model.setContactPhone(rs.getString("ContactPhone"));
-					model.setContactMPhone(rs.getString("ContactMPhone"));
+//					model.setContactMPhone(rs.getString("ContactMPhone"));
 					model.setContactFax(rs.getString("ContactFax"));
 					model.setContactEmail(rs.getString("ContactEmail"));
 					model.setContactPostalCode(rs
 							.getString("ContactPostalCode"));
-					model.setBusinessScope(rs.getString("BusinessScope"));
+					model.setScopeOfBusiness(rs.getString("ScopeOfBusiness"));
 
 					model.setFlag(rs.getInt("Flag"));
-
+					model.setMemo(rs.getString("Memo"));
+						
 					model.setDbDeleted(rs.getInt("DbDeleted"));
 					model.setDbCreateBy(rs.getInt("DbCreateBy"));
 					model.setDbCreateTime(com.fsmflying.helpers.Helper
@@ -223,7 +224,7 @@ public class ExampleDbHelper {
 				while (rs.next()) {
 					model = new SysDepartment();
 					model.setDeptId(rs.getInt("DeptId"));
-					model.setPDeptId(rs.getInt("PDeptId"));
+					model.setParentDeptId(rs.getInt("PDeptId"));
 //					model.setcom(rs.getInt("CompanyId"));
 					model.setDeptName(rs.getString("DeptName"));
 					model.setDeptNo(rs.getString("DeptNo"));

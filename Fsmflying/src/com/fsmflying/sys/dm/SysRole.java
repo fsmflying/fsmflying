@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="Sys_Roles",
-uniqueConstraints=@UniqueConstraint(columnNames = { "RoleCode" })
+uniqueConstraints=@UniqueConstraint(columnNames = { "KeyCode" })
 )
 @TableGenerator(
 		name="tableIdGenerator",
@@ -34,7 +34,7 @@ public class SysRole extends AbstractBean{
 	private static final long serialVersionUID = 1L;
 	private int mRoleId;
 	private String mRoleName;
-	private String mRoleCode;
+	private String mKeyCode;
 	private String mMemo;
 	
 	private Set<SysUser> users = new HashSet<SysUser>();
@@ -74,12 +74,12 @@ public class SysRole extends AbstractBean{
 	public void setRoleName(String roleName) {
 		mRoleName = roleName;
 	}
-	@Column(name="RoleCode")
-	public String getRoleCode() {
-		return mRoleCode;
+	@Column(name="KeyCode")
+	public String getKeyCode() {
+		return mKeyCode;
 	}
-	public void setRoleCode(String roleCode) {
-		mRoleCode = roleCode;
+	public void setKeyCode(String KeyCode) {
+		mKeyCode = KeyCode;
 	}
 	@Column(name="Memo")
 	public String getMemo() {

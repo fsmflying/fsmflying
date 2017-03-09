@@ -34,24 +34,27 @@ public class SysCompany extends AbstractBean {
 	private static final long serialVersionUID = 1L;
 	
 	private int		mCompanyId;
-	private int 	mPCompanyId;
+	private int 	mParentCompanyId;
+	private String 	mFullName;
+	private String 	mShortName;
 	private String 	mCompanyNo;
 	private String 	mAutoNo;
-	private String 	mShortName;
-	private String 	mFullName;
-	private Date 	mEstablishedDate;
+	private Date 	mRegisterationDate;
 	private int 	mShowOrder;
-	private String 	mContacts;
+	private String 	mContactPerson;
 	private String 	mContactAddress;
 	private String 	mContactPhone;
-	private String 	mContactMPhone;
+//	private String 	mContactMPhone;
 	private String 	mContactFax;
 	private String 	mContactEmail;
 	private String 	mContactPostalCode;
-	private String 	mBusinessScope;
+	private String 	mScopeOfBusiness;
 	private int		mFlag;
+	private String  mMemo;
 	
 	private Set<SysDepartment> mDepartments = new HashSet<SysDepartment>();
+
+	
 	
 	public SysCompany() {
 		super();
@@ -87,12 +90,12 @@ public class SysCompany extends AbstractBean {
 		mCompanyId = companyId;
 	}
 
-	@Column(name="PCompanyId")
-	public int getPCompanyId() {
-		return mPCompanyId;
+	@Column(name="ParentCompanyId")
+	public int getParentCompanyId() {
+		return mParentCompanyId;
 	}
-	public void setPCompanyId(int pCompanyId) {
-		mPCompanyId = pCompanyId;
+	public void setParentCompanyId(int parentCompanyId) {
+		mParentCompanyId = parentCompanyId;
 	}
 
 	@Column(name="CompanyNo")
@@ -128,12 +131,12 @@ public class SysCompany extends AbstractBean {
 		mFullName = fullName;
 	}
 
-	@Column(name="EstablishedDate")
-	public Date getEstablishedDate() {
-		return mEstablishedDate;
+	@Column(name="RegisterationDate")
+	public Date getRegisterationDate() {
+		return mRegisterationDate;
 	}
-	public void setEstablishedDate(Date establishedDate) {
-		mEstablishedDate = establishedDate;
+	public void setRegisterationDate(Date registerationDate) {
+		mRegisterationDate = registerationDate;
 	}
 
 	@Column(name="ShowOrder")
@@ -144,12 +147,12 @@ public class SysCompany extends AbstractBean {
 		mShowOrder = showOrder;
 	}
 
-	@Column(name="Contacts")
-	public String getContacts() {
-		return mContacts;
+	@Column(name="ContactPerson")
+	public String getContactPerson() {
+		return mContactPerson;
 	}
-	public void setContacts(String contacts) {
-		mContacts = contacts;
+	public void setContactPerson(String contacts) {
+		mContactPerson = contacts;
 	}
 
 	@Column(name="ContactAddress")
@@ -168,13 +171,13 @@ public class SysCompany extends AbstractBean {
 		mContactPhone = contactPhone;
 	}
 
-	@Column(name="ContactMPhone")
-	public String getContactMPhone() {
-		return mContactMPhone;
-	}
-	public void setContactMPhone(String contactMPhone) {
-		mContactMPhone = contactMPhone;
-	}
+//	@Column(name="ContactMPhone")
+//	public String getContactMPhone() {
+//		return mContactMPhone;
+//	}
+//	public void setContactMPhone(String contactMPhone) {
+//		mContactMPhone = contactMPhone;
+//	}
 
 	@Column(name="ContactFax")
 	public String getContactFax() {
@@ -200,12 +203,12 @@ public class SysCompany extends AbstractBean {
 		mContactPostalCode = contactPostalCode;
 	}
 
-	@Column(name="BusinessScope")
-	public String getBusinessScope() {
-		return mBusinessScope;
+	@Column(name="ScopeOfBusiness")
+	public String getScopeOfBusiness() {
+		return mScopeOfBusiness;
 	}
-	public void setBusinessScope(String businessScope) {
-		mBusinessScope = businessScope;
+	public void setScopeOfBusiness(String scopeOfBusiness) {
+		mScopeOfBusiness = scopeOfBusiness;
 	}
 
 	@Column(name="Flag")
@@ -214,6 +217,14 @@ public class SysCompany extends AbstractBean {
 	}
 	public void setFlag(int flag) {
 		mFlag = flag;
+	}
+	
+	@Column(name="Memo")
+	public String getMemo() {
+		return mMemo;
+	}
+	public void setMemo(String memo) {
+		mMemo = memo;
 	}
 	
 	@Override

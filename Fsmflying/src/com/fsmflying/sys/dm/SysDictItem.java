@@ -23,7 +23,7 @@ public class SysDictItem extends AbstractBean {
 
 	private int mItemId;
 	private String mItemName;
-	private String mItemCode;
+	private String mItemValue;
 	private String mDisplayName;
 	private int mDirId;
 	private int mShowOrder;
@@ -40,7 +40,7 @@ public class SysDictItem extends AbstractBean {
 			int showOrder, int isDefault, String memo) {
 		super();
 		mItemName = itemName;
-		mItemCode = itemCode;
+		mItemValue = itemCode;
 		mDisplayName = displayName;
 		mShowOrder = showOrder;
 		mIsDefault = isDefault;
@@ -77,13 +77,13 @@ public class SysDictItem extends AbstractBean {
 		mItemName = itemName;
 	}
 
-	@Column(name = "ItemCode")
-	public String getItemCode() {
-		return mItemCode;
+	@Column(name = "ItemValue")
+	public String getItemValue() {
+		return mItemValue;
 	}
 
-	public void setItemCode(String itemCode) {
-		mItemCode = itemCode;
+	public void setItemValue(String itemValue) {
+		mItemValue = itemValue;
 	}
 
 	@Column(name = "DisplayName")

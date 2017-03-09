@@ -45,18 +45,18 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public boolean add(SysUser model) {
 		this.mJdbcTemplate
 				.update("insert into sys_users(UserId,Username,UserPwd,Nickname,IPPolicy,IPAddress,RegisterTime,LastLoginTime,"
-						+ "DisabledPolicy,DisabledTime,DisabledMinutes,PwdPromptQuestion,PwdProtectQuestion,PwdProtectAnswer,"
-						+ "PwdResetEmail,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) "
+						+ "Status,DisabledTime,DisabledMinutes,PwdPromptQuestion,PwdProtectQuestion,PwdProtectAnswer,"
+						+ "Email,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) "
 						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
 						model.getUserId(), model.getUsername(),
-						model.getPassword(), model.getNickname(),
+						model.getUserPwd(), model.getNickname(),
 						model.getIPPolicy(), model.getIPAddress(),
 						model.getRegisterTime(), model.getLastLoginTime(),
-						model.getDisabledPolicy(), model.getDisabledTime(),
+						model.getStatus(), model.getDisabledTime(),
 						model.getDisabledMinutes(),
 						model.getPwdPromptQuestion(),
 						model.getPwdProtectQuestion(),
-						model.getPwdProtectAnswer(), model.getPwdResetEmail(),
+						model.getPwdProtectAnswer(), model.getEmail(),
 						model.getDbDeleted(), model.getDbCreateBy(),
 						model.getDbCreateTime(), model.getDbLastUpdateBy(),
 						model.getDbLastUpdateTime()
@@ -70,18 +70,18 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 		this.mJdbcTemplate
 				.update("update sys_users set Username=?,UserPwd=?,Nickname=?,IPPolicy=?,IPAddress=?,RegisterTime=?,"
-						+ "LastLoginTime=?,DisabledPolicy=?,DisabledTime=?,DisabledMinutes=?,PwdPromptQuestion=?,"
-						+ "PwdProtectQuestion=?,PwdProtectAnswer=?,PwdResetEmail=?,DbDeleted=?,DbCreateBy=?,"
+						+ "LastLoginTime=?,Status=?,DisabledTime=?,DisabledMinutes=?,PwdPromptQuestion=?,"
+						+ "PwdProtectQuestion=?,PwdProtectAnswer=?,Email=?,DbDeleted=?,DbCreateBy=?,"
 						+ "DbCreateTime=?,DbLastUpdateBy=?,DbLastUpdateTime=? "
 						+ "where 1=1 and UserId=?", model.getUsername(),
-						model.getPassword(), model.getNickname(),
+						model.getUserPwd(), model.getNickname(),
 						model.getIPPolicy(), model.getIPAddress(),
 						model.getRegisterTime(), model.getLastLoginTime(),
-						model.getDisabledPolicy(), model.getDisabledTime(),
+						model.getStatus(), model.getDisabledTime(),
 						model.getDisabledMinutes(),
 						model.getPwdPromptQuestion(),
 						model.getPwdProtectQuestion(),
-						model.getPwdProtectAnswer(), model.getPwdResetEmail(),
+						model.getPwdProtectAnswer(), model.getEmail(),
 						model.getDbDeleted(), model.getDbCreateBy(),
 						model.getDbCreateTime(), model.getDbLastUpdateBy(),
 						model.getDbLastUpdateTime(), model.getUserId()
@@ -103,19 +103,19 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			SysUser model = new SysUser();
 			model.setUserId(rs.getInt("UserId"));
 			model.setUsername(rs.getString("Username"));
-			model.setPassword(rs.getString("UserPwd"));
+			model.setUserPwd(rs.getString("UserPwd"));
 			model.setNickname(rs.getString("Nickname"));
+			model.setEmail(rs.getString("Email"));
 			model.setIPPolicy(rs.getInt("IPPolicy"));
 			model.setIPAddress(rs.getString("IPAddress"));
 			model.setRegisterTime(rs.getDate("RegisterTime"));
 			model.setLastLoginTime(rs.getDate("LastLoginTime"));
-			model.setDisabledPolicy(rs.getInt("DisabledPolicy"));
+			model.setStatus(rs.getInt("Status"));
 			model.setDisabledTime(rs.getDate("DisabledTime"));
 			model.setDisabledMinutes(rs.getInt("DisabledMinutes"));
 			model.setPwdPromptQuestion(rs.getString("PwdPromptQuestion"));
 			model.setPwdProtectQuestion(rs.getString("PwdProtectQuestion"));
 			model.setPwdProtectAnswer(rs.getString("PwdProtectAnswer"));
-			model.setPwdResetEmail(rs.getString("PwdResetEmail"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
 			model.setDbCreateBy(rs.getInt("DbCreateBy"));
 			model.setDbCreateTime(rs.getDate("DbCreateTime"));
@@ -142,9 +142,9 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean add(SysRole model) {
 		this.mJdbcTemplate
-				.update("insert into sys_roles(RoleId,RoleName,RoleCode,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?)",
+				.update("insert into sys_roles(RoleId,RoleName,KeyCode,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?)",
 						model.getRoleId(), model.getRoleName(),
-						model.getRoleCode(), model.getMemo(),
+						model.getKeyCode(), model.getMemo(),
 						model.getDbDeleted(), model.getDbCreateBy(),
 						model.getDbLastUpdateBy(), model.getDbCreateTime(),
 						model.getDbLastUpdateTime()
@@ -156,8 +156,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysRole model) {
 		this.mJdbcTemplate
-				.update("update sys_roles set RoleName=?,RoleCode=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and RoleId=?",
-						model.getRoleName(), model.getRoleCode(),
+				.update("update sys_roles set RoleName=?,KeyCode=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and RoleId=?",
+						model.getRoleName(), model.getKeyCode(),
 						model.getMemo(), model.getDbDeleted(),
 						model.getDbCreateBy(), model.getDbLastUpdateBy(),
 						model.getDbCreateTime(), model.getDbLastUpdateTime(),
@@ -179,7 +179,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			SysRole model = new SysRole();
 			model.setRoleId(rs.getInt("RoleId"));
 			model.setRoleName(rs.getString("RoleName"));
-			model.setRoleCode(rs.getString("RoleCode"));
+			model.setKeyCode(rs.getString("KeyCode"));
 			model.setMemo(rs.getString("Memo"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
 			model.setDbCreateBy(rs.getInt("DbCreateBy"));
@@ -207,18 +207,27 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean add(SysCompany model) {
 		this.mJdbcTemplate
-				.update("insert into sys_companys(CompanyId,PCompanyId,CompanyNo,AutoNo,ShortName,FullName,EstablishedDate,ShowOrder,Contacts,ContactAddress,ContactPhone,ContactMPhone,ContactFax,ContactEmail,ContactPostalCode,BusinessScope,Flag,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-						model.getCompanyId(), model.getPCompanyId(),
-						model.getCompanyNo(), model.getAutoNo(),
-						model.getShortName(), model.getFullName(),
-						model.getEstablishedDate(), model.getShowOrder(),
-						model.getContacts(), model.getContactAddress(),
-						model.getContactPhone(), model.getContactMPhone(),
+				.update("insert into sys_companys(CompanyId,PCompanyId,CompanyNo,AutoNo,ShortName,FullName,RegisterationDate,ShowOrder,"
+						+ "Contacts,ContactAddress,ContactPhone,ContactMPhone,ContactFax,ContactEmail,ContactPostalCode,"
+						+ "BusinessScope,Flag,Memo,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) "
+						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+						model.getCompanyId(),
+						model.getParentCompanyId(),
+						model.getCompanyNo(),
+						model.getAutoNo(),
+						model.getShortName(),
+						model.getFullName(),
+						model.getRegisterationDate(),
+						model.getShowOrder(),
+						model.getContactPerson(),
+						model.getContactAddress(),
+						model.getContactPhone(), // model.getContactMPhone(),
 						model.getContactFax(), model.getContactEmail(),
-						model.getContactPostalCode(), model.getBusinessScope(),
-						model.getFlag(), model.getDbDeleted(),
-						model.getDbCreateBy(), model.getDbCreateTime(),
-						model.getDbLastUpdateBy(), model.getDbLastUpdateTime()
+						model.getContactPostalCode(),
+						model.getScopeOfBusiness(), model.getFlag(),model.getMemo(),
+						model.getDbDeleted(), model.getDbCreateBy(),
+						model.getDbCreateTime(), model.getDbLastUpdateBy(),
+						model.getDbLastUpdateTime()
 
 				);
 		return true;
@@ -227,18 +236,22 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysCompany model) {
 		this.mJdbcTemplate
-				.update("update sys_companys set PCompanyId=?,CompanyNo=?,AutoNo=?,ShortName=?,FullName=?,EstablishedDate=?,ShowOrder=?,Contacts=?,ContactAddress=?,ContactPhone=?,ContactMPhone=?,ContactFax=?,ContactEmail=?,ContactPostalCode=?,BusinessScope=?,Flag=?,DbDeleted=?,DbCreateBy=?,DbCreateTime=?,DbLastUpdateBy=?,DbLastUpdateTime=? where 1=1 and CompanyId=?",
-						model.getPCompanyId(), model.getCompanyNo(),
+				.update("update sys_companys set ParentCompanyId=?,CompanyNo=?,AutoNo=?,ShortName=?,FullName=?,RegisterationDate=?,ShowOrder=?,"
+						+ "ContactPerson=?,ContactAddress=?,ContactPhone=?,ContactFax=?,ContactEmail=?,ContactPostalCode=?,"
+						+ "ScopeOfBusiness=?,Flag=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbCreateTime=?,DbLastUpdateBy=?,DbLastUpdateTime=? "
+						+ "where 1=1 and CompanyId=?",
+						model.getParentCompanyId(), model.getCompanyNo(),
 						model.getAutoNo(), model.getShortName(),
-						model.getFullName(), model.getEstablishedDate(),
-						model.getShowOrder(), model.getContacts(),
+						model.getFullName(), model.getRegisterationDate(),
+						model.getShowOrder(), model.getContactPerson(),
 						model.getContactAddress(), model.getContactPhone(),
-						model.getContactMPhone(), model.getContactFax(),
+						/* model.getContactMPhone(), */model.getContactFax(),
 						model.getContactEmail(), model.getContactPostalCode(),
-						model.getBusinessScope(), model.getFlag(),
-						model.getDbDeleted(), model.getDbCreateBy(),
-						model.getDbCreateTime(), model.getDbLastUpdateBy(),
-						model.getDbLastUpdateTime(), model.getCompanyId()
+						model.getScopeOfBusiness(), model.getFlag(),
+						model.getMemo(), model.getDbDeleted(),
+						model.getDbCreateBy(), model.getDbCreateTime(),
+						model.getDbLastUpdateBy(), model.getDbLastUpdateTime(),
+						model.getCompanyId()
 
 				);
 		return true;
@@ -256,22 +269,23 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		public SysCompany mapRow(ResultSet rs, int rowNum) throws SQLException {
 			SysCompany model = new SysCompany();
 			model.setCompanyId(rs.getInt("CompanyId"));
-			model.setPCompanyId(rs.getInt("PCompanyId"));
+			model.setParentCompanyId(rs.getInt("ParentCompanyId"));
 			model.setCompanyNo(rs.getString("CompanyNo"));
 			model.setAutoNo(rs.getString("AutoNo"));
 			model.setShortName(rs.getString("ShortName"));
 			model.setFullName(rs.getString("FullName"));
-			model.setEstablishedDate(rs.getDate("EstablishedDate"));
+			model.setRegisterationDate(rs.getDate("RegisterationDate"));
 			model.setShowOrder(rs.getInt("ShowOrder"));
-			model.setContacts(rs.getString("Contacts"));
+			model.setContactPerson(rs.getString("Contacts"));
 			model.setContactAddress(rs.getString("ContactAddress"));
 			model.setContactPhone(rs.getString("ContactPhone"));
-			model.setContactMPhone(rs.getString("ContactMPhone"));
+			// model.setContactMPhone(rs.getString("ContactMPhone"));
 			model.setContactFax(rs.getString("ContactFax"));
 			model.setContactEmail(rs.getString("ContactEmail"));
 			model.setContactPostalCode(rs.getString("ContactPostalCode"));
-			model.setBusinessScope(rs.getString("BusinessScope"));
+			model.setScopeOfBusiness(rs.getString("ScopeOfBusiness"));
 			model.setFlag(rs.getInt("Flag"));
+			model.setMemo(rs.getString("Memo"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
 			model.setDbCreateBy(rs.getInt("DbCreateBy"));
 			model.setDbCreateTime(rs.getDate("DbCreateTime"));
@@ -299,7 +313,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public boolean add(SysDepartment model) {
 		this.mJdbcTemplate
 				.update("insert into sys_departments(DeptId,PDeptId,CompanyId,DeptName,DeptNo,LevelDepth,AutoNo,ShowOrder,IsLeaf,Flag,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-						model.getDeptId(), model.getPDeptId(),
+						model.getDeptId(), model.getParentDeptId(),
 						model.getCompanyId(), model.getDeptName(),
 						model.getDeptNo(), model.getLevelDepth(),
 						model.getAutoNo(), model.getShowOrder(),
@@ -316,7 +330,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public boolean save(SysDepartment model) {
 		this.mJdbcTemplate
 				.update("update sys_departments set PDeptId=?,CompanyId=?,DeptName=?,DeptNo=?,LevelDepth=?,AutoNo=?,ShowOrder=?,IsLeaf=?,Flag=?,DbDeleted=?,DbCreateBy=?,DbCreateTime=?,DbLastUpdateBy=?,DbLastUpdateTime=? where 1=1 and DeptId=?",
-						model.getPDeptId(), model.getCompanyId(),
+						model.getParentDeptId(), model.getCompanyId(),
 						model.getDeptName(), model.getDeptNo(),
 						model.getLevelDepth(), model.getAutoNo(),
 						model.getShowOrder(), model.getIsLeaf(),
@@ -341,7 +355,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 				throws SQLException {
 			SysDepartment model = new SysDepartment();
 			model.setDeptId(rs.getInt("DeptId"));
-			model.setPDeptId(rs.getInt("PDeptId"));
+			model.setParentDeptId(rs.getInt("PDeptId"));
 			model.setCompanyId(rs.getInt("CompanyId"));
 			model.setDeptName(rs.getString("DeptName"));
 			model.setDeptNo(rs.getString("DeptNo"));
@@ -648,10 +662,10 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean add(SysCustomPage model) {
 		this.mJdbcTemplate
-				.update("insert into sys_custompages(CustomPageId,CustomPageName,SysName,SourceUrl,DestinationUrl,HandleWay,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?)",
+				.update("insert into sys_custompages(CustomPageId,CustomPageName,AppName,SourceUrl,DestinationUrl,TranslationType,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?)",
 						model.getCustomPageId(), model.getCustomPageName(),
-						model.getSysName(), model.getSourceUrl(),
-						model.getDestinationUrl(), model.getHandleWay(),
+						model.getAppName(), model.getSourceUrl(),
+						model.getDestinationUrl(), model.getTranslationType(),
 						model.getMemo(), model.getDbDeleted(),
 						model.getDbCreateBy(), model.getDbLastUpdateBy(),
 						model.getDbCreateTime(), model.getDbLastUpdateTime()
@@ -663,10 +677,10 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysCustomPage model) {
 		this.mJdbcTemplate
-				.update("update sys_custompages set CustomPageName=?,SysName=?,SourceUrl=?,DestinationUrl=?,HandleWay=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and CustomPageId=?",
-						model.getCustomPageName(), model.getSysName(),
+				.update("update sys_custompages set CustomPageName=?,AppName=?,SourceUrl=?,DestinationUrl=?,TranslationType=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and CustomPageId=?",
+						model.getCustomPageName(), model.getAppName(),
 						model.getSourceUrl(), model.getDestinationUrl(),
-						model.getHandleWay(), model.getMemo(),
+						model.getTranslationType(), model.getMemo(),
 						model.getDbDeleted(), model.getDbCreateBy(),
 						model.getDbLastUpdateBy(), model.getDbCreateTime(),
 						model.getDbLastUpdateTime(), model.getCustomPageId()
@@ -689,10 +703,10 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			SysCustomPage model = new SysCustomPage();
 			model.setCustomPageId(rs.getInt("CustomPageId"));
 			model.setCustomPageName(rs.getString("CustomPageName"));
-			model.setSysName(rs.getString("SysName"));
+			model.setAppName(rs.getString("AppName"));
 			model.setSourceUrl(rs.getString("SourceUrl"));
 			model.setDestinationUrl(rs.getString("DestinationUrl"));
-			model.setHandleWay(rs.getInt("HandleWay"));
+			model.setTranslationType(rs.getInt("TranslationType"));
 			model.setMemo(rs.getString("Memo"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
 			model.setDbCreateBy(rs.getInt("DbCreateBy"));
@@ -922,8 +936,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean add(SysDictItem model) {
 		this.mJdbcTemplate
-				.update("insert into sys_dictitems(ItemId,ItemCode,ItemName,DirId,ShowOrder,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?)",
-						model.getItemId(), model.getItemCode(),
+				.update("insert into sys_dictitems(ItemId,ItemValue,ItemName,DirId,ShowOrder,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?)",
+						model.getItemId(), model.getItemValue(),
 						model.getItemName(), model.getDirId(),
 						model.getShowOrder(), model.getMemo(),
 						model.getDbDeleted(), model.getDbCreateBy(),
@@ -937,8 +951,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysDictItem model) {
 		this.mJdbcTemplate
-				.update("update sys_dictitems set ItemCode=?,ItemName=?,DirId=?,ShowOrder=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and ItemId=?",
-						model.getItemCode(), model.getItemName(),
+				.update("update sys_dictitems set ItemValue=?,ItemName=?,DirId=?,ShowOrder=?,Memo=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and ItemId=?",
+						model.getItemValue(), model.getItemName(),
 						model.getDirId(), model.getShowOrder(),
 						model.getMemo(), model.getDbDeleted(),
 						model.getDbCreateBy(), model.getDbLastUpdateBy(),
@@ -960,7 +974,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		public SysDictItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 			SysDictItem model = new SysDictItem();
 			model.setItemId(rs.getInt("ItemId"));
-			model.setItemCode(rs.getString("ItemCode"));
+			model.setItemValue(rs.getString("ItemValue"));
 			model.setItemName(rs.getString("ItemName"));
 			model.setDirId(rs.getInt("DirId"));
 			model.setShowOrder(rs.getInt("ShowOrder"));
@@ -989,53 +1003,52 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	}
 
 	@Override
-	public boolean add(SysSequence model){
+	public boolean add(SysSequence model) {
 		this.mJdbcTemplate
-				.update("insert into sys_sequences(KeyName,NextValue,GeneratedTime) values(?,?,?)", 
-									model.getKeyName(),
-						model.getNextValue(),
+				.update("insert into sys_sequences(KeyName,NextValue,GeneratedTime) values(?,?,?)",
+						model.getKeyName(), model.getNextValue(),
 						model.getGeneratedTime()
 
-		);
+				);
 		return true;
 	}
 
 	@Override
-	public boolean save(SysSequence model){
+	public boolean save(SysSequence model) {
 		this.mJdbcTemplate
-				.update("update sys_sequences set NextValue=?,GeneratedTime=? where 1=1 and KeyName=?" 
-									,model.getNextValue()
-						,model.getGeneratedTime()
-						,model.getKeyName()
+				.update("update sys_sequences set NextValue=?,GeneratedTime=? where 1=1 and KeyName=?",
+						model.getNextValue(), model.getGeneratedTime(),
+						model.getKeyName()
 
-		);
+				);
 		return true;
 	}
-	
+
 	@Override
-	public boolean deleteModelOfSysSequence(String keyName){
-		this.mJdbcTemplate.update("delete from  sys_sequences where  1=1 and KeyName=?",  keyName);
+	public boolean deleteModelOfSysSequence(String keyName) {
+		this.mJdbcTemplate.update(
+				"delete from  sys_sequences where  1=1 and KeyName=?", keyName);
 		return true;
 	}
-	
+
 	class SysSequenceMapper implements RowMapper<SysSequence> {
 		public SysSequence mapRow(ResultSet rs, int rowNum) throws SQLException {
 			SysSequence model = new SysSequence();
-				model.setKeyName(rs.getString("KeyName"));
-				model.setNextValue(rs.getInt("NextValue"));
-				model.setGeneratedTime(rs.getDate("GeneratedTime"));
+			model.setKeyName(rs.getString("KeyName"));
+			model.setNextValue(rs.getInt("NextValue"));
+			model.setGeneratedTime(rs.getDate("GeneratedTime"));
 
 			return model;
 		}
 	}
-	
+
 	@Override
 	public SysSequence getModelOfSysSequence(String keyName) {
 		return this.mJdbcTemplate.queryForObject(
-				"select * from sys_sequences where  1=1 and KeyName=?", new Object[] {  keyName },
-				new SysSequenceMapper());
+				"select * from sys_sequences where  1=1 and KeyName=?",
+				new Object[] { keyName }, new SysSequenceMapper());
 	}
-	
+
 	@Override
 	public List<SysSequence> getListOfSysSequence() {
 		return this.mJdbcTemplate.query("select * from sys_sequences",
@@ -1045,11 +1058,12 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean add(SysFile model) {
 		this.mJdbcTemplate
-				.update("insert into sys_files(fileId,fileName,fileExtName,fileAddress,fileLength,fileType,dbDeleted,dbCreateBy,dbCreateTime)"
-						+ " values(?,?,?,?,?,?,?,?,?)", model.getFileId(),
+				.update("insert into sys_files(fileId,fileName,fileExtName,fileGroupId,fileAddress,fileLength,fileType,memo,dbDeleted,dbCreateBy,dbCreateTime)"
+						+ " values(?,?,?,?,?,?,?,?,?,?,?)", model.getFileId(),
 						model.getFileName(), model.getFileExtName(),
-						model.getFileAddress(), model.getFileLength(),
-						model.getFileType(), model.getDbDeleted(),
+						model.getFileGroupId(), model.getFileAddress(),
+						model.getFileLength(), model.getFileType(),
+						model.getMemo(), model.getDbDeleted(),
 						model.getDbCreateBy(), model.getDbCreateTime());
 		return true;
 	}
@@ -1057,10 +1071,11 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysFile model) {
 		this.mJdbcTemplate
-				.update("update sys_files set fileName=?,fileExtName=?,fileAddress=?,fileLength=?,fileType=?,dbDeleted=?"
+				.update("update sys_files set fileName=?,fileExtName=?,fileGroupId=?,fileAddress=?,fileLength=?,fileType=?,memo=?,dbDeleted=?"
 						+ " where fileId=?", model.getFileName(),
-						model.getFileExtName(), model.getFileAddress(),
-						model.getFileLength(), model.getFileType(),
+						model.getFileExtName(), model.getFileGroupId(),
+						model.getFileAddress(), model.getFileLength(),
+						model.getFileType(), model.getMemo(),
 						model.getDbDeleted(), model.getFileId());
 		return true;
 	}
@@ -1081,7 +1096,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			model.setFileAddress(rs.getString("fileAddress"));
 			model.setFileLength(rs.getInt("fileLength"));
 			model.setFileType(rs.getInt("fileType"));
-			model.setMemo(rs.getString("fileName"));
+			model.setMemo(rs.getString("memo"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
 			model.setDbCreateBy(rs.getInt("DbDeleted"));
 			model.setDbCreateTime(rs.getDate("DbCreateTime"));
