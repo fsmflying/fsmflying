@@ -3,7 +3,9 @@ package com.fsmflying.spring.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -131,6 +133,13 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		return this.mJdbcTemplate.queryForObject(
 				"select * from sys_users where  1=1 and UserId=?",
 				new Object[] { userId }, new SysUserMapper());
+	}
+	
+	@Override
+	public SysUser getModelOfSysUser(String username) {
+		return this.mJdbcTemplate.queryForObject(
+				"select * from sys_users where  1=1 and Username=?",
+				new Object[] { username }, new SysUserMapper());
 	}
 
 	@Override
