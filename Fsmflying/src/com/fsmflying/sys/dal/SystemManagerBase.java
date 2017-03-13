@@ -151,7 +151,7 @@ public class SystemManagerBase implements SystemManager {
 			if (readOk) {
 				model = new SysMenu();
 				model.setMenuId(rs.getInt("MenuId"));
-				model.setPMenuId(rs.getInt("PMenuId"));
+				model.setParentMenuId(rs.getInt("PMenuId"));
 				model.setMenuName(rs.getString("MenuName"));
 				model.setMenuType(rs.getInt("MenuType"));
 				model.setShowOrder(rs.getInt("ShowOrder"));

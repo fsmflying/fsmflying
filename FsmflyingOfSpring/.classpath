@@ -14,5 +14,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-4.3.1-release"/>
+	<classpathentry kind="lib" path="D:/dev/java/libs/jackson/jackson-core-2.8.7.jar"/>
+	<classpathentry kind="lib" path="D:/dev/java/libs/jackson/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="D:/dev/java/libs/jackson/jackson-core-asl-1.9.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

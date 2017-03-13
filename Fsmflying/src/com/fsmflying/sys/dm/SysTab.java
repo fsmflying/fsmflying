@@ -35,9 +35,10 @@ public class SysTab extends AbstractBean{
 	private int		mTabId;
 	private String	mTabName;
 	private int		mShowOrder;
-	private int		mPTabId;
+	private int		mParentTabId;
 	private String	mDefaultUrl;
 	private int		mTabType;
+	private int 	mLevelDepth;
 	private String	mMemo;
 	
 	private Set<SysMenu> mMenus = new HashSet<SysMenu>();
@@ -58,6 +59,7 @@ public class SysTab extends AbstractBean{
 	public void setMenus(Set<SysMenu> menus) {
 		mMenus = menus;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
@@ -85,12 +87,13 @@ public class SysTab extends AbstractBean{
 		mShowOrder = showOrder;
 	}
 
-	public int getPTabId() {
-		return mPTabId;
+	@Column(name="ParentTabId",nullable=false,columnDefinition="int default -1")
+	public int getParentTabId() {
+		return mParentTabId;
 	}
 
-	public void setPTabId(int pTabId) {
-		mPTabId = pTabId;
+	public void setParentTabId(int pTabId) {
+		mParentTabId = pTabId;
 	}
 
 	public String getDefaultUrl() {
@@ -157,5 +160,14 @@ public class SysTab extends AbstractBean{
 	@Override
 	public String toString() {
 		return "SysTab [mTabName=" + mTabName + "]";
+	}
+	
+	@Column(name="LevelDepth",nullable=false,columnDefinition="int default -1")
+	public int getLevelDepth() {
+		return mLevelDepth;
+	}
+
+	public void setLevelDepth(int levelDepth) {
+		mLevelDepth = levelDepth;
 	}
 }

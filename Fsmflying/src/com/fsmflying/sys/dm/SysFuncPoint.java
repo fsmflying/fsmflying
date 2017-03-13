@@ -32,9 +32,10 @@ public class SysFuncPoint extends AbstractBean{
 	private int mFuncPointId; 
 //	private int mMenuId;
 	private String mFuncPointName; 
-	private String mFuncPointCode; 
+	private String mKeyCode; 
 	private int mShowOrder;
 	private String mMemo;
+	private int mMenuId;
 	
 	private SysMenu mMenu;
 
@@ -72,13 +73,13 @@ public class SysFuncPoint extends AbstractBean{
 	public void setFuncPointName(String funcPointName) {
 		mFuncPointName = funcPointName;
 	}
-	@Column(name="FuncPointCode",nullable=false)
-	public String getFuncPointCode() {
-		return mFuncPointCode;
+	@Column(name="KeyCode",nullable=false)
+	public String getKeyCode() {
+		return mKeyCode;
 	}
 
-	public void setFuncPointCode(String funcPointCode) {
-		mFuncPointCode = funcPointCode;
+	public void setKeyCode(String keyCode) {
+		mKeyCode = keyCode;
 	}
 
 	@Column(name="ShowOrder",nullable=false,columnDefinition="int default 10000")
@@ -139,6 +140,16 @@ public class SysFuncPoint extends AbstractBean{
 	public String getTypeUnique() {
 		// TODO Auto-generated method stub
 		return "sys.efunctionpoint";
+	}
+
+
+	@Column(name="MenuId",nullable=false,columnDefinition="int default -1")
+	public int getMenuId() {
+		return mMenuId;
+	}
+
+	public void setMenuId(int menuId) {
+		mMenuId = menuId;
 	}
 	
 }

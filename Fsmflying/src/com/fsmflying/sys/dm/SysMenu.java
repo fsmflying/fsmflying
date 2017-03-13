@@ -34,7 +34,7 @@ public class SysMenu extends AbstractBean{
 	private String 	mMenuName;
 	private String 	mDefaultUrl;
 	private int 	mShowOrder;
-	private int 	mPMenuId;
+	private int 	mParentMenuId;
 	private int 	mLevelDepth;
 	private int 	mMenuType;
 	private String 	mMemo;
@@ -49,7 +49,7 @@ public class SysMenu extends AbstractBean{
 		mMenuName = menuName;
 		mDefaultUrl = defaultUrl;
 		mShowOrder = showOrder;
-		mPMenuId = pMenuId;
+		mParentMenuId = pMenuId;
 		mLevelDepth = depth;
 		mMenuType = menuType;
 		mMemo = memo;
@@ -118,12 +118,12 @@ public class SysMenu extends AbstractBean{
 	public void setShowOrder(int showOrder) {
 		mShowOrder = showOrder;
 	}
-	@Column(name="PMenuId",nullable=false,columnDefinition="int default -1")
-	public int getPMenuId() {
-		return mPMenuId;
+	@Column(name="ParentMenuId",nullable=false,columnDefinition="int default -1")
+	public int getParentMenuId() {
+		return mParentMenuId;
 	}
-	public void setPMenuId(int pMenuId) {
-		mPMenuId = pMenuId;
+	public void setParentMenuId(int parentMenuId) {
+		mParentMenuId = parentMenuId;
 	}
 	@Column(name="LevelDepth",nullable=false,columnDefinition="int default -1")
 	public int getLevelDepth() {
