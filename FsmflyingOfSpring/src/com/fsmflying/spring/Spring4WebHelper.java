@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +27,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.fsmflying.sys.dao.SystemManageDao;
 import com.fsmflying.sys.dm.SysFile;
 import com.fsmflying.sys.service.SequenceService;
 import com.fsmflying.sys.service.SystemManageService;

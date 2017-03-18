@@ -3,7 +3,9 @@ package com.fsmflying.spring.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -130,7 +132,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysUser> getListOfSysUser() {
-		return this.mJdbcTemplate.query("select * from sys_users", new SysUserMapper());
+		return this.mJdbcTemplate.query("select * from sys_users where dbdeleted=0", new SysUserMapper());
 	}
 
 	@Override
@@ -186,7 +188,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysRole> getListOfSysRole() {
-		return this.mJdbcTemplate.query("select * from sys_roles", new SysRoleMapper());
+		return this.mJdbcTemplate.query("select * from sys_roles where dbdeleted=0", new SysRoleMapper());
 	}
 
 	@Override
@@ -271,7 +273,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysCompany> getListOfSysCompany() {
-		return this.mJdbcTemplate.query("select * from sys_companys", new SysCompanyMapper());
+		return this.mJdbcTemplate.query("select * from sys_companys where dbdeleted=0", new SysCompanyMapper());
 	}
 
 	@Override
@@ -337,7 +339,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysDepartment> getListOfSysDepartment() {
-		return this.mJdbcTemplate.query("select * from sys_departments", new SysDepartmentMapper());
+		return this.mJdbcTemplate.query("select * from sys_departments where dbdeleted=0", new SysDepartmentMapper());
 	}
 
 	@Override
@@ -425,7 +427,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysEmployee> getListOfSysEmployee() {
-		return this.mJdbcTemplate.query("select * from sys_employees", new SysEmployeeMapper());
+		return this.mJdbcTemplate.query("select * from sys_employees where dbdeleted=0", new SysEmployeeMapper());
 	}
 
 	@Override
@@ -487,7 +489,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysTab> getListOfSysTab() {
-		return this.mJdbcTemplate.query("select * from sys_tabs", new SysTabMapper());
+		return this.mJdbcTemplate.query("select * from sys_tabs where dbdeleted=0", new SysTabMapper());
 	}
 
 	@Override
@@ -550,7 +552,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysMenu> getListOfSysMenu() {
-		return this.mJdbcTemplate.query("select * from sys_menus", new SysMenuMapper());
+		return this.mJdbcTemplate.query("select * from sys_menus where dbdeleted=0", new SysMenuMapper());
 	}
 
 	@Override
@@ -610,15 +612,15 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysFuncPoint> getListOfSysFuncPoint() {
-		return this.mJdbcTemplate.query("select * from sys_funcpoints", new SysFuncPointMapper());
+		return this.mJdbcTemplate.query("select * from sys_funcpoints where dbdeleted=0", new SysFuncPointMapper());
 	}
 
 	@Override
 	public boolean add(SysConfig model) {
 		this.mJdbcTemplate.update(
-				"insert into sys_configs(ConfigId,ConfigName,ConfigKey,ConfigValue,Memo,PConfigId,Disabled,LevelDepth,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+				"insert into sys_configs(ConfigId,ConfigName,ConfigKey,ConfigValue,Memo,ParentConfigId,Disabled,LevelDepth,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
 				model.getConfigId(), model.getConfigName(), model.getConfigKey(), model.getConfigValue(),
-				model.getMemo(), model.getPConfigId(), model.getDisabled(), model.getLevelDepth(), model.getDbDeleted(),
+				model.getMemo(), model.getParentConfigId(), model.getDisabled(), model.getLevelDepth(), model.getDbDeleted(),
 				model.getDbCreateBy(), model.getDbLastUpdateBy(), model.getDbCreateTime(), model.getDbLastUpdateTime()
 
 		);
@@ -628,9 +630,9 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	@Override
 	public boolean save(SysConfig model) {
 		this.mJdbcTemplate.update(
-				"update sys_configs set ConfigName=?,ConfigKey=?,ConfigValue=?,Memo=?,PConfigId=?,Disabled=?,LevelDepth=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and ConfigId=?",
+				"update sys_configs set ConfigName=?,ConfigKey=?,ConfigValue=?,Memo=?,ParentConfigId=?,Disabled=?,LevelDepth=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and ConfigId=?",
 				model.getConfigName(), model.getConfigKey(), model.getConfigValue(), model.getMemo(),
-				model.getPConfigId(), model.getDisabled(), model.getLevelDepth(), model.getDbDeleted(),
+				model.getParentConfigId(), model.getDisabled(), model.getLevelDepth(), model.getDbDeleted(),
 				model.getDbCreateBy(), model.getDbLastUpdateBy(), model.getDbCreateTime(), model.getDbLastUpdateTime(),
 				model.getConfigId()
 
@@ -652,7 +654,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			model.setConfigKey(rs.getString("ConfigKey"));
 			model.setConfigValue(rs.getString("ConfigValue"));
 			model.setMemo(rs.getString("Memo"));
-			model.setPConfigId(rs.getInt("PConfigId"));
+			model.setParentConfigId(rs.getInt("ParentConfigId"));
 			model.setDisabled(rs.getInt("Disabled"));
 			model.setLevelDepth(rs.getInt("LevelDepth"));
 			model.setDbDeleted(rs.getInt("DbDeleted"));
@@ -673,7 +675,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysConfig> getListOfSysConfig() {
-		return this.mJdbcTemplate.query("select * from sys_configs", new SysConfigMapper());
+		return this.mJdbcTemplate.query("select * from sys_configs where dbdeleted=0", new SysConfigMapper());
 	}
 
 	@Override
@@ -734,7 +736,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysCustomPage> getListOfSysCustomPage() {
-		return this.mJdbcTemplate.query("select * from sys_custompages", new SysCustomPageMapper());
+		return this.mJdbcTemplate.query("select * from sys_custompages where dbdeleted=0", new SysCustomPageMapper());
 	}
 
 	@Override
@@ -793,7 +795,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysDataAuth> getListOfSysDataAuth() {
-		return this.mJdbcTemplate.query("select * from sys_dataauths", new SysDataAuthMapper());
+		return this.mJdbcTemplate.query("select * from sys_dataauths where dbdeleted=0", new SysDataAuthMapper());
 	}
 
 	@Override
@@ -855,7 +857,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysDataAuthItem> getListOfSysDataAuthItem() {
-		return this.mJdbcTemplate.query("select * from sys_dataauthitems", new SysDataAuthItemMapper());
+		return this.mJdbcTemplate.query("select * from sys_dataauthitems where dbdeleted=0", new SysDataAuthItemMapper());
 	}
 
 	@Override
@@ -1082,7 +1084,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysFile> getListOfSysFile() {
-		return this.mJdbcTemplate.query("select * from sys_files", new SysFileMapper());
+		return this.mJdbcTemplate.query("select * from sys_files where dbdeleted=0", new SysFileMapper());
 	}
 
 	@Override
@@ -1257,44 +1259,51 @@ public class SystemManageDaoImpl implements SystemManageDao {
 
 	@Override
 	public List<SysRole> getUserRoles(int userId) {
-		return this.mJdbcTemplate.query("select b.* from sys_ruserrole a"
-				+ " inner join sys_roles b on a.roleid=b.roleid where b.dbdeleted=0 and a.userid=?",
+		return this.mJdbcTemplate.query(
+				"select b.* from sys_ruserrole a"
+						+ " inner join sys_roles b on a.roleid=b.roleid where b.dbdeleted=0 and a.userid=?",
 				new Object[] { userId }, new SysRoleMapper());
 	}
 
 	@Override
 	public List<SysTab> getUserTabs(int userId) {
-		System.out.println("getUserTabs:userId="+userId);
-		return this.mJdbcTemplate.query("select d.* from (select distinct c.tabid from sys_ruserrole a"
-				+ " inner join sys_roles b on a.roleid=b.roleid inner join sys_rroletab c on c.roleid=b.roleid"
-				+ " where a.userid=? and b.dbdeleted=0) a inner join sys_tabs d on a.tabid=d.tabid"
-				+ " where 1=1  and d.dbdeleted=0 order by d.showorder", new Object[] { userId }, new SysTabMapper());
+		// System.out.println("getUserTabs:userId="+userId);
+		return this.mJdbcTemplate.query(
+				"select d.* from (select distinct c.tabid from sys_ruserrole a"
+						+ " inner join sys_roles b on a.roleid=b.roleid inner join sys_rroletab c on c.roleid=b.roleid"
+						+ " where a.userid=? and b.dbdeleted=0) a inner join sys_tabs d on a.tabid=d.tabid"
+						+ " where 1=1  and d.dbdeleted=0 order by d.showorder",
+				new Object[] { userId }, new SysTabMapper());
 	}
 
 	@Override
 	public List<SysMenu> getUserMenus(int userId) {
-		return this.mJdbcTemplate.query("select d.* from (select distinct c.menuid from sys_ruserrole a"
-				+ "	inner join sys_roles b on a.roleid=b.roleid inner join sys_rrolemenu c on c.roleid=b.roleid"
-				+ "	where a.userid=? and b.dbdeleted=0) a inner join sys_menus d on a.menuid=d.menuid"
-				+ " where 1=1  and d.dbdeleted=0 order by d.showorder", new Object[] { userId }, new SysMenuMapper());
+		return this.mJdbcTemplate.query(
+				"select d.* from (select distinct c.menuid from sys_ruserrole a"
+						+ "	inner join sys_roles b on a.roleid=b.roleid inner join sys_rrolemenu c on c.roleid=b.roleid"
+						+ "	where a.userid=? and b.dbdeleted=0) a inner join sys_menus d on a.menuid=d.menuid"
+						+ " where 1=1  and d.dbdeleted=0 order by d.showorder",
+				new Object[] { userId }, new SysMenuMapper());
 	}
 
 	@Override
 	public List<SysFuncPoint> getUserFuncPoints(int userId) {
-		return this.mJdbcTemplate.query("select d.* from (select distinct c.funcpointid from sys_ruserrole a"
-				+ "	inner join sys_roles b on a.roleid=b.roleid"
-				+ "	inner join sys_rrolefuncpoint c on c.roleid=b.roleid where a.userid=? and b.dbdeleted=0"
-				+ " ) a inner join sys_funcpoints d on a.funcpointid=d.funcpointid"
-				+ " where 1=1  and d.dbdeleted=0 order by d.showorder", new Object[] { userId },
-				new SysFuncPointMapper());
+		return this.mJdbcTemplate.query(
+				"select d.* from (select distinct c.funcpointid from sys_ruserrole a"
+						+ "	inner join sys_roles b on a.roleid=b.roleid"
+						+ "	inner join sys_rrolefuncpoint c on c.roleid=b.roleid where a.userid=? and b.dbdeleted=0"
+						+ " ) a inner join sys_funcpoints d on a.funcpointid=d.funcpointid"
+						+ " where 1=1  and d.dbdeleted=0 order by d.showorder",
+				new Object[] { userId }, new SysFuncPointMapper());
 	}
 
 	@Override
 	public List<SysDataAuth> getUserDataAuths(int userId) {
-		return this.mJdbcTemplate.query("select d.* from (select distinct c.authid from sys_ruserrole a"
-				+ "	inner join sys_roles b on a.roleid=b.roleid"
-				+ "	inner join sys_rroledataauth c on c.roleid=b.roleid" + " where a.userid=? and b.dbdeleted=0"
-				+ " ) a inner join sys_dataauths d on a.authid=d.authid" + " where 1=1  and d.dbdeleted=0",
+		return this.mJdbcTemplate.query(
+				"select d.* from (select distinct c.authid from sys_ruserrole a"
+						+ "	inner join sys_roles b on a.roleid=b.roleid"
+						+ "	inner join sys_rroledataauth c on c.roleid=b.roleid" + " where a.userid=? and b.dbdeleted=0"
+						+ " ) a inner join sys_dataauths d on a.authid=d.authid" + " where 1=1  and d.dbdeleted=0",
 				new Object[] { userId }, new SysDataAuthMapper());
 	}
 
@@ -1303,8 +1312,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		return this.mJdbcTemplate.query("select d.* from (select distinct c.authitemid from sys_ruserrole a"
 				+ "	inner join sys_roles b on a.roleid=b.roleid"
 				+ "	inner join sys_rroledataauthitem c on c.roleid=b.roleid where a.userid=? and b.dbdeleted=0"
-				+ " ) a inner join sys_dataauthitems d on a.authitemid=d.authitemid"
-				+ " where 1=1  and d.dbdeleted=0", new Object[] { userId }, new SysDataAuthItemMapper());
+				+ " ) a inner join sys_dataauthitems d on a.authitemid=d.authitemid" + " where 1=1  and d.dbdeleted=0",
+				new Object[] { userId }, new SysDataAuthItemMapper());
 	}
 
 	@Override
@@ -1318,54 +1327,151 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public UserRightSet getUserRightSet(int userId) {
 		UserRightSet userRightSet = new UserRightSet();
 		List<Integer> ids = new ArrayList<Integer>();
-		
+
 		List<SysRole> roles = this.getUserRoles(userId);
-		for(SysRole e:roles)
+		for (SysRole e : roles)
 			ids.add(e.getRoleId());
 		userRightSet.setRoles(ids);
-		
+
 		ids.clear();
 		List<SysMenu> menus = this.getUserMenus(userId);
-		for(SysMenu e:menus)
+		for (SysMenu e : menus)
 			ids.add(e.getMenuId());
 		userRightSet.setMenus(ids);
-		
+
 		ids.clear();
 		List<SysFuncPoint> funcPoints = this.getUserFuncPoints(userId);
-		for(SysFuncPoint e:funcPoints)
+		for (SysFuncPoint e : funcPoints)
 			ids.add(e.getFuncPointId());
 		userRightSet.setFuncPoints(ids);
-		
+
 		ids.clear();
 		List<SysDataAuth> dataAuths = this.getUserDataAuths(userId);
-		for(SysDataAuth e:dataAuths)
+		for (SysDataAuth e : dataAuths)
 			ids.add(e.getAuthId());
 		userRightSet.setDataAuths(ids);
-		
+
 		ids.clear();
 		List<SysDataAuthItem> dataAuthItems = this.getUserDataAuthItems(userId);
-		for(SysDataAuthItem e:dataAuthItems)
+		for (SysDataAuthItem e : dataAuthItems)
 			ids.add(e.getAuthItemId());
 		userRightSet.setDataAuthItems(ids);
-		
+
 		return userRightSet;
 	}
-	
-	
-	class SysTabMenuMapper implements RowMapper<TwoTuple<Integer,Integer>> {
-		public TwoTuple<Integer,Integer> mapRow(ResultSet rs, int rowNum) throws SQLException {
-			TwoTuple<Integer,Integer> model = new TwoTuple<Integer,Integer>();
+
+	class SysTabMenuMapper implements RowMapper<TwoTuple<Integer, Integer>> {
+		public TwoTuple<Integer, Integer> mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TwoTuple<Integer, Integer> model = new TwoTuple<Integer, Integer>();
 			model.setFirst(rs.getInt("TabId"));
 			model.setSecond(rs.getInt("MenuId"));
 			return model;
 		}
 	}
 
-	
-	
-	@Override
-	public List<TwoTuple<Integer, Integer>> getUserTabMenus() {
-		return this.mJdbcTemplate.query("select tabid,menuid from sys_rtabmenu", new SysTabMenuMapper());
+	class TwoIntegerTupleMapper implements RowMapper<TwoTuple<Integer, Integer>> {
+		private String firstColumnName;
+		private String secondColumnName;
+
+		public TwoIntegerTupleMapper(String firstColumnName, String secondColumnName) {
+			super();
+			this.firstColumnName = firstColumnName;
+			this.secondColumnName = secondColumnName;
+		}
+
+		public TwoTuple<Integer, Integer> mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TwoTuple<Integer, Integer> model = new TwoTuple<Integer, Integer>();
+			model.setFirst(rs.getInt(firstColumnName));
+			model.setSecond(rs.getInt(secondColumnName));
+			return model;
+		}
 	}
+	
+	//class SingleIntegerColumnMapper implements RowMapper<K>
+	
+	
+//	class IntegerListMapMapper implements RowMapper<HashMap<Integer, List<Integer>>> {
+//		private String firstColumnName;
+//		private String secondColumnName;
+//
+//		public IntegerListMapMapper(String firstColumnName, String secondColumnName) {
+//			super();
+//			this.firstColumnName = firstColumnName;
+//			this.secondColumnName = secondColumnName;
+//		}
+//
+//		public HashMap<Integer, List<Integer>> mapRow(ResultSet rs, int rowNum) throws SQLException {
+//			Map<Integer, List<Integer>> model = new HashMap<Integer, List<Integer>>();
+//			model.setFirst(rs.getInt(firstColumnName));
+//			model.setSecond(rs.getInt(secondColumnName));
+//			return model;
+//		}
+//	}
+	
+	
+
+	// class TwoTupleMapper<K, V> implements RowMapper<Map<K, List<V>>> {
+	//
+	// private RowMapper<K> keyMapper;
+	// private RowMapper<V> valueMapper;
+	//
+	// public TwoTupleMapper(RowMapper<K> keyMapper, RowMapper<V> valueMapper) {
+	// super();
+	// this.keyMapper = keyMapper;
+	// this.valueMapper = valueMapper;
+	// }
+	//
+	// public Map<K, List<V>> mapRow(ResultSet rs, int rowNum) throws
+	// SQLException {
+	// Map<K, List<V>> model = new HashMap<K, List<V>>();
+	// K key = keyMapper.mapRow(rs, rowNum);
+	// V value = valueMapper.mapRow(rs, rowNum);
+	// if (!model.containsKey(key)) {
+	// model.put(key, new ArrayList<V>());
+	// }
+	// model.get(key).add(value);
+	// return model;
+	// }
+	// }
+
+	// class TwoTupleMapper implements RowMapper<TwoTuple<Integer,Integer>> {
+	// private String firstColumnName;
+	// private String secondColumnName;
+	//
+	// public TwoTupleMapper(String firstColumnName, String secondColumnName) {
+	// super();
+	// this.firstColumnName = firstColumnName;
+	// this.secondColumnName = secondColumnName;
+	// }
+	//
+	// public TwoTuple<Integer,Integer> mapRow(ResultSet rs, int rowNum) throws
+	// SQLException {
+	// TwoTuple<Integer,Integer> model = new TwoTuple<Integer,Integer>();
+	// model.setFirst(rs.getInt(firstColumnName));
+	// model.setSecond(rs.getInt(secondColumnName));
+	// return model;
+	// }
+	// }
+
+	@Override
+	public List<TwoTuple<Integer, Integer>> getTabMenuTuples() {
+		return this.mJdbcTemplate.query(
+				"select r.tabid,r.menuid from sys_rtabmenu r" + " inner join sys_tabs t on r.tabid = t.tabid"
+						+ " inner join sys_menus m on r.menuid=m.menuid" + " where t.dbdeleted=0 and m.dbdeleted=0",
+				new TwoIntegerTupleMapper("tabid", "menuid"));
+	}
+
+	// @Override
+	// public Map<SysTab, List<SysMenu>> getUserTabMenus(int userId) {
+	// Map<SysTab, List<SysMenu>> maps = new HashMap<SysTab, List<SysMenu>>();
+	// List<SysTab> tabs = this.getUserTabs(userId);
+	// List<SysMenu> menus = this.getUserMenus(userId);
+	// for(SysTab tab : tabs)
+	// {
+	// if(!maps.containsKey(tab))
+	// }
+	//
+	// return null;
+	// }
 
 }

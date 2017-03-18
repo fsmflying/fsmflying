@@ -12,6 +12,7 @@ import java.util.function.Predicate;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,93 +23,81 @@ import com.fsmflying.sys.dm.SysTab;
 import com.fsmflying.sys.service.SystemManageService;
 import com.fsmflying.util.TwoTuple;
 
-
 @RestController
 @RequestMapping("/json")
 public class JsonDataProvider {
 
 	@Resource
 	SystemManageService systemManageService;
-	
-	@RequestMapping("getUserTabs")
-	public HttpJsonResult getUserTabs(HttpServletRequest request)
-	{
+
+	@RequestMapping("/getUserTabs")
+	@JsonView
+	public HttpJsonResult getUserTabs(HttpServletRequest request) {
 		HttpJsonResult jsonResult = new HttpJsonResult();
 		int userId = AuthHelper.getUserId(request);
-//		System.out.println(userId);
+		// System.out.println(userId);
 		if (userId != -1) {
 			jsonResult.setResult(1);
 			jsonResult.setRows(systemManageService.getUserTabs(userId));
-		}
-		else{
+		} else {
 			jsonResult.setResult(0);
 			jsonResult.setMessage("未能识别用户信息!");
 		}
 		return jsonResult;
 	}
-	
+
 	@RequestMapping("/getTreeTabMenus")
-	public HttpJsonResult getTreeTabMenus(HttpServletRequest request)
-	{
+	@JsonView
+	public HttpJsonResult getTreeTabMenus(HttpServletRequest request) {
 		HttpJsonResult jsonResult = new HttpJsonResult();
-		
+
 		int userId = AuthHelper.getUserId(request);
-		List<SysTab> tabs = systemManageService.getUserTabs(userId);
-		List<SysMenu> menus = systemManageService.getUserMenus(userId);
-		List<TwoTuple<Integer,Integer>> pairs = systemManageService.getUserTabMenus();
-		
-		Map<Integer,HashSet<SysMenu>> mapTabs = new HashMap<Integer,HashSet<SysMenu>>();
-		
-		for(SysTab tab:tabs)
-		{			
-			mapTabs.put(tab.getTabId(), new HashSet<SysMenu>());
-		}
-		
-		for(SysMenu menu:menus)
-		{	
-			int tabId = -1;
-			for(TwoTuple<Integer,Integer> pair:pairs)
-			{
-				if(menu.getMenuId()==pair.getSecond())
-				{
-					tabId=pair.getFirst();
-					break;
+		if (userId != -1) {
+			List<SysTab> tabs = systemManageService.getUserTabs(userId);
+			List<SysMenu> menus = systemManageService.getUserMenus(userId);
+			List<TwoTuple<Integer, Integer>> pairs = systemManageService.getTabMenuTuples();
+			Map<Integer, HashSet<SysMenu>> mapTabs = new HashMap<Integer, HashSet<SysMenu>>();
+			for (SysTab tab : tabs) {
+				mapTabs.put(tab.getTabId(), new HashSet<SysMenu>());
+			}
+
+			for (SysMenu menu : menus) {
+				int tabId = -1;
+				for (TwoTuple<Integer, Integer> pair : pairs) {
+					if (menu.getMenuId() == pair.getSecond()) {
+						tabId = pair.getFirst();
+						break;
+					}
+				}
+
+				if (mapTabs.containsKey(tabId)) {
+					mapTabs.get(tabId).add(menu);
 				}
 			}
-			
-			if(mapTabs.containsKey(tabId))
-			{
-				mapTabs.get(tabId).add(menu);
-			}
-		}
-		
-		for(SysTab tab:tabs)
-		{			
-			tab.setMenus(mapTabs.get(tab.getTabId()));
-		}
 
-		if (userId != -1) {
+			for (SysTab tab : tabs) {
+				tab.setMenus(mapTabs.get(tab.getTabId()));
+			}
+
 			jsonResult.setResult(1);
 			jsonResult.setRows(tabs);
-		}
-		else{
+		} else {
 			jsonResult.setResult(0);
 			jsonResult.setMessage("未能识别用户信息!");
 		}
 		return jsonResult;
 	}
-	
-	@RequestMapping("getUserMenus")
-	public HttpJsonResult getUserMenus(HttpServletRequest request)
-	{
+
+	@RequestMapping("/getUserMenus")
+	@JsonView
+	public HttpJsonResult getUserMenus(HttpServletRequest request) {
 		HttpJsonResult jsonResult = new HttpJsonResult();
 		int userId = AuthHelper.getUserId(request);
-//		System.out.println(userId);
+		// System.out.println(userId);
 		if (userId != -1) {
 			jsonResult.setResult(1);
 			jsonResult.setRows(systemManageService.getUserMenus(userId));
-		}
-		else{
+		} else {
 			jsonResult.setResult(0);
 			jsonResult.setMessage("未能识别用户信息!");
 		}

@@ -9,8 +9,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import com.fsmflying.sys.dm.SysFuncPoint;
 import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.sys.dm.helper.LoginResult;
 import com.fsmflying.sys.dm.helper.User;
+import com.fsmflying.sys.service.ConfigService;
 import com.fsmflying.sys.service.SystemManageService;
 
 import com.fsmflying.http.JsonHttpResult;
@@ -33,8 +36,13 @@ public class AccountController {
 	@Resource
 	SystemManageService systemManageService;
 
+	@Resource
+	ConfigService configService;
+
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
-	public LoginResult login(HttpServletRequest request, HttpSession session, String username, String password) {
+	@JsonView
+	public LoginResult login(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			String username, String password) {
 		System.out.println("username=" + username);
 		System.out.println("password=" + password);
 
@@ -103,6 +111,19 @@ public class AccountController {
 
 			session.setAttribute(AuthInterceptor.SESSION_USERID, userId);
 			session.setAttribute(AuthInterceptor.SESSION_USER, user);
+			if (configService != null) {
+				int sessionExpirePolicy = configService.getSessionExpirePolicy();
+				if (sessionExpirePolicy == 0)
+					session.setMaxInactiveInterval(configService.getSessionExpireIntervalMinutes());
+				else if (sessionExpirePolicy == 1)
+					response.setDateHeader("Expires",
+							System.currentTimeMillis() + configService.getSessionExpireMinutes() * 60 * 1000);
+				else
+					session.setMaxInactiveInterval(300);
+			}
+			else
+				session.setMaxInactiveInterval(300);
+
 			List<SysFuncPoint> funcPoints = systemManageService.getUserFuncPoints(userId);
 			List<String> list = new ArrayList<String>();
 			for (SysFuncPoint e : funcPoints)
@@ -138,6 +159,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("/logout")
+	@JsonView
 	public JsonHttpResult logout(HttpSession session) {
 
 		JsonHttpResult jsonResult = new JsonHttpResult();
@@ -157,6 +179,7 @@ public class AccountController {
 	}
 
 	@RequestMapping("/getStatus")
+	@JsonView
 	public JsonHttpResult getStatus(HttpServletRequest request, HttpSession session) {
 
 		JsonHttpResult jsonResult = new JsonHttpResult();

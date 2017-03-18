@@ -61,7 +61,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 					flag = false;
 				} else {// 登录了检查,方法上只是@Auth,表示只要求登录就能通过.@Auth("authority")这类型,验证用户权限
 					if (!"".equals(auth.value())) {
-						@SuppressWarnings("unchecked")
 						int userId = AuthHelper.getUserId(request);
 						List<SysFuncPoint> funcPoints = systemManageService.getUserFuncPoints(userId);
 						for (SysFuncPoint e : funcPoints) {
