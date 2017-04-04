@@ -27,6 +27,13 @@ public class SysIOTemplate extends AbstractBean{
 
 	private int mTemplateId;
 	
+	
+	
+	public SysIOTemplate(int templateId) {
+		super();
+		mTemplateId = templateId;
+	}
+
 	@Override
 	@Transient
 	public String getTypeUnique() {

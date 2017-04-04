@@ -27,6 +27,11 @@ public class SysIOTemplateColumn extends AbstractBean{
 	private int mColumnId;
 	
 	
+	public SysIOTemplateColumn(int columnId) {
+		super();
+		mColumnId = columnId;
+	}
+
 	@Override
 	@Transient
 	public String getTypeUnique() {

@@ -26,7 +26,15 @@ public class SysIOTemplateField extends AbstractBean{
 
 	private int mFieldId;
 	
-	
+	public SysIOTemplateField() {
+		super();
+	}
+
+	public SysIOTemplateField(int fieldId) {
+		super();
+		mFieldId = fieldId;
+	}
+
 	@Override
 	@Transient
 	public String getTypeUnique() {

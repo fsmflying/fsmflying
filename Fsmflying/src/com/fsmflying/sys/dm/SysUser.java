@@ -6,12 +6,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -35,39 +37,43 @@ public class SysUser extends AbstractBean/**/{
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
-	private int 	mUserId;
-	private String	mUsername;
-	private String	mUserPwd;
-	private String	mNickname;
-	private String	mEmail;
-	private int		mIPPolicy;
-	private String	mIPAddress;
-	private Date	mRegisterTime;
-	private Date	mLastLoginTime;
+	private int 	userId;
+	private String	username;
+	private String	userPwd;
+	private String	nickname;
+	private String	email;
+	private int		ipPolicy;
+	private String	ipAddress;
+	private Date	registerTime;
+	private Date	lastLoginTime;
 
-	private int 	mStatus;
-	private Date	mDisabledTime;
-	private int 	mDisabledMinutes;
-	private String	mPwdPromptQuestion;
-	private	String	mPwdProtectQuestion;
-	private	String	mPwdProtectAnswer;
+	private int 	status;
+	private Date	disabledTime;
+	private int 	disabledMinutes;
+	private String	pwdPromptQuestion;
+	private	String	pwdProtectQuestion;
+	private	String	pwdProtectAnswer;
 	
 	private Set<SysRole>	roles = new HashSet<SysRole>();
 	
-
 	public SysUser()
 	{
 		super();
 		
 	}
 	
+	public SysUser(int userId) {
+		super();
+		this.userId = userId;
+	}
+
 	public SysUser(String username)
 	{
 		this();
-		this.mUsername = username;
+		this.username = username;
 	}
 	
-	@ManyToMany(targetEntity=SysRole.class)
+	@ManyToMany(targetEntity=SysRole.class,fetch=FetchType.EAGER)
 	@JoinTable(name="Sys_RUserRole",
 		joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"),
         inverseJoinColumns= @JoinColumn(name="RoleId", referencedColumnName="RoleId"))
@@ -83,74 +89,74 @@ public class SysUser extends AbstractBean/**/{
 	@Column(name="UserId")
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
 	public int getUserId() {
-		return mUserId;
+		return userId;
 	}
 	
 	public void setUserId(int userId) {
-		this.mUserId = userId;
+		this.userId = userId;
 	}
 
 	@Column(name="Username")
 	public String getUsername() {
-		return mUsername;
+		return username;
 	}
 	
 	public void setUsername(String username) {
-		this.mUsername = username;
+		this.username = username;
 	}
 
 	@Column(name="UserPwd")
 	public String getUserPwd() {
-		return mUserPwd;
+		return userPwd;
 	}
 	
 	public void setUserPwd(String userPwd) {
-		this.mUserPwd = userPwd;
+		this.userPwd = userPwd;
 	}
 
 	@Column(name="Nickname")
 	public String getNickname() {
-		return mNickname;
+		return nickname;
 	}
 
 	public void setNickname(String nickname) {
-		this.mNickname = nickname;
+		this.nickname = nickname;
 	}
 
-	@Column(name="IPPolicy")
-	public int getIPPolicy() {
-		return mIPPolicy;
+	@Column(name="IpPolicy")
+	public int getIpPolicy() {
+		return ipPolicy;
 	}
 
-	public void setIPPolicy(int mIPPolicy) {
-		this.mIPPolicy = mIPPolicy;
+	public void setIpPolicy(int mIPPolicy) {
+		this.ipPolicy = mIPPolicy;
 	}
 
 	@Column(name="IPAddress")
-	public String getIPAddress() {
-		return mIPAddress;
+	public String getIpAddress() {
+		return ipAddress;
 	}
 
-	public void setIPAddress(String mIPAddress) {
-		this.mIPAddress = mIPAddress;
+	public void setIpAddress(String mIPAddress) {
+		this.ipAddress = mIPAddress;
 	}
 
 	@Column(name="RegisterTime")
 	public Date getRegisterTime() {
-		return mRegisterTime;
+		return registerTime;
 	}
 
 	public void setRegisterTime(Date registerTime) {
-		this.mRegisterTime = registerTime;
+		this.registerTime = registerTime;
 	}
 
 	@Column(name="LastLoginTime")
 	public Date getLastLoginTime() {
-		return mLastLoginTime;
+		return lastLoginTime;
 	}
 
 	public void setLastLoginTime(Date lastLoginTime) {
-		this.mLastLoginTime = lastLoginTime;
+		this.lastLoginTime = lastLoginTime;
 	}
 
 	/**
@@ -165,7 +171,7 @@ public class SysUser extends AbstractBean/**/{
 	 */
 	@Column(name="Status")
 	public int getStatus() {
-		return mStatus;
+		return status;
 	}
 	
 	/**
@@ -179,61 +185,61 @@ public class SysUser extends AbstractBean/**/{
 	 * @param status ÓÃ»§×´Ì¬
 	 */
 	public void setStatus(int status) {
-		this.mStatus = status;
+		this.status = status;
 	}
 
 	@Column(name="DisabledMinutes")
 	public int getDisabledMinutes() {
-		return mDisabledMinutes;
+		return disabledMinutes;
 	}
 
 	public void setDisabledMinutes(int mDisabledMinutes) {
-		this.mDisabledMinutes = mDisabledMinutes;
+		this.disabledMinutes = mDisabledMinutes;
 	}
 
 	@Column(name="DisabledTime")
 	public Date getDisabledTime() {
-		return mDisabledTime;
+		return disabledTime;
 	}
 
 	public void setDisabledTime(Date mDisabledTime) {
-		this.mDisabledTime = mDisabledTime;
+		this.disabledTime = mDisabledTime;
 	}
 
 	@Column(name="PwdPromptQuestion")	
 	public String getPwdPromptQuestion() {
-		return mPwdPromptQuestion;
+		return pwdPromptQuestion;
 	}
 
 	public void setPwdPromptQuestion(String pwdPromptQuestion) {
-		mPwdPromptQuestion = pwdPromptQuestion;
+		this.pwdPromptQuestion = pwdPromptQuestion;
 	}
 
 	@Column(name="PwdProtectQuestion")
 	public String getPwdProtectQuestion() {
-		return mPwdProtectQuestion;
+		return pwdProtectQuestion;
 	}
 
 	public void setPwdProtectQuestion(String pwdProtectQuestion) {
-		mPwdProtectQuestion = pwdProtectQuestion;
+		this.pwdProtectQuestion = pwdProtectQuestion;
 	}
 
 	@Column(name="PwdProtectAnswer")
 	public String getPwdProtectAnswer() {
-		return mPwdProtectAnswer;
+		return pwdProtectAnswer;
 	}
 
 	public void setPwdProtectAnswer(String pwdProtectAnswer) {
-		mPwdProtectAnswer = pwdProtectAnswer;
+		this.pwdProtectAnswer = pwdProtectAnswer;
 	}
 
 	@Column(name="Email")
 	public String getEmail() {
-		return mEmail;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		mEmail = email;
+		this.email = email;
 	}
 	
 	@Override
@@ -271,25 +277,50 @@ public class SysUser extends AbstractBean/**/{
 	public String getTypeUnique() {
 		return "sys.euser";
 	}
+	
+	private SysEmployee employee;
+	@Transient
+//	@OneToOne(targetEntity=SysEmployee.class,fetch=FetchType.EAGER)
+//	@JoinTable(name="Sys_RUserEmpl",
+//		joinColumns=@JoinColumn(name="UserId", referencedColumnName="UserId"),
+//        inverseJoinColumns= @JoinColumn(name="EmplId", referencedColumnName="EmplId"))
+	public SysEmployee getEmployee(){
+		return this.employee;
+	}
+	
+	public void setEmployee(SysEmployee employee){
+		this.employee = employee;
+	}
 
 	@Override
 	public String toString() {
-		return "SysUser [mUserId=" + mUserId + ", mUsername=" + mUsername
-				+ ", mPassword=" + mUserPwd + ", mNickname=" + mNickname
-				+ ", mIPPolicy=" + mIPPolicy + ", mIPAddress=" + mIPAddress
-				+ ", mRegisterTime=" + mRegisterTime + ", mLastLoginTime="
-				+ mLastLoginTime + ", mDisabledPolicy=" + mStatus
-				+ ", mDisabledTime=" + mDisabledTime + ", mDisabledMinutes="
-				+ mDisabledMinutes + ", mPwdPromptQuestion="
-				+ mPwdPromptQuestion + ", mPwdProtectQuestion="
-				+ mPwdProtectQuestion + ", mPwdProtectAnswer="
-				+ mPwdProtectAnswer + ", mPwdResetEmail=" + mEmail
-				+ ", getDeleted()=" + getDbDeleted() + ", getCreateBy()="
-				+ getDbCreateBy() + ", getCreateTime()=" + getDbCreateTime()
-				+ ", getLastUpdateBy()=" + getDbLastUpdateBy()
-				+ ", getLastUpdateTime()=" + getDbLastUpdateTime() 
-				+ "]";
+		return "SysUser [userId=" + userId + ", username=" + username + ", nickname=" + nickname + ", email=" + email
+				+ ", ipPolicy=" + ipPolicy + ", ipAddress=" + ipAddress + ", registerTime=" + registerTime
+				+ ", lastLoginTime=" + lastLoginTime + ", status=" + status + ", disabledTime=" + disabledTime
+				+ ", disabledMinutes=" + disabledMinutes + ", pwdPromptQuestion=" + pwdPromptQuestion
+				+ ", pwdProtectQuestion=" + pwdProtectQuestion + ", pwdProtectAnswer=" + pwdProtectAnswer + ", roles="
+				+ roles + ", employee=" + employee + "]";
 	}
+	
+
+//	@Override
+//	public String toString() {
+//		return "SysUser [mUserId=" + userId + ", mUsername=" + username
+//				+ ", mPassword=" + userPwd + ", mNickname=" + nickname
+//				+ ", mIPPolicy=" + ipPolicy + ", mIPAddress=" + ipAddress
+//				+ ", mRegisterTime=" + registerTime + ", mLastLoginTime="
+//				+ lastLoginTime + ", mDisabledPolicy=" + status
+//				+ ", mDisabledTime=" + disabledTime + ", mDisabledMinutes="
+//				+ disabledMinutes + ", mPwdPromptQuestion="
+//				+ pwdPromptQuestion + ", mPwdProtectQuestion="
+//				+ pwdProtectQuestion + ", mPwdProtectAnswer="
+//				+ pwdProtectAnswer + ", mPwdResetEmail=" + email
+//				+ ", getDeleted()=" + getDbDeleted() + ", getCreateBy()="
+//				+ getDbCreateBy() + ", getCreateTime()=" + getDbCreateTime()
+//				+ ", getLastUpdateBy()=" + getDbLastUpdateBy()
+//				+ ", getLastUpdateTime()=" + getDbLastUpdateTime() 
+//				+ "]";
+//	}
 	
 	
 }

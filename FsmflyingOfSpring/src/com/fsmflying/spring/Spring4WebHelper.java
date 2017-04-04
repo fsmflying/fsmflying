@@ -28,7 +28,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.fsmflying.sys.dm.SysFile;
-import com.fsmflying.sys.service.SequenceService;
+import com.fsmflying.sys.service.ISequenceService;
 import com.fsmflying.sys.service.SystemManageService;
 
 public class Spring4WebHelper {
@@ -78,11 +78,11 @@ public class Spring4WebHelper {
 		record.setDbCreateBy(-1);
 		record.setDbDeleted(0);
 
-		SequenceService sequenceService = (SequenceService) getBean(request,
+		ISequenceService sequenceService = (ISequenceService) getBean(request,
 				"sequenceService");
 		if (sequenceService != null) {
-			record.setFileGroupId(sequenceService.getNextId("sysfilegroup"));
-			record.setFileId(sequenceService.getNextId("sysfile"));
+			record.setFileGroupId(sequenceService.generateNextId("sysfilegroup"));
+			record.setFileId(sequenceService.generateNextId("sysfile"));
 		}
 
 		String fileRealAddress = request.getServletContext().getRealPath(
@@ -142,12 +142,12 @@ public class Spring4WebHelper {
 		record.setDbCreateBy(-1);
 		record.setDbDeleted(0);
 
-		SequenceService sequenceService = (SequenceService) getBean(request,
+		ISequenceService sequenceService = (ISequenceService) getBean(request,
 				"sequenceService");
 	
 		if (sequenceService != null) {
-			record.setFileGroupId(sequenceService.getNextId("sysfilegroup"));
-			record.setFileId(sequenceService.getNextId("sysfile"));
+			record.setFileGroupId(sequenceService.generateNextId("sysfilegroup"));
+			record.setFileId(sequenceService.generateNextId("sysfile"));
 		}
 
 		String fileRealAddress = request.getServletContext().getRealPath(
@@ -239,13 +239,13 @@ public class Spring4WebHelper {
 			e.printStackTrace();
 		}
 
-		SequenceService sequenceService = (SequenceService) getBean(request,
+		ISequenceService sequenceService = (ISequenceService) getBean(request,
 				"sequenceService");
 		if (sequenceService != null) {
-			int fileGroupId = sequenceService.getNextId("sysfilegroup");
+			int fileGroupId = sequenceService.generateNextId("sysfilegroup");
 			for (SysFile file : list) {
 				file.setFileGroupId(fileGroupId);
-				file.setFileId(sequenceService.getNextId("sysfile"));
+				file.setFileId(sequenceService.generateNextId("sysfile"));
 			}
 
 		}

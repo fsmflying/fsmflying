@@ -1,13 +1,9 @@
 package com.fsmflying.spring.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +16,7 @@ import com.fsmflying.http.HttpJsonResult;
 import com.fsmflying.spring.auth.AuthHelper;
 import com.fsmflying.sys.dm.SysMenu;
 import com.fsmflying.sys.dm.SysTab;
-import com.fsmflying.sys.service.SystemManageService;
+import com.fsmflying.sys.service.ISystemManageService;
 import com.fsmflying.util.TwoTuple;
 
 @RestController
@@ -28,7 +24,7 @@ import com.fsmflying.util.TwoTuple;
 public class JsonDataProvider {
 
 	@Resource
-	SystemManageService systemManageService;
+	ISystemManageService systemManageService;
 
 	@RequestMapping("/getUserTabs")
 	@JsonView
@@ -52,6 +48,11 @@ public class JsonDataProvider {
 		HttpJsonResult jsonResult = new HttpJsonResult();
 
 		int userId = AuthHelper.getUserId(request);
+		if(systemManageService==null)
+		{
+			System.out.println(systemManageService);
+			return jsonResult;
+		}
 		if (userId != -1) {
 			List<SysTab> tabs = systemManageService.getUserTabs(userId);
 			List<SysMenu> menus = systemManageService.getUserMenus(userId);

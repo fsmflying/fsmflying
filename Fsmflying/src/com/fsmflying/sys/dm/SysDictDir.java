@@ -1,15 +1,16 @@
 package com.fsmflying.sys.dm;
 
 import java.util.Date;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -27,7 +28,6 @@ import javax.persistence.UniqueConstraint;
 		valueColumnName="NextValue",
 		pkColumnValue="sys.edictdir",
 		initialValue=1
-		
 	)
 public class SysDictDir extends AbstractBean{
 	@SuppressWarnings("unused")
@@ -38,14 +38,19 @@ public class SysDictDir extends AbstractBean{
 	private String 	mKeyCode;
 	private String 	mMemo;
 	
-	private Set<SysDictItem> items = new HashSet<SysDictItem>();
+	private Set<SysDictItem> items; //= new HashSet<SysDictItem>();
 	
 	public SysDictDir() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
-	@OneToMany(targetEntity=SysDictItem.class,mappedBy="dir")
+	public SysDictDir(int dirId) {
+		super();
+		mDirId = dirId;
+	}
+
+//	@OneToMany(targetEntity=SysDictItem.class,mappedBy="dir",fetch=FetchType.EAGER)
+	@Transient
 	public Set<SysDictItem> getItems() {
 		return items;
 	}
@@ -55,7 +60,7 @@ public class SysDictDir extends AbstractBean{
 	}
 
 	@Id
-	@Column(name="DictDirId")
+	@Column(name="DirId")
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
 	public int getDirId() {
 		return mDirId;
@@ -73,7 +78,6 @@ public class SysDictDir extends AbstractBean{
 	public void setDirName(String dirName) {
 		mDirName = dirName;
 	}
-
 	
 	@Column(name="KeyCode")
 	public String getKeyCode() {
@@ -93,46 +97,39 @@ public class SysDictDir extends AbstractBean{
 		mMemo = memo;
 	}
 
-
 	@Override
 	@Transient
 	public String getTypeUnique() {
-		// TODO Auto-generated method stub
 		return "sys.edictdir";
 	}
 
 	@Override
 	@Column(name="DbDeleted")
 	public int getDbDeleted() {
-		// TODO Auto-generated method stub
 		return super.getDbDeleted();
 	}
 
 	@Override
 	@Column(name="DbCreateBy")
 	public int getDbCreateBy() {
-		// TODO Auto-generated method stub
 		return super.getDbCreateBy();
 	}
 
 	@Override
 	@Column(name="DbCreateTime")
 	public Date getDbCreateTime() {
-		// TODO Auto-generated method stub
 		return super.getDbCreateTime();
 	}
 
 	@Override
 	@Column(name="DbLastUpdateBy")
 	public int getDbLastUpdateBy() {
-		// TODO Auto-generated method stub
 		return super.getDbLastUpdateBy();
 	}
 
 	@Override
 	@Column(name="DbLastUpdateTime")
 	public Date getDbLastUpdateTime() {
-		// TODO Auto-generated method stub
 		return super.getDbLastUpdateTime();
 	}
 

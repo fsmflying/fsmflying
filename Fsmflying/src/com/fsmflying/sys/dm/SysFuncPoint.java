@@ -30,7 +30,6 @@ public class SysFuncPoint extends AbstractBean{
 	private static final long serialVersionUID = 1L;
 	
 	private int mFuncPointId; 
-//	private int mMenuId;
 	private String mFuncPointName; 
 	private String mKeyCode; 
 	private int mShowOrder;
@@ -43,9 +42,15 @@ public class SysFuncPoint extends AbstractBean{
 	public SysFuncPoint() {
 		super();
 	}
+	
+	public SysFuncPoint(int funcPointId) {
+		super();
+		mFuncPointId = funcPointId;
+	}
 
-	@ManyToOne(targetEntity=SysMenu.class)
-	@JoinColumn(name="MenuId",nullable=true)
+	//@ManyToOne(targetEntity=SysMenu.class)
+	//@JoinColumn(name="MenuId",nullable=true)
+	@Transient
 	public SysMenu getMenu() {
 		return mMenu;
 	}
@@ -53,6 +58,7 @@ public class SysFuncPoint extends AbstractBean{
 	public void setMenu(SysMenu menu) {
 		mMenu = menu;
 	}
+	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
@@ -143,7 +149,8 @@ public class SysFuncPoint extends AbstractBean{
 	}
 
 
-	@Column(name="MenuId",nullable=false,columnDefinition="int default -1")
+	//@Column(name="MenuId",nullable=false,columnDefinition="int default -1")
+	//@Transient
 	public int getMenuId() {
 		return mMenuId;
 	}

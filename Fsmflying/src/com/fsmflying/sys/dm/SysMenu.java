@@ -39,10 +39,23 @@ public class SysMenu extends AbstractBean{
 	private int 	mMenuType;
 	private String 	mMemo;
 	
-	private Set<SysTab> mTabs = new HashSet<SysTab>();
-	private Set<SysFuncPoint> mFuncPoints = new HashSet<SysFuncPoint>();
 	
 	
+	
+//	private Set<SysTab> mTabs ;//= new HashSet<SysTab>();
+	private Set<SysFuncPoint> mFuncPoints ;//= new HashSet<SysFuncPoint>();
+	
+	
+
+	public SysMenu() {
+		super();
+	}
+	
+	public SysMenu(int menuId) {
+		super();
+		mMenuId = menuId;
+	}
+
 	public SysMenu(String menuName, String defaultUrl, int showOrder,
 			int pMenuId, int depth, int menuType, String memo) {
 		super();
@@ -55,28 +68,27 @@ public class SysMenu extends AbstractBean{
 		mMemo = memo;
 	}
 
-	public SysMenu() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	@ManyToMany(targetEntity=SysTab.class)
-	@JoinTable(name="Sys_RTabMenu",
-		joinColumns=@JoinColumn(name="CMenuId",referencedColumnName="MenuId"),
-		inverseJoinColumns=@JoinColumn(name="CTabId",referencedColumnName="TabId")
-			)
-	public Set<SysTab> getTabs() {
-		return mTabs;
-	}
-
-	public void setTabs(Set<SysTab> tabs) {
-		mTabs = tabs;
-	}
-	@OneToMany(targetEntity=SysFuncPoint.class)
+//	@ManyToMany(targetEntity=SysTab.class)
+//	@JoinTable(name="Sys_RTabMenu",
+//		joinColumns=@JoinColumn(name="MenuId",referencedColumnName="MenuId"),
+//		inverseJoinColumns=@JoinColumn(name="TabId",referencedColumnName="TabId")
+//			)
+//	@Transient
+//	public Set<SysTab> getTabs() {
+//		return mTabs;
+//	}
+//
+//	public void setTabs(Set<SysTab> tabs) {
+//		mTabs = tabs;
+//	}
+	
+//	@OneToMany(targetEntity=SysFuncPoint.class)
 //	@JoinTable(name="Sys_RMenuFuncPoint",
 //		joinColumns=@JoinColumn(name="CMenuId",referencedColumnName="MenuId"),
 //		inverseJoinColumns=@JoinColumn(name="CFuncPointId",referencedColumnName="FuncPointId")
 //			)
-	@JoinColumn(name="MenuId")
+//	@JoinColumn(name="MenuId")
+	@Transient
 	public Set<SysFuncPoint> getFuncPoints() {
 		return mFuncPoints;
 	}

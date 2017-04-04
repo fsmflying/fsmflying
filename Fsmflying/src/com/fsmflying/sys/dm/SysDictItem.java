@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
-
 
 @Entity
 @Table(name = "Sys_DictItems")
@@ -36,8 +36,13 @@ public class SysDictItem extends AbstractBean {
 		super();
 	}
 
-	public SysDictItem(String itemName, String itemCode, String displayName,
-			int showOrder, int isDefault, String memo) {
+	public SysDictItem(int itemId) {
+		super();
+		mItemId = itemId;
+	}
+
+	public SysDictItem(String itemName, String itemCode, String displayName, int showOrder, int isDefault,
+			String memo) {
 		super();
 		mItemName = itemName;
 		mItemValue = itemCode;
@@ -47,7 +52,7 @@ public class SysDictItem extends AbstractBean {
 		mMemo = memo;
 	}
 
-	@ManyToOne
+	@ManyToOne(targetEntity = SysDictDir.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "dirId")
 	public SysDictDir getDir() {
 		return mDir;
@@ -171,6 +176,7 @@ public class SysDictItem extends AbstractBean {
 		return super.getDbLastUpdateTime();
 	}
 
+	@Transient
 	public int getDirId() {
 		return mDirId;
 	}

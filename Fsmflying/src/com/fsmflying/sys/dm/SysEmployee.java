@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
-
 @Entity
 @Table(name = "Sys_Employees")
 @TableGenerator(name = "tableIdGenerator", table = "Sys_IdGenerators", pkColumnName = "KeyName", valueColumnName = "NextValue", pkColumnValue = "sys.eemployee", initialValue = 1)
@@ -28,7 +27,7 @@ public class SysEmployee extends AbstractBean {
 	private int mSex;
 	private int mShowOrder;
 	private String mAutoNo;
-	private Date mBirthdate;
+	private Date mBirthDate;
 	private String mNativePlace;
 	private String mCardId;
 	private String mContactPhone;
@@ -38,13 +37,22 @@ public class SysEmployee extends AbstractBean {
 	private String mContactEmail;
 	private int mPositionId;
 	private String mPositionName;
-	private String mTitleName;
+	private String mPositionTitle;
 	private String mField001;
 	private String mField002;
 	private String mField003;
 	private String mField004;
 	private String mField005;
 	private int mFlag;
+
+	public SysEmployee() {
+		super();
+	}
+
+	public SysEmployee(int emplId) {
+		super();
+		mEmplId = emplId;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "tableIdGenerator")
@@ -104,42 +112,28 @@ public class SysEmployee extends AbstractBean {
 		this.mSex = mSex;
 	}
 
-	/**
-	 * @return the showOrder
-	 */
 	public int getShowOrder() {
 		return mShowOrder;
 	}
 
-	/**
-	 * @param showOrder
-	 *            the showOrder to set
-	 */
 	public void setShowOrder(int showOrder) {
 		mShowOrder = showOrder;
 	}
 
-	/**
-	 * @return the autoNo
-	 */
 	public String getAutoNo() {
 		return mAutoNo;
 	}
 
-	/**
-	 * @param autoNo
-	 *            the autoNo to set
-	 */
 	public void setAutoNo(String autoNo) {
 		mAutoNo = autoNo;
 	}
 
-	public Date getBirthdate() {
-		return mBirthdate;
+	public Date getBirthDate() {
+		return mBirthDate;
 	}
 
-	public void setBirthdate(Date mBirthdate) {
-		this.mBirthdate = mBirthdate;
+	public void setBirthDate(Date mBirthdate) {
+		this.mBirthDate = mBirthdate;
 	}
 
 	public String getNativePlace() {
@@ -158,77 +152,42 @@ public class SysEmployee extends AbstractBean {
 		this.mCardId = mCardId;
 	}
 
-	/**
-	 * @return the contactPhone
-	 */
 	public String getContactPhone() {
 		return mContactPhone;
 	}
 
-	/**
-	 * @param contactPhone
-	 *            the contactPhone to set
-	 */
 	public void setContactPhone(String contactPhone) {
 		mContactPhone = contactPhone;
 	}
 
-	/**
-	 * @return the contactMPhone
-	 */
 	public String getContactMPhone() {
 		return mContactMPhone;
 	}
 
-	/**
-	 * @param contactMPhone
-	 *            the contactMPhone to set
-	 */
 	public void setContactMPhone(String contactMPhone) {
 		mContactMPhone = contactMPhone;
 	}
 
-	/**
-	 * @return the contactAddress
-	 */
 	public String getContactAddress() {
 		return mContactAddress;
 	}
 
-	/**
-	 * @param contactAddress
-	 *            the contactAddress to set
-	 */
 	public void setContactAddress(String contactAddress) {
 		mContactAddress = contactAddress;
 	}
 
-	/**
-	 * @return the contactFax
-	 */
 	public String getContactFax() {
 		return mContactFax;
 	}
 
-	/**
-	 * @param contactFax
-	 *            the contactFax to set
-	 */
 	public void setContactFax(String contactFax) {
 		mContactFax = contactFax;
 	}
 
-	/**
-	 * @return the contactEmail
-	 */
 	public String getContactEmail() {
 		return mContactEmail;
 	}
 
-	/**
-	 * @param contactEmail
-	 *            the contactEmail to set
-	 */
 	public void setContactEmail(String contactEmail) {
 		mContactEmail = contactEmail;
 	}
@@ -249,12 +208,12 @@ public class SysEmployee extends AbstractBean {
 		this.mPositionName = mPositionName;
 	}
 
-	public String getTitleName() {
-		return mTitleName;
+	public String getPositionTitle() {
+		return mPositionTitle;
 	}
 
-	public void setTitleName(String mTitleName) {
-		this.mTitleName = mTitleName;
+	public void setPositionTitle(String mTitleName) {
+		this.mPositionTitle = mTitleName;
 	}
 
 	// public int getDeleted() {
@@ -343,8 +302,7 @@ public class SysEmployee extends AbstractBean {
 
 	@Override
 	public String toString() {
-		return "SysEmployee [mEmplName_CN=" + mEmplName_CN + ", mEmplName_EN="
-				+ mEmplName_EN + "]";
+		return "SysEmployee [mEmplName_CN=" + mEmplName_CN + ", mEmplName_EN=" + mEmplName_EN + "]";
 	}
 
 }

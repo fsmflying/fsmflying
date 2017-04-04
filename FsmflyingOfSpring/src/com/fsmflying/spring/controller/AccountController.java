@@ -25,6 +25,9 @@ import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.sys.dm.helper.LoginResult;
 import com.fsmflying.sys.dm.helper.User;
 import com.fsmflying.sys.service.ConfigService;
+import com.fsmflying.sys.service.IConfigService;
+import com.fsmflying.sys.service.ILogService;
+import com.fsmflying.sys.service.ISystemManageService;
 import com.fsmflying.sys.service.SystemManageService;
 
 import com.fsmflying.http.JsonHttpResult;
@@ -34,10 +37,13 @@ import com.fsmflying.http.JsonHttpResult;
 public class AccountController {
 
 	@Resource
-	SystemManageService systemManageService;
+	ISystemManageService systemManageService;
 
 	@Resource
-	ConfigService configService;
+	ILogService logService;
+
+	@Resource
+	IConfigService configService;
 
 	@RequestMapping(value = "/login", method = { RequestMethod.POST })
 	@JsonView
@@ -55,9 +61,10 @@ public class AccountController {
 			loginResult.setRedirectUrl(request.getRequestURI().toString());
 			return loginResult;
 		}
+		System.out.println(systemManageService);
 		SysUser sysUser = systemManageService.getModelOfSysUser(username, true);
 		if (sysUser != null) {
-
+			logService.writeLog(this.getClass().getCanonicalName(),"用户[" + sysUser.getUsername() + "]尝试登录系统!");
 			if (sysUser.getStatus() == 1) {
 				loginResult.setResult(0);
 				loginResult.setMessage("用户被永久禁用！");
@@ -120,8 +127,7 @@ public class AccountController {
 							System.currentTimeMillis() + configService.getSessionExpireMinutes() * 60 * 1000);
 				else
 					session.setMaxInactiveInterval(300);
-			}
-			else
+			} else
 				session.setMaxInactiveInterval(300);
 
 			List<SysFuncPoint> funcPoints = systemManageService.getUserFuncPoints(userId);
@@ -144,6 +150,8 @@ public class AccountController {
 			loginResult.setResult(1);
 			loginResult.setMessage("用户登录成功！");
 			loginResult.setUser(user);
+//			logService.writeInfoLog("用户[" + user.toString() + "]成功登录系统!");
+			logService.writeLog(this.getClass().getCanonicalName(), "用户[" + user.toString() + "]成功登录系统!");
 			if (request.getParameter("redirectUrl") == null) {
 				loginResult.setRedirectUrl(request.getServletContext().getContextPath() + "/ui/user/desktop");
 			} else {
@@ -166,8 +174,10 @@ public class AccountController {
 		Object objectUserId = session.getAttribute(AuthInterceptor.SESSION_USERID);
 		if (objectUserId != null) {
 			int userId = (Integer) objectUserId;
-			// CacheHelper.remove("[User][" + userId + "][funcpoint]");
 			System.out.println("用户[" + userId + "]登出系统!");
+			User user = new User(systemManageService.getModelOfSysUser(userId));
+			System.out.println(logService);
+			logService.writeInfoLog(this.getClass().getCanonicalName(),"用户[" + user.toString() + "]登出系统!");
 			session.removeAttribute(AuthInterceptor.SESSION_USERID);
 			session.removeAttribute(AuthInterceptor.SESSION_USER);
 			jsonResult.setResult(1);

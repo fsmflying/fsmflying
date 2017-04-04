@@ -32,7 +32,11 @@ public class SysDataAuthItem extends AbstractBean{
 	
 	public SysDataAuthItem() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	public SysDataAuthItem(int authItemId) {
+		super();
+		mAuthItemId = authItemId;
 	}
 
 	@Id

@@ -3,9 +3,7 @@ package com.fsmflying.spring.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -13,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.fsmflying.sys.dao.SystemManageDao;
-import com.fsmflying.sys.dm.SysArea;
+//import com.fsmflying.sys.dm.SysArea;
 import com.fsmflying.sys.dm.SysCompany;
 import com.fsmflying.sys.dm.SysConfig;
 import com.fsmflying.sys.dm.SysCustomPage;
@@ -25,16 +23,16 @@ import com.fsmflying.sys.dm.SysDictItem;
 import com.fsmflying.sys.dm.SysEmployee;
 import com.fsmflying.sys.dm.SysFile;
 import com.fsmflying.sys.dm.SysFuncPoint;
-import com.fsmflying.sys.dm.SysIOTemplate;
-import com.fsmflying.sys.dm.SysIOTemplateColumn;
-import com.fsmflying.sys.dm.SysIOTemplateField;
-import com.fsmflying.sys.dm.SysLog;
+//import com.fsmflying.sys.dm.SysIOTemplate;
+//import com.fsmflying.sys.dm.SysIOTemplateColumn;
+//import com.fsmflying.sys.dm.SysIOTemplateField;
+//import com.fsmflying.sys.dm.SysLog;
 import com.fsmflying.sys.dm.SysMenu;
 import com.fsmflying.sys.dm.SysRole;
-import com.fsmflying.sys.dm.SysSequence;
+//import com.fsmflying.sys.dm.SysSequence;
 import com.fsmflying.sys.dm.SysTab;
 import com.fsmflying.sys.dm.SysUser;
-import com.fsmflying.sys.dm.helper.UserRightSet;
+import com.fsmflying.sys.dm.helper.UserPermissions;
 import com.fsmflying.util.TwoTuple;
 
 //import org.springframework
@@ -55,8 +53,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 						+ "Status,DisabledTime,DisabledMinutes,PwdPromptQuestion,PwdProtectQuestion,PwdProtectAnswer,"
 						+ "Email,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime) "
 						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-				model.getUserId(), model.getUsername(), model.getUserPwd(), model.getNickname(), model.getIPPolicy(),
-				model.getIPAddress(), model.getRegisterTime(), model.getLastLoginTime(), model.getStatus(),
+				model.getUserId(), model.getUsername(), model.getUserPwd(), model.getNickname(), model.getIpPolicy(),
+				model.getIpAddress(), model.getRegisterTime(), model.getLastLoginTime(), model.getStatus(),
 				model.getDisabledTime(), model.getDisabledMinutes(), model.getPwdPromptQuestion(),
 				model.getPwdProtectQuestion(), model.getPwdProtectAnswer(), model.getEmail(), model.getDbDeleted(),
 				model.getDbCreateBy(), model.getDbCreateTime(), model.getDbLastUpdateBy(), model.getDbLastUpdateTime()
@@ -73,7 +71,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 						+ "LastLoginTime=?,Status=?,DisabledTime=?,DisabledMinutes=?,PwdPromptQuestion=?,"
 						+ "PwdProtectQuestion=?,PwdProtectAnswer=?,Email=?,DbDeleted=?,DbCreateBy=?,"
 						+ "DbCreateTime=?,DbLastUpdateBy=?,DbLastUpdateTime=? " + "where 1=1 and UserId=?",
-				model.getUsername(), model.getUserPwd(), model.getNickname(), model.getIPPolicy(), model.getIPAddress(),
+				model.getUsername(), model.getUserPwd(), model.getNickname(), model.getIpPolicy(), model.getIpAddress(),
 				model.getRegisterTime(), model.getLastLoginTime(), model.getStatus(), model.getDisabledTime(),
 				model.getDisabledMinutes(), model.getPwdPromptQuestion(), model.getPwdProtectQuestion(),
 				model.getPwdProtectAnswer(), model.getEmail(), model.getDbDeleted(), model.getDbCreateBy(),
@@ -98,8 +96,8 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			model.setUserPwd(rs.getString("UserPwd"));
 			model.setNickname(rs.getString("Nickname"));
 			model.setEmail(rs.getString("Email"));
-			model.setIPPolicy(rs.getInt("IPPolicy"));
-			model.setIPAddress(rs.getString("IPAddress"));
+			model.setIpPolicy(rs.getInt("IPPolicy"));
+			model.setIpAddress(rs.getString("IPAddress"));
 			model.setRegisterTime(rs.getTimestamp("RegisterTime"));
 			model.setLastLoginTime(rs.getTimestamp("LastLoginTime"));
 			model.setStatus(rs.getInt("Status"));
@@ -347,9 +345,9 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		this.mJdbcTemplate.update(
 				"insert into sys_employees(EmplId,CompanyId,EmplNo,EmplName_CN,EmplName_EN,Sex,Birthdate,NativePlace,CardId,ContactPhone,ContactMPhone,ContactAddress,ContactFax,ContactEmail,PositionId,PositionName,TitleName,ShowOrder,AutoNo,DeptId,Field001,Field002,Field003,Field004,Field005,Flag,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
 				model.getEmplId(), model.getCompanyId(), model.getEmplNo(), model.getEmplName_CN(),
-				model.getEmplName_EN(), model.getSex(), model.getBirthdate(), model.getNativePlace(), model.getCardId(),
+				model.getEmplName_EN(), model.getSex(), model.getBirthDate(), model.getNativePlace(), model.getCardId(),
 				model.getContactPhone(), model.getContactMPhone(), model.getContactAddress(), model.getContactFax(),
-				model.getContactEmail(), model.getPositionId(), model.getPositionName(), model.getTitleName(),
+				model.getContactEmail(), model.getPositionId(), model.getPositionName(), model.getPositionTitle(),
 				model.getShowOrder(), model.getAutoNo(), model.getDeptId(), model.getField001(), model.getField002(),
 				model.getField003(), model.getField004(), model.getField005(), model.getFlag(), model.getDbDeleted(),
 				model.getDbCreateBy(), model.getDbLastUpdateBy(), model.getDbCreateTime(), model.getDbLastUpdateTime()
@@ -363,9 +361,9 @@ public class SystemManageDaoImpl implements SystemManageDao {
 		this.mJdbcTemplate.update(
 				"update sys_employees set CompanyId=?,EmplNo=?,EmplName_CN=?,EmplName_EN=?,Sex=?,Birthdate=?,NativePlace=?,CardId=?,ContactPhone=?,ContactMPhone=?,ContactAddress=?,ContactFax=?,ContactEmail=?,PositionId=?,PositionName=?,TitleName=?,ShowOrder=?,AutoNo=?,DeptId=?,Field001=?,Field002=?,Field003=?,Field004=?,Field005=?,Flag=?,DbDeleted=?,DbCreateBy=?,DbLastUpdateBy=?,DbCreateTime=?,DbLastUpdateTime=? where 1=1 and EmplId=?",
 				model.getCompanyId(), model.getEmplNo(), model.getEmplName_CN(), model.getEmplName_EN(), model.getSex(),
-				model.getBirthdate(), model.getNativePlace(), model.getCardId(), model.getContactPhone(),
+				model.getBirthDate(), model.getNativePlace(), model.getCardId(), model.getContactPhone(),
 				model.getContactMPhone(), model.getContactAddress(), model.getContactFax(), model.getContactEmail(),
-				model.getPositionId(), model.getPositionName(), model.getTitleName(), model.getShowOrder(),
+				model.getPositionId(), model.getPositionName(), model.getPositionTitle(), model.getShowOrder(),
 				model.getAutoNo(), model.getDeptId(), model.getField001(), model.getField002(), model.getField003(),
 				model.getField004(), model.getField005(), model.getFlag(), model.getDbDeleted(), model.getDbCreateBy(),
 				model.getDbLastUpdateBy(), model.getDbCreateTime(), model.getDbLastUpdateTime(), model.getEmplId()
@@ -389,7 +387,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			model.setEmplName_CN(rs.getString("EmplName_CN"));
 			model.setEmplName_EN(rs.getString("EmplName_EN"));
 			model.setSex(rs.getInt("Sex"));
-			model.setBirthdate(rs.getDate("Birthdate"));
+			model.setBirthDate(rs.getDate("Birthdate"));
 			model.setNativePlace(rs.getString("NativePlace"));
 			model.setCardId(rs.getString("CardId"));
 			model.setContactPhone(rs.getString("ContactPhone"));
@@ -399,7 +397,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 			model.setContactEmail(rs.getString("ContactEmail"));
 			model.setPositionId(rs.getInt("PositionId"));
 			model.setPositionName(rs.getString("PositionName"));
-			model.setTitleName(rs.getString("TitleName"));
+			model.setPositionTitle(rs.getString("TitleName"));
 			model.setShowOrder(rs.getInt("ShowOrder"));
 			model.setAutoNo(rs.getString("AutoNo"));
 			model.setDeptId(rs.getInt("DeptId"));
@@ -983,7 +981,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 						+ "where 1=1 and a.dbdeleted=0 and b.dbdeleted=0 and lower(b.keycode)=lower(?)",
 				new Object[] { dirKeyCode }, new SysDictItemMapper());
 	}
-
+/*
 	@Override
 	public boolean add(SysSequence model) {
 		this.mJdbcTemplate.update("insert into sys_sequences(KeyName,NextValue,GeneratedTime) values(?,?,?)",
@@ -1029,7 +1027,9 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public List<SysSequence> getListOfSysSequence() {
 		return this.mJdbcTemplate.query("select * from sys_sequences", new SysSequenceMapper());
 	}
+*/
 
+	
 	@Override
 	public boolean add(SysFile model) {
 		this.mJdbcTemplate.update(
@@ -1086,7 +1086,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public List<SysFile> getListOfSysFile() {
 		return this.mJdbcTemplate.query("select * from sys_files where dbdeleted=0", new SysFileMapper());
 	}
-
+/*
 	@Override
 	public boolean add(SysIOTemplate model) {
 		// this.mJdbcTemplate
@@ -1256,7 +1256,7 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	public List<SysArea> getListOfSysArea() {
 		return null;
 	}
-
+*/
 	@Override
 	public List<SysRole> getUserRoles(int userId) {
 		return this.mJdbcTemplate.query(
@@ -1324,40 +1324,40 @@ public class SystemManageDaoImpl implements SystemManageDao {
 	}
 
 	@Override
-	public UserRightSet getUserRightSet(int userId) {
-		UserRightSet userRightSet = new UserRightSet();
+	public UserPermissions getUserPermissions(int userId) {
+		UserPermissions userPermissions = new UserPermissions();
 		List<Integer> ids = new ArrayList<Integer>();
 
 		List<SysRole> roles = this.getUserRoles(userId);
 		for (SysRole e : roles)
 			ids.add(e.getRoleId());
-		userRightSet.setRoles(ids);
+		userPermissions.setRoles(ids);
 
 		ids.clear();
 		List<SysMenu> menus = this.getUserMenus(userId);
 		for (SysMenu e : menus)
 			ids.add(e.getMenuId());
-		userRightSet.setMenus(ids);
+		userPermissions.setMenus(ids);
 
 		ids.clear();
 		List<SysFuncPoint> funcPoints = this.getUserFuncPoints(userId);
 		for (SysFuncPoint e : funcPoints)
 			ids.add(e.getFuncPointId());
-		userRightSet.setFuncPoints(ids);
+		userPermissions.setFuncPoints(ids);
 
 		ids.clear();
 		List<SysDataAuth> dataAuths = this.getUserDataAuths(userId);
 		for (SysDataAuth e : dataAuths)
 			ids.add(e.getAuthId());
-		userRightSet.setDataAuths(ids);
+		userPermissions.setDataAuths(ids);
 
 		ids.clear();
 		List<SysDataAuthItem> dataAuthItems = this.getUserDataAuthItems(userId);
 		for (SysDataAuthItem e : dataAuthItems)
 			ids.add(e.getAuthItemId());
-		userRightSet.setDataAuthItems(ids);
+		userPermissions.setDataAuthItems(ids);
 
-		return userRightSet;
+		return userPermissions;
 	}
 
 	class SysTabMenuMapper implements RowMapper<TwoTuple<Integer, Integer>> {

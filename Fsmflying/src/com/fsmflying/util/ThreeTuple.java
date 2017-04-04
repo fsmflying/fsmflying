@@ -4,6 +4,11 @@ public class ThreeTuple<TFirst, TSecond, TThird> extends
 		TwoTuple<TFirst, TSecond> {
 	private TThird mThird;
 
+	
+	public ThreeTuple() {
+		super();
+	}
+
 	public ThreeTuple(TFirst first, TSecond second, TThird mThird) {
 		super(first, second);
 		this.mThird = mThird;

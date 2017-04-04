@@ -39,6 +39,11 @@ public class SysCustomPage extends AbstractBean{
 		super();
 	}
 
+	public SysCustomPage(int customPageId) {
+		super();
+		mCustomPageId = customPageId;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
 	@Column(name="CustomPageId",nullable=false)

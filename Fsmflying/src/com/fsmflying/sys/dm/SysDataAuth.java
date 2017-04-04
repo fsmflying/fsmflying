@@ -34,10 +34,22 @@ public class SysDataAuth extends AbstractBean{
 	public String 	mMemo;
 	public int 		mDisabled;
 	
+	
+	public SysDataAuth() {
+		super();
+	}
+
+	public SysDataAuth(int authId) {
+		super();
+		mAuthId = authId;
+	}
+
+
 	private Set<SysDataAuthItem> items = new HashSet<SysDataAuthItem>();
 	
-	@OneToMany(targetEntity=SysDataAuthItem.class)
-	@JoinColumn(name="DataAuthId")
+//	@OneToMany(targetEntity=SysDataAuthItem.class)
+//	@JoinColumn(name="DataAuthId")
+	@Transient
 	public Set<SysDataAuthItem> getItems() {
 		return items;
 	}

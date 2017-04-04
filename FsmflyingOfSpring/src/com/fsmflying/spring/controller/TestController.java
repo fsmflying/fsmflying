@@ -13,13 +13,14 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fsmflying.http.HttpJsonResult;
 import com.fsmflying.spring.Spring4WebHelper;
 import com.fsmflying.sys.service.ConfigService;
+import com.fsmflying.sys.service.IConfigService;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
 
 	@Resource
-	ConfigService configService;
+	IConfigService configService;
 
 	@RequestMapping("/getCtxInfo")
 	@JsonView

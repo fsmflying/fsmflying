@@ -14,12 +14,14 @@ import com.fsmflying.sys.dm.SysMenu;
 import com.fsmflying.sys.dm.SysRole;
 import com.fsmflying.sys.dm.SysTab;
 import com.fsmflying.sys.dm.SysUser;
-import com.fsmflying.sys.dm.helper.UserRightSet;
+import com.fsmflying.sys.dm.helper.UserPermissions;
 import com.fsmflying.util.TwoTuple;
 
 public class SystemManageDaoImpl extends com.fsmflying.spring.dao.impl.SystemManageDaoImpl {
 
 	HibernateTemplate hibernateTemplate;
+
+	
 	
 	
 	@Override
@@ -136,9 +138,9 @@ public class SystemManageDaoImpl extends com.fsmflying.spring.dao.impl.SystemMan
 	}
 
 	@Override
-	public UserRightSet getUserRightSet(int userId) {
+	public UserPermissions getUserPermissions(int userId) {
 		// TODO Auto-generated method stub
-		return super.getUserRightSet(userId);
+		return super.getUserPermissions(userId);
 	}
 
 	@Override

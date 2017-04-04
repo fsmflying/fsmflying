@@ -9,13 +9,12 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.fsmflying.sys.dao.SequenceDao;
+import com.fsmflying.sys.dao.ISequenceDao;
 
-public class SequenceDaoImpl implements SequenceDao {
+public class SequenceDaoImpl implements ISequenceDao {
 
 	private JdbcTemplate mJdbcTemplate = new JdbcTemplate();
 
-	@Override
 	public void setDataSource(DataSource ds) {
 		this.mJdbcTemplate.setDataSource(ds);
 	}
@@ -60,13 +59,9 @@ public class SequenceDaoImpl implements SequenceDao {
 		}
 	}
 
-	@Override
-	public int getNextId(String keyName) {
-		return getNextId(keyName, 1);
-	}
 
 	@Override
-	public int getNextId(String keyName, int increment) {
+	public int generateNextId(String keyName, int increment) {
 		if (keyName == null || "".equals(keyName.trim()))
 			throw new IllegalArgumentException(
 					"The value of 'keyName' must be not null and empty !");
@@ -113,13 +108,9 @@ public class SequenceDaoImpl implements SequenceDao {
 		
 	}
 
-	@Override
-	public int getNextIdByDefault() {
-		return getNextId("default");
-	}
 
 	@Override
-	public int[] getNextId(int generateCount, String keyName, int increment) {
+	public int[] generateNextIds(int generateCount, String keyName, int increment) {
 
 		if (generateCount <= 0)
 			throw new IllegalArgumentException(
@@ -127,7 +118,7 @@ public class SequenceDaoImpl implements SequenceDao {
 		if (keyName == null || "".equals(keyName.trim()))
 			throw new IllegalArgumentException(
 					"The value of 'keyName' must be not null and empty !");
-		int[] nextIds = new int[generateCount];
+		int[] values = new int[generateCount];
 
 		List<SysSequence> list = this.mJdbcTemplate.query(
 				"select * from sys_sequences where keyname=?",
@@ -136,29 +127,29 @@ public class SequenceDaoImpl implements SequenceDao {
 
 		String keyname = keyName.toLowerCase().trim();
 
-		Date lastUpdateTime = Calendar.getInstance().getTime();
+		Date generatedTime = Calendar.getInstance().getTime();
 		if (list.size() == 0) {
 
 			this.mJdbcTemplate
 					.update("insert sys_sequences(keyname,nextvalue,GeneratedTime) values(?,?,?)",
 							keyname, increment * (generateCount - 1) + 2,
-							lastUpdateTime);
-			for (int i = 0; i < nextIds.length; i++) {
-				nextIds[i] = increment * i + 1;
+							generatedTime);
+			for (int i = 0; i < values.length; i++) {
+				values[i] = increment * i + 1;
 				// greater than Integer.MAX_VALUE is not allows;
-				if ((Integer.MAX_VALUE - nextIds[i] < increment)) {
-					nextIds[i] = -1;
-					if ((i > 0) && (nextIds[i - 1] == -1))
+				if ((Integer.MAX_VALUE - values[i] < increment)) {
+					values[i] = -1;
+					if ((i > 0) && (values[i - 1] == -1))
 						this.mJdbcTemplate
 								.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
-										keyname, -1, lastUpdateTime);
+										keyname, -1, generatedTime);
 					continue;
 				}
 				this.mJdbcTemplate
 						.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
-								keyname, nextIds[i], lastUpdateTime);
+								keyname, values[i], generatedTime);
 			}
-			return nextIds;
+			return values;
 		} else {
 			SysSequence model = this.mJdbcTemplate.queryForObject(
 					"select * from sys_sequences where keyname=?",
@@ -166,31 +157,18 @@ public class SequenceDaoImpl implements SequenceDao {
 			this.mJdbcTemplate
 					.update("update sys_sequences set nextvalue=?,GeneratedTime=? where keyname=?",
 							model.getNextValue() + increment
-									* (generateCount - 1) + 1, lastUpdateTime,
+									* (generateCount - 1) + 1, generatedTime,
 							keyname);
-			for (int i = 0; i < nextIds.length; i++) {
-				nextIds[i] = increment * i + model.getNextValue();
+			for (int i = 0; i < values.length; i++) {
+				values[i] = increment * i + model.getNextValue();
 				this.mJdbcTemplate
 						.update("insert sys_sequencehistories(keyname,GeneratedValue,GeneratedTime) values(?,?,?)",
-								keyname, nextIds[i], lastUpdateTime);
+								keyname, values[i], generatedTime);
 			}
-			return nextIds;
+			return values;
 		}
 	}
 
-	@Override
-	public int[] getNextId(int generateCount, String keyName) {
-		return getNextId(generateCount, keyName, 1);
-	}
-
-	@Override
-	public int[] getNextId(int generateCount) {
-		return getNextId(generateCount, "default", 1);
-	}
-
-	@Override
-	public int[] getNextId(int generateCount, int increment) {
-		return getNextId(generateCount, "default", increment);
-	}
+	
 
 }

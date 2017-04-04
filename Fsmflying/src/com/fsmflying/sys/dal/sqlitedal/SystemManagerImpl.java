@@ -79,9 +79,9 @@ public class SystemManagerImpl implements SystemManager {
 				e.setUsername(rs.getString("Userpwd"));
 				e.setUserPwd(rs.getString("Password"));
 				e.setNickname(rs.getString("Nickname"));
-				e.setIPPolicy(rs.getInt("IPPolicy"));
+				e.setIpPolicy(rs.getInt("IPPolicy"));
 
-				e.setIPAddress(rs.getString("IPAddress"));
+				e.setIpAddress(rs.getString("IPAddress"));
 				e.setLastLoginTime(rs.getDate("LastLoginTime"));
 				e.setStatus(rs.getInt("DisabledPolicy"));
 				e.setDisabledMinutes(rs.getInt("DisabledMinutes"));

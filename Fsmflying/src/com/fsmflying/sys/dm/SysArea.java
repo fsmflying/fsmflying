@@ -34,6 +34,14 @@ public class SysArea extends AbstractBean {
 	private int mShowOrder;
 	private String mMemo;
 
+	
+	
+	
+	public SysArea(int areaId) {
+		super();
+		mAreaId = areaId;
+	}
+
 	@Override
 	@Transient
 	public String getTypeUnique() {

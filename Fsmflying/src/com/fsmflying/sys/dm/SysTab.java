@@ -41,17 +41,23 @@ public class SysTab extends AbstractBean{
 	private int 	mLevelDepth;
 	private String	mMemo;
 	
-	private Set<SysMenu> mMenus = new HashSet<SysMenu>();
+	private Set<SysMenu> mMenus;// = new HashSet<SysMenu>();
 
 	public SysTab() {
 		super();
 	}
+	
+	public SysTab(int tabId) {
+		super();
+		mTabId = tabId;
+	}
 
-	@ManyToMany(targetEntity=SysMenu.class)
-	@JoinTable(name="Sys_RTabMenu",
-	joinColumns=@JoinColumn(name="CTabId",referencedColumnName="TabId"),
-	inverseJoinColumns=@JoinColumn(name="CMenuId",referencedColumnName="MenuId")
-			)
+//	@ManyToMany(targetEntity=SysMenu.class)
+//	@JoinTable(name="Sys_RTabMenu",
+//	 joinColumns=@JoinColumn(name="TabId",referencedColumnName="TabId"),
+//	 inverseJoinColumns=@JoinColumn(name="MenuId",referencedColumnName="MenuId")
+//	)
+	@Transient
 	public Set<SysMenu> getMenus() {
 		return mMenus;
 	}

@@ -42,6 +42,15 @@ public class SysConfig extends AbstractBean{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public SysConfig(int configId) {
+		super();
+		mConfigId = configId;
+	}
+
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")

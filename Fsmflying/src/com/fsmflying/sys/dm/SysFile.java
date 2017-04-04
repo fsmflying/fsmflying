@@ -32,6 +32,15 @@ public class SysFile extends AbstractBean{
 	private int		mFileType;
 	private String	mMemo;
 	
+	public SysFile() {
+		super();
+	}
+	
+	public SysFile(int fileId) {
+		super();
+		mFileId = fileId;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tableIdGenerator")
 	@Column(name="FileId",nullable=false)
@@ -105,10 +114,6 @@ public class SysFile extends AbstractBean{
 
 	public void setMemo(String mMemo) {
 		this.mMemo = mMemo;
-	}
-
-	public SysFile() {
-		super();
 	}
 
 	@Override

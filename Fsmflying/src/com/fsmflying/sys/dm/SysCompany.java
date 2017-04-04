@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,8 +60,19 @@ public class SysCompany extends AbstractBean {
 	public SysCompany() {
 		super();
 	}
-	@OneToMany(targetEntity=SysDepartment.class)
-	@JoinColumn(name="CompanyId")
+	
+	
+	
+	public SysCompany(int companyId) {
+		super();
+		mCompanyId = companyId;
+	}
+
+
+
+//	@OneToMany(targetEntity=SysDepartment.class,fetch=FetchType.LAZY)
+//	@JoinColumn(name="CompanyId")
+	@Transient
 	public Set<SysDepartment> getDepartments() {
 		return mDepartments;
 	}

@@ -34,14 +34,23 @@ public class SysLog extends AbstractBean{
 	private	String 	mOperatorName;
 	private Date	mOperationTime;
 	private String	mOperationType;
-	private String 	mOperationAddress;
+	private String 	mOperationAddr;
 	private String 	mMachineIP;
 	private String	mMachineName;
 	private String	mBrowser;
-	private String	mApplicationName;
-	private String 	mOSName;
+	private String	mAppName;
+	private String 	mClientSystemName;
 	private String 	mMessage;
 	
+	public SysLog() {
+		super();
+	}
+
+	public SysLog(int logId) {
+		super();
+		mLogId = logId;
+	}
+
 	@Override
 	@Transient
 	public String getTypeUnique() {
@@ -121,21 +130,23 @@ public class SysLog extends AbstractBean{
 		mOperationTime = operationTime;
 	}
 
-	public String getOperationAddress() {
-		return mOperationAddress;
+	public String getOperationAddr() {
+		return mOperationAddr;
 	}
 
-	public void setOperationAddress(String operationAddress) {
-		mOperationAddress = operationAddress;
+	public void setOperationAddr(String operationAddress) {
+		mOperationAddr = operationAddress;
 	}
-	@Column(name="Machine_IP")
-	public String getMachineIP() {
+	
+	@Column(name="MachineIp")
+	public String getMachineIp() {
 		return mMachineIP;
 	}
 
-	public void setMachineIP(String machineIP) {
+	public void setMachineIp(String machineIP) {
 		mMachineIP = machineIP;
 	}
+	
 	public String getMachineName() {
 		return mMachineName;
 	}
@@ -150,19 +161,19 @@ public class SysLog extends AbstractBean{
 	public void setBrowser(String browser) {
 		mBrowser = browser;
 	}
-	public String getApplicationName() {
-		return mApplicationName;
+	public String getAppName() {
+		return mAppName;
 	}
 
-	public void setApplicationName(String applicationName) {
-		mApplicationName = applicationName;
+	public void setAppName(String applicationName) {
+		mAppName = applicationName;
 	}
-	public String getOSName() {
-		return mOSName;
+	public String getClientSystemName() {
+		return mClientSystemName;
 	}
 
-	public void setOSName(String oSName) {
-		mOSName = oSName;
+	public void setClientSystemName(String oSName) {
+		mClientSystemName = oSName;
 	}
 	public String getMessage() {
 		return mMessage;

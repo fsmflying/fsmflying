@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,12 @@ public class SysDepartment extends AbstractBean {
 		super();
 	}
 
-	@ManyToOne(targetEntity = SysCompany.class)
+	public SysDepartment(int deptId) {
+		super();
+		mDeptId = deptId;
+	}
+
+	@ManyToOne(targetEntity = SysCompany.class,fetch=FetchType.EAGER)
 	@JoinColumn(name = "CompanyId")
 	public SysCompany getCompany() {
 		return mCompany;
@@ -178,7 +184,8 @@ public class SysDepartment extends AbstractBean {
 		return super.getDbLastUpdateTime();
 	}
 
-	@Column(name = "CompanyId", nullable = false, columnDefinition = "int default -1")
+	//@Column(name = "CompanyId", nullable = false, columnDefinition = "int default -1")
+	@Transient
 	public int getCompanyId() {
 		return mCompanyId;
 	}

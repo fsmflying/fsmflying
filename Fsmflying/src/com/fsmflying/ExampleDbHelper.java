@@ -51,9 +51,9 @@ public class ExampleDbHelper {
 					model.setUsername(rs.getString("Username"));
 					model.setUserPwd(rs.getString("Userpwd"));
 					model.setNickname(rs.getString("Nickname"));
-					model.setIPPolicy(rs.getInt("IPPolicy"));
+					model.setIpPolicy(rs.getInt("IPPolicy"));
 
-					model.setIPAddress(rs.getString("IPAddress"));
+					model.setIpAddress(rs.getString("IPAddress"));
 					model.setLastLoginTime(com.fsmflying.helpers.Helper
 							.parseDate(rs.getString("LastLoginTime")));
 					model.setStatus(rs.getInt("DisabledPolicy"));
@@ -277,7 +277,7 @@ public class ExampleDbHelper {
 					model.setEmplName_EN(rs.getString("EmplName_EN"));
 
 					model.setSex(rs.getInt("Sex"));
-					model.setBirthdate(com.fsmflying.helpers.Helper
+					model.setBirthDate(com.fsmflying.helpers.Helper
 							.parseDate(rs.getString("Birthdate")));
 					model.setNativePlace(rs.getString("NativePlace"));
 					model.setCardId(rs.getString("CardId"));
@@ -292,7 +292,7 @@ public class ExampleDbHelper {
 
 					model.setPositionId(rs.getInt("PositionId"));
 					model.setPositionName(rs.getString("PositionName"));
-					model.setTitleName(rs.getString("TitleName"));
+					model.setPositionTitle(rs.getString("TitleName"));
 
 					model.setDeptId(rs.getInt("DeptId"));
 					model.setShowOrder(rs.getInt("ShowOrder"));
