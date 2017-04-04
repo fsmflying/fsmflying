@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd       
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        ">
+	
+	<context:annotation-config></context:annotation-config>
+	
+	<context:component-scan base-package="com.fsmflying.spring.controller" />
+	<context:component-scan base-package="com.fsmflying.hibernate.jpa" />
+	<context:component-scan base-package="com.fsmflying.sys.dm" />
+	
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="fsmflying"/>
+	</bean>
+	
+	
+	
+	<bean id="txManager"
+        class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="txManager"/>
+	
+	<bean id="systemManageService" class="com.fsmflying.hibernate.jpa.impl.SystemManageServiceImpl"></bean>
+	<bean id="sequenceService" class="com.fsmflying.hibernate.jpa.impl.SequenceServiceImpl"></bean>
+	<bean id="configService" class="com.fsmflying.hibernate.jpa.impl.ConfigServiceImpl"></bean>
+	<bean id="logService" class="com.fsmflying.hibernate.jpa.impl.LogServiceImpl"></bean>
+	
+</beans>
