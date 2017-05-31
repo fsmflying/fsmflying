@@ -28,14 +28,11 @@ import com.fsmflying.mybatis.mapper.SysUserMapper;
 import com.fsmflying.sys.dm.SysCompany;
 import com.fsmflying.sys.dm.SysDepartment;
 import com.fsmflying.sys.dm.SysDictDir;
-import com.fsmflying.sys.dm.SysDictItem;
 import com.fsmflying.sys.dm.SysEmployee;
 import com.fsmflying.sys.dm.SysRole;
 import com.fsmflying.sys.dm.SysSequence;
 import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.util.IntegerStringTuple;
-import com.fsmflying.util.TwoIntegerTuple;
-import com.fsmflying.util.TwoObjectTuple;
 import com.fsmflying.util.TwoTuple;
 import com.google.gson.Gson;
 

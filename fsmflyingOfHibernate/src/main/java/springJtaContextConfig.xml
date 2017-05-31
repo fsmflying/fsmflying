@@ -186,9 +186,9 @@
 		</property>
 	</bean>
 	
-	 <!-- The transaction manager -->
+	 <!-- The transaction manager 
     <tx:annotation-driven transaction-manager="transactionManager" />
-    
+    -->
     
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate4.HibernateTransactionManager">

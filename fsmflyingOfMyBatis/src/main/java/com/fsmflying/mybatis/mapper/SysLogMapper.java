@@ -2,11 +2,6 @@ package com.fsmflying.mybatis.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
 //import com.fsmflying.helpers.SqlParameter;
 import com.fsmflying.sys.dm.SysLog;
 

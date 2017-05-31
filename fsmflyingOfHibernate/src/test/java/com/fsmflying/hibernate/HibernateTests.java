@@ -2,27 +2,21 @@ package com.fsmflying.hibernate;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fsmflying.sys.dm.SysRole;
-import com.fsmflying.sys.dm.SysTab;
-import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.sys.service.IConfigService;
 import com.fsmflying.sys.service.ILogService;
 import com.fsmflying.sys.service.ISequenceService;
 import com.fsmflying.sys.service.ISystemManageService;
 import com.fsmflying.util.TwoTuple;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class HibernateTests {
 

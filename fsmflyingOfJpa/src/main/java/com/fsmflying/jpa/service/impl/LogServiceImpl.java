@@ -12,24 +12,30 @@ import com.fsmflying.sys.service.AbstractLogService;
 @SuppressWarnings("unchecked")
 public class LogServiceImpl extends AbstractLogService implements JpaAccessable {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="common_log")
 	EntityManager entityManager;
+	
+	EntityManagerFactory entityManagerFactory;
 	
 	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory)
 	{
-		this.entityManager = entityManagerFactory.createEntityManager();
+		this.entityManagerFactory = entityManagerFactory;
+		this.entityManager = this.entityManagerFactory.createEntityManager();
+	}
+
+	public void close() {
+		if (this.entityManagerFactory != null)
+			this.entityManagerFactory.close();
 	}
 	
 	@Transactional
 	public boolean add(SysLog model) {
-		System.out.println(this.getClass().getCanonicalName()+".add():"+model.getMessage());
 		this.entityManager.persist(model);
 		return true;
 	}
 	
 	@Transactional
 	public boolean save(SysLog model) {
-		System.out.println(this.getClass().getCanonicalName()+".save():"+model.getMessage());
 		this.entityManager.merge(model);
 		return true;
 	}
@@ -51,8 +57,6 @@ public class LogServiceImpl extends AbstractLogService implements JpaAccessable 
 	
 	@Override
 	public void writeLog(String logger, String message) {
-		// TODO Auto-generated method stub
-		System.out.println(this.getClass().getCanonicalName()+".isWriteDatabase:"+this.getIsWriteDatabase());
 		System.out.println(logger+":"+message);
 		super.writeLog(logger, message);
 		

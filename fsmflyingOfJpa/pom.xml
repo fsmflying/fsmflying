@@ -2,9 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.fsmflying</groupId>
-	<artifactId>fsmflyingOfJpa</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>fsmflying-jpa</artifactId>
+	<version>${fsmflying.version}</version>
 	<packaging>jar</packaging>
 
 	<name>fsmflyingOfJpa</name>
@@ -19,7 +18,18 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>fsmflyingOfJpa</finalName>
+	</build>
+	<parent>
+		<groupId>com.fsmflying</groupId>
+		<artifactId>fsmflying-project-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
 </project>

@@ -9,11 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.fsmflying.mybatis.dao.impl.SystemManageDaoImpl;
 import com.fsmflying.mybatis.mapper.SysMapper;
 import com.fsmflying.sys.dm.SysDictDir;
-import com.fsmflying.util.TwoIntegerTuple;
-import com.fsmflying.util.TwoTuple;
 import com.google.gson.Gson;
 
 public class ConsoleApp {

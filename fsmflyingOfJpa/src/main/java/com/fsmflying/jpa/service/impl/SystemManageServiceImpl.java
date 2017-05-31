@@ -35,15 +35,25 @@ import com.fsmflying.util.TwoTuple;
 @SuppressWarnings("unchecked")
 public class SystemManageServiceImpl implements ISystemManageService, JpaAccessable {
 
-	@PersistenceContext
+
+	@PersistenceContext(unitName="common_sysadmin")
 	EntityManager entityManager;
 
 	EntityManagerFactory entityManagerFactory;
-
+	
+	public void close() {
+		if (this.entityManagerFactory != null)
+			this.entityManagerFactory.close();
+	}
 	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+		System.out.println(this.getClass().getCanonicalName()+".setEntityManagerFactory(..) executed !");
+		System.out.println(entityManagerFactory);
 		this.entityManagerFactory = entityManagerFactory;
 		this.entityManager = this.entityManagerFactory.createEntityManager();
-		// this.entityManager = entityManagerFactory.createEntityManager();
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 	public <T> List<T> getListOf(Class<T> cls, List<SqlParameter<?>> parameters) {
@@ -202,6 +212,7 @@ public class SystemManageServiceImpl implements ISystemManageService, JpaAccessa
 	@Transactional
 	public boolean add(SysUser model) {
 		this.entityManager.persist(model);
+		//this.entityManagerFactory.close();
 		return true;
 	}
 
@@ -222,6 +233,8 @@ public class SystemManageServiceImpl implements ISystemManageService, JpaAccessa
 	}
 
 	public SysUser getModelOfSysUser(String username, boolean refreshCache) {
+		System.out.println(this.entityManager);
+//		this.entityManager.close();
 		return (SysUser) this.entityManager.createQuery("select o from SysUser o  where o.username=:username")
 				.setParameter("username", username).getSingleResult();
 	}

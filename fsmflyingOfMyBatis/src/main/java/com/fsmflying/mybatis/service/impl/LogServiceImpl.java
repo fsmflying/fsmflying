@@ -14,7 +14,7 @@ public class LogServiceImpl extends AbstractLogService implements IMybatisAccess
 
 	SqlSessionFactory sessionFactory;
 
-	@Override
+//	@Override
 	public void setSessionFactory(SqlSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -28,7 +28,7 @@ public class LogServiceImpl extends AbstractLogService implements IMybatisAccess
 			session.close();
 	}
 	
-	@Override
+//	@Override
 	public boolean add(SysLog model) {
 		SqlSession session = this.getSession();
 		session.getMapper(SysLogMapper.class).add(model);
@@ -37,7 +37,7 @@ public class LogServiceImpl extends AbstractLogService implements IMybatisAccess
 		return true;
 	}
 
-	@Override
+//	@Override
 	public boolean save(SysLog model) {
 		SqlSession session = this.getSession();
 		session.getMapper(SysLogMapper.class).save(model);
@@ -46,7 +46,7 @@ public class LogServiceImpl extends AbstractLogService implements IMybatisAccess
 		return true;
 	}
 
-	@Override
+//	@Override
 	public boolean deleteModelOfSysLog(int id) {
 		SqlSession session = this.getSession();
 		session.getMapper(SysLogMapper.class).delete(id);
@@ -55,21 +55,21 @@ public class LogServiceImpl extends AbstractLogService implements IMybatisAccess
 		return true;
 	}
 
-	@Override
+//	@Override
 	public SysLog getModelOfSysLog(int id) {
 		SqlSession session = this.getSession();
 		SysLog model = session.getMapper(SysLogMapper.class).get(id);
 //		session.commit();
-//		closeSession(session);
+		closeSession(session);
 		return model;
 	}
 
-	@Override
+//	@Override
 	public List<SysLog> getListOfSysLog() {
 		SqlSession session = this.getSession();
 		List<SysLog> list = session.getMapper(SysLogMapper.class).getAllList();
 //		session.commit();
-//		closeSession(session);
+		closeSession(session);
 		return list;
 	}
 

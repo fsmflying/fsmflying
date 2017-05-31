@@ -16,7 +16,7 @@ public class SequenceDaoImpl implements ISequenceDao, IMybatisAccessable {
 
 	SqlSessionFactory sessionFactory;
 
-	@Override
+//	@Override
 	public void setSessionFactory(SqlSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -30,7 +30,7 @@ public class SequenceDaoImpl implements ISequenceDao, IMybatisAccessable {
 			session.close();
 	}
 
-	@Override
+//	@Override
 	public int generateNextId(String keyName, int increment) {
 		if (keyName == null || keyName.trim().isEmpty() || increment <= 0)
 			throw new IllegalArgumentException(
@@ -59,7 +59,7 @@ public class SequenceDaoImpl implements ISequenceDao, IMybatisAccessable {
 		return 0;
 	}
 
-	@Override
+//	@Override
 	public int[] generateNextIds(int generateCount, String keyName, int increment) {
 
 		if (keyName == null || keyName.trim().isEmpty() || generateCount <= 0 || increment <= 0)

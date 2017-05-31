@@ -3,8 +3,6 @@ package com.fsmflying.hibernate.service.impl;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

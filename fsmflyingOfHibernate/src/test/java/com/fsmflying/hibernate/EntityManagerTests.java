@@ -6,9 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.TestExecutionListeners;
-
-import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.sys.service.IConfigService;
 import com.fsmflying.sys.service.ILogService;
 import com.fsmflying.sys.service.ISequenceService;

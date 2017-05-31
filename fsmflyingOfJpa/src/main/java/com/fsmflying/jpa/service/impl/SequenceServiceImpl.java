@@ -7,29 +7,38 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fsmflying.jpa.service.JpaAccessable;
 import com.fsmflying.sys.dm.SysSequence;
 import com.fsmflying.sys.service.AbstractSequenceService;
-import com.fsmflying.sys.service.ILogService;
 
 //@Service("jpaSequenceService")
 public class SequenceServiceImpl extends AbstractSequenceService implements JpaAccessable {
 
-	ILogService logService;
+	// ILogService logService;
+	Logger logger = LoggerFactory.getLogger(SequenceServiceImpl.class);
 
-	@PersistenceContext
+	@PersistenceContext(unitName="common_sequence")
 	EntityManager entityManager;
 
+	EntityManagerFactory entityManagerFactory;
+
 	public void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
-		this.entityManager = entityManagerFactory.createEntityManager();
-	}
-	
-	public void setLogService(ILogService logService)
-	{
-		this.logService = logService;
+		this.entityManagerFactory = entityManagerFactory;// .createEntityManager();
+		this.entityManager = this.entityManagerFactory.createEntityManager();
 	}
 
-	
+	public void close() {
+		if (this.entityManagerFactory != null)
+			this.entityManagerFactory.close();
+	}
+
+	// public void setLogService(ILogService logService) {
+	//// this.logService = logService;
+	// }
+
 	@javax.transaction.Transactional(javax.transaction.Transactional.TxType.REQUIRES_NEW)
 	public int generateNextId(String keyName, int increment) {
 		if (keyName == null)
@@ -72,9 +81,12 @@ public class SequenceServiceImpl extends AbstractSequenceService implements JpaA
 					.setParameter("generatedTime", generateTime).executeUpdate();
 		}
 
-		logService.writeLog(this.getClass().getCanonicalName(),
-				"method[getNextId(String keyName, int increment)] Generate sequence[keyName=" + model.getKeyName()
-						+ "]:" + value);
+		// logService.writeLog(this.getClass().getCanonicalName(),
+		// "method[getNextId(String keyName, int increment)] Generate
+		// sequence[keyName=" + model.getKeyName()
+		// + "]:" + value);
+		logger.debug("method[getNextId(String keyName, int increment)] Generate sequence[keyName=" + model.getKeyName()
+				+ "]:" + value);
 		return value;
 	}
 
@@ -142,9 +154,17 @@ public class SequenceServiceImpl extends AbstractSequenceService implements JpaA
 					.setParameter("generatedTime", model.getGeneratedTime()).executeUpdate();
 
 		}
-		logService.writeLog(this.getClass().getCanonicalName(),
-				"method[getNextId(int generateCount, String keyName, int increment)] Generate sequence[keyName="
-						+ model.getKeyName() + "]:" + values.toString());
+		// logService.writeLog(this.getClass().getCanonicalName(),
+		// "method[getNextId(int generateCount, String keyName, int increment)]
+		// Generate sequence[keyName="
+		// + model.getKeyName() + "]:" + values.toString());
+		StringBuilder sb = new StringBuilder("[");
+		for (int i = 0; i < values.length; i++) {
+			sb.append(i > 0 ? ("," + values[i]) : values[i]);
+		}
+		sb.append("]");
+		logger.debug("method[getNextId(String keyName, int increment)] Generate sequence[keyName=" + model.getKeyName()
+				+ "]:" + sb.toString());
 		return values;
 	}
 

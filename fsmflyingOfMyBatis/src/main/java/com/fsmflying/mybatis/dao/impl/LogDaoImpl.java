@@ -14,7 +14,7 @@ public class LogDaoImpl implements ILogDao, IMybatisAccessable {
 
 	SqlSessionFactory sessionFactory;
 	
-	@Override
+//	@Override
 	public void setSessionFactory(SqlSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -28,7 +28,7 @@ public class LogDaoImpl implements ILogDao, IMybatisAccessable {
 			session.close();
 	}
 	
-	@Override
+//	@Override
 	public boolean add(SysLog model) {
 		SqlSession session = this.sessionFactory.openSession();
 		session.getMapper(SysLogMapper.class).add(model);
@@ -36,7 +36,7 @@ public class LogDaoImpl implements ILogDao, IMybatisAccessable {
 		return true;
 	}
 
-	@Override
+//	@Override
 	public boolean save(SysLog model) {
 		SqlSession session = this.sessionFactory.openSession();
 		session.getMapper(SysLogMapper.class).save(model);
@@ -44,7 +44,7 @@ public class LogDaoImpl implements ILogDao, IMybatisAccessable {
 		return true;
 	}
 
-	@Override
+//	@Override
 	public boolean deleteModelOfSysLog(int id) {
 		SqlSession session = this.sessionFactory.openSession();
 		session.getMapper(SysLogMapper.class).delete(id);
@@ -52,14 +52,14 @@ public class LogDaoImpl implements ILogDao, IMybatisAccessable {
 		return true;
 	}
 
-	@Override
+//	@Override
 	public SysLog getModelOfSysLog(int id) {
 		SqlSession session = this.sessionFactory.openSession();
 		SysLog model  = session.getMapper(SysLogMapper.class).get(id);
 		return model;
 	}
 
-	@Override
+//	@Override
 	public List<SysLog> getListOfSysLog() {
 		SqlSession session = this.sessionFactory.openSession();
 		List<SysLog> list  = session.getMapper(SysLogMapper.class).getAllList();
