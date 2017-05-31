@@ -6,7 +6,7 @@
 	<version>${fsmflying.version}</version>
 	<packaging>jar</packaging>
 
-	<name>fsmflyingOfMyBatis</name>
+	<name>fsmflying-mybatis</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

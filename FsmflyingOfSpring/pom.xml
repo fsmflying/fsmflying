@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>fsmflying-spring</artifactId>
 	<version>${fsmflying.version}</version>
+	<name>fsmflying-spring</name>
 	<parent>
 		<groupId>com.fsmflying</groupId>
 		<artifactId>fsmflying-project-parent</artifactId>

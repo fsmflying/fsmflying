@@ -5,7 +5,7 @@
 	<artifactId>fsmflying-hibernate</artifactId>
 	<version>${fsmflying.version}</version>
 	<packaging>jar</packaging>
-	<name>fsmflyingOfHibernate</name>
+	<name>fsmflying-hibernate</name>
 	<url>http://maven.apache.org</url>
 	<parent>
 		<groupId>com.fsmflying</groupId>
