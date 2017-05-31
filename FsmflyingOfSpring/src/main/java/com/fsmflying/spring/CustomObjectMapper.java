@@ -12,7 +12,7 @@ import org.codehaus.jackson.map.SerializerProvider;
 import org.codehaus.jackson.map.ser.CustomSerializerFactory;  
   
 /** 
- * @description 解决Date类型返回json格式为自定义格式 
+ * @description
  * @author aokunsang 
  * @date 2013-5-28 
  */  

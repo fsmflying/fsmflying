@@ -75,20 +75,14 @@ public class DBUtils {
 		}
 	}
 
-//	/**
-//	 * 打印默认数据库配置文件路径
-//	 */
+
 //	public static void printPackageInfo() {
 //		String filePath = DBUtils.class.getResource("/exampledb.properties")
 //				.getPath();
 //		System.out.println("example database file path:" + filePath);
 //	}
 
-//	/**
-//	 * 获取默认数据库配置文件路径
-//	 * 
-//	 * @return　默认数据库的文件路径
-//	 */
+
 //	public static String getDefaultDbConfigFilePath() {
 //		return DBUtils.class.getResource("/exampledb.properties").getPath();
 //	}
@@ -179,9 +173,9 @@ public class DBUtils {
 				DbFieldSet s = m.getAnnotation(DbFieldSet.class);
 				tuple = getsetpairs.get(s.value());
 				if (tuple == null) {
-					System.out.println("请检查"
-							+ cls.getClass().getCanonicalName() + "set访问器set"
-							+ s.value() + "上的DbFieldSet标记项!");
+					System.out.println(""
+							+ cls.getClass().getCanonicalName() + ""
+							+ s.value() + "");
 				}
 				if (tuple != null && s != null)
 					tuple.setSecond(m);
@@ -191,9 +185,9 @@ public class DBUtils {
 				DbFieldGet g = m.getAnnotation(DbFieldGet.class);
 				tuple = getsetpairs.get(g.value());
 				if (tuple == null) {
-					System.out.println("请检查"
-							+ cls.getClass().getCanonicalName() + "get访问器get"
-							+ g.value() + "上的DbFieldGet标记项!");
+					System.out.println(""
+							+ cls.getClass().getCanonicalName() + ""
+							+ g.value() + "");
 				}
 				if (tuple != null && g != null)
 					tuple.setFirst(m);
@@ -241,9 +235,9 @@ public class DBUtils {
 			getM = t.getFirst();
 			// setM = t.getSecond();
 			if (getM == null)
-				System.out.println(key + "的get访问器配置不符合表字段！");
+//				System.out.println(key + "");
 			// if(setM==null)
-			// System.out.println(key+"的set访问器配置不符合表字段！");
+			// System.out.println(key+"");
 			try {
 				value = getM.invoke(obj);
 			} catch (IllegalAccessException e) {

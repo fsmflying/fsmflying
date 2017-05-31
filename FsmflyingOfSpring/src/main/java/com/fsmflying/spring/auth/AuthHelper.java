@@ -12,9 +12,9 @@ public class AuthHelper {
 	static SystemManageService systemManageService;
 
 	/**
-	 * µÃµ½ÒÑ¾­µÇÂ¼ÓÃ»§µÄUserÊµÀı£¬Èç¹ûÎ´µÇÂ¼Ôò·µ»Ønull
-	 * @param request HttpServletRequestÇëÇóÊµÀı
-	 * @return¡¡UserÊµÀı
+	 * 
+	 * @param request ç”¨æˆ·çš„è¯·æ±‚
+	 * @return ä¼šè¯ä¸­çš„ç”¨æˆ·ä¿¡æ¯
 	 */
 	public static User getUser(HttpServletRequest request) {
 		if (request != null) {
@@ -27,9 +27,9 @@ public class AuthHelper {
 	}
 
 	/**
-	 * µÃµ½ÒÑ¾­µÇÂ¼ÓÃ»§µÄÓÃ»§Id£¬Èç¹ûÎ´µÇÂ¼Ôò·µ»Ø-1
-	 * @param request HttpServletRequestÇëÇóÊµÀı
-	 * @return intÀàĞÍµÄUserId
+	 * æ ¹æ®ä¼šè¯è·å–ç™»å½•ç”¨æˆ·Id
+	 * @param request ç”¨æˆ·çš„è¯·æ±‚
+	 * @return ç”¨æˆ·Id
 	 */
 	public static int getUserId(HttpServletRequest request) {
 		if (request != null) {

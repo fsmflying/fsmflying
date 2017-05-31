@@ -8,8 +8,19 @@
 		<groupId>com.fsmflying</groupId>
 		<artifactId>fsmflying-project-parent</artifactId>
 		<version>1.0.0</version>
+		<relativePath>../fsmflying-project-parent</relativePath>
 	</parent>
 	<dependencies>
+		<dependency>
+			<groupId>com.fsmflying</groupId>
+			<artifactId>fsmflying</artifactId>
+			<version>${fsmflying.version}</version>
+			
+			<!--  
+            <scope>system</scope>  
+            <systemPath>${project.basedir}/../fsmflying/target/fsmflying-1.0.0.jar</systemPath>  
+            -->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -79,6 +90,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-
+		
 	</dependencies>
 </project>

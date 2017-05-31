@@ -4,6 +4,10 @@
 	<artifactId>fsmflying</artifactId>
 	<version>${fsmflying.version}</version>
 	<name>fsmflying</name>
+	<properties>
+		<fsmflying.version>1.0.0</fsmflying.version>
+	</properties>
+	
 	<dependencies>
 		<!-- jpa -->
 		<dependency>
@@ -21,5 +25,6 @@
 		<groupId>com.fsmflying</groupId>
 		<artifactId>fsmflying-project-parent</artifactId>
 		<version>1.0.0</version>
+		<relativePath>../fsmflying-project-parent</relativePath>
 	</parent>
 </project>

@@ -37,7 +37,7 @@ public class JsonDataProvider {
 			jsonResult.setRows(systemManageService.getUserTabs(userId));
 		} else {
 			jsonResult.setResult(0);
-			jsonResult.setMessage("Î´ÄÜÊ¶±ğÓÃ»§ĞÅÏ¢!");
+			jsonResult.setMessage("ç”¨æˆ·æœªç™»å½•!");
 		}
 		return jsonResult;
 	}
@@ -81,7 +81,7 @@ public class JsonDataProvider {
 			jsonResult.setRows(tabs);
 		} else {
 			jsonResult.setResult(0);
-			jsonResult.setMessage("Î´ÄÜÊ¶±ğÓÃ»§ĞÅÏ¢!");
+			jsonResult.setMessage("ç”¨æˆ·æœªç™»å½•!");
 		}
 		return jsonResult;
 	}
@@ -97,7 +97,7 @@ public class JsonDataProvider {
 			jsonResult.setRows(systemManageService.getUserMenus(userId));
 		} else {
 			jsonResult.setResult(0);
-			jsonResult.setMessage("Î´ÄÜÊ¶±ğÓÃ»§ĞÅÏ¢!");
+			jsonResult.setMessage("ç”¨æˆ·æœªç™»å½•!");
 		}
 		return jsonResult;
 	}

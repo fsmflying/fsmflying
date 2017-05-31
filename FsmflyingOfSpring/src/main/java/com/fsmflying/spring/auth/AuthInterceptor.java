@@ -42,8 +42,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		if (handler instanceof HandlerMethod) {
 			Auth auth = ((HandlerMethod) handler).getMethod().getAnnotation(Auth.class);
-			if (auth != null) {// ÓĞÈ¨ÏŞ¿ØÖÆµÄ¾ÍÒª¼ì²é
-				if (request.getSession().getAttribute(SESSION_USERID) == null) {// Ã»µÇÂ¼¾ÍÒªÇóµÇÂ¼
+			if (auth != null) {// 
+				if (request.getSession().getAttribute(SESSION_USERID) == null) {//
 					response.setStatus(HttpStatus.FORBIDDEN.value());
 					response.setContentType("text/html; charset=UTF-8");
 					String redirectUrl = request.getRequestURI().toString();
@@ -55,11 +55,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 							+ URLEncoder.encode(redirectUrl, "UTF-8"));
 
 					// PrintWriter out=response.getWriter();
-					// out.write("{\"type\":\"nosignin\",\"msg\":\"ÇëÄúÏÈµÇÂ¼!\"}");
+					// out.write("{\"type\":\"nosignin\",\"msg\":\"æœªç™»å½•!\"}");
 					// out.flush();
 					// out.close();
 					flag = false;
-				} else {// µÇÂ¼ÁË¼ì²é,·½·¨ÉÏÖ»ÊÇ@Auth,±íÊ¾Ö»ÒªÇóµÇÂ¼¾ÍÄÜÍ¨¹ı.@Auth("authority")ÕâÀàĞÍ,ÑéÖ¤ÓÃ»§È¨ÏŞ
+				} else {//
 					if (!"".equals(auth.value())) {
 						int userId = AuthHelper.getUserId(request);
 						List<SysFuncPoint> funcPoints = systemManageService.getUserFuncPoints(userId);
@@ -69,16 +69,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 							}
 						}
 
-						if (!flag) {// ÌáÊ¾ÓÃ»§Ã»È¨ÏŞ
+						if (!flag) {//
 							response.setStatus(HttpStatus.FORBIDDEN.value());
 							response.setContentType("text/html; charset=UTF-8");
 							PrintWriter out = response.getWriter();
-							out.write("{\"type\":\"noauth\",\"msg\":\"ÄúÃ»ÓĞ" + auth.name() + "È¨ÏŞ!\"}");
+							out.write("{\"type\":\"noauth\",\"msg\":\"æ²¡æœ‰ç™»å½•" + auth.name() + "!\"}");
 							out.flush();
 							out.close();
 							flag = false;
 						}
-						System.out.println("ÑéÖ¤ÓÃ»§[" + userId + "]¹¦ÄÜÈ¨ÏŞ[" + auth.value() + "]:" + flag);
+						System.out.println("ç”¨æˆ·[" + userId + "]çš„æƒé™[" + auth.value() + "]:" + flag);
 					}
 				}
 			}

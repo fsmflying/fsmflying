@@ -1,15 +1,8 @@
 package com.fsmflying.hibernate.service.impl;
 
-//import java.beans.BeanInfo;
-//import java.beans.IntrospectionException;
-//import java.beans.Introspector;
-//import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Table;
-//import javax.transaction.Transactional;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,7 +12,6 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.fsmflying.helpers.SqlParameter;
 import com.fsmflying.hibernate.service.HibernateSessionAccessable;
 import com.fsmflying.sys.dm.SysCompany;
@@ -33,13 +25,8 @@ import com.fsmflying.sys.dm.SysDictItem;
 import com.fsmflying.sys.dm.SysEmployee;
 import com.fsmflying.sys.dm.SysFile;
 import com.fsmflying.sys.dm.SysFuncPoint;
-//import com.fsmflying.sys.dm.SysIOTemplate;
-//import com.fsmflying.sys.dm.SysIOTemplateColumn;
-//import com.fsmflying.sys.dm.SysIOTemplateField;
-//import com.fsmflying.sys.dm.SysLog;
 import com.fsmflying.sys.dm.SysMenu;
 import com.fsmflying.sys.dm.SysRole;
-//import com.fsmflying.sys.dm.SysSequence;
 import com.fsmflying.sys.dm.SysTab;
 import com.fsmflying.sys.dm.SysUser;
 import com.fsmflying.sys.dm.helper.UserPermissions;

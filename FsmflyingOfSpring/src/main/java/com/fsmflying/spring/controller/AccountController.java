@@ -57,7 +57,7 @@ public class AccountController {
 		int userId = AuthHelper.getUserId(request);
 		if (userId != -1) {
 			loginResult.setResult(-2);
-			loginResult.setMessage("ÓÃ»§ÒÑ¾­µÇÂ¼³É¹¦£¡");
+			loginResult.setMessage("ç”¨æˆ·å·²ç»ç™»å½•!");
 			loginResult.setUser(AuthHelper.getUser(request));
 			loginResult.setRedirectUrl(request.getRequestURI().toString());
 			return loginResult;
@@ -65,11 +65,11 @@ public class AccountController {
 		System.out.println(systemManageService);
 		SysUser sysUser = systemManageService.getModelOfSysUser(username, true);
 		if (sysUser != null) {
-			//logService.writeLog(this.getClass().getCanonicalName(),"ÓÃ»§[" + sysUser.getUsername() + "]³¢ÊÔµÇÂ¼ÏµÍ³!");
-			logger.info("ÓÃ»§[" + sysUser.getUsername() + "]³¢ÊÔµÇÂ¼ÏµÍ³!");
+			//logService.writeLog(this.getClass().getCanonicalName(),"ï¿½Ã»ï¿½[" + sysUser.getUsername() + "]ï¿½ï¿½ï¿½Ôµï¿½Â¼ÏµÍ³!");
+			logger.info("ç”¨æˆ·[" + sysUser.getUsername() + "]å°è¯•ç™»å½•!");
 			if (sysUser.getStatus() == 1) {
 				loginResult.setResult(0);
-				loginResult.setMessage("ÓÃ»§±»ÓÀ¾Ã½ûÓÃ£¡");
+				loginResult.setMessage("ç”¨æˆ·è¢«æ°¸ä¹…ç¦ç”¨!è¯·è”ç³»ç®¡ç†å‘˜!");
 				return loginResult;
 			} else if (sysUser.getStatus() == 2) {
 				Date currentTime = Calendar.getInstance().getTime();
@@ -78,15 +78,13 @@ public class AccountController {
 					if (currentTime.getTime() < sysUser.getDisabledTime().getTime()
 							+ sysUser.getDisabledMinutes() * 60 * 1000) {
 						loginResult.setResult(0);
-						loginResult.setMessage("ÓÃ»§´¦ÓÚ±»½ûÓÃµÄÊ±¼ä¶ÎÄÚ£¡");
-
+						loginResult.setMessage("ç”¨æˆ·è´¦å·è¢«ç¦ç”¨!è¯·è”ç³»ç®¡ç†å‘˜!");
 						return loginResult;
 					}
 				} else {
 
 					loginResult.setResult(0);
-					loginResult.setMessage("ÓÃ»§½ûÓÃÊ±¼ä¶ÎÓĞ´í£¬ÇëÁªÏµ¹ÜÀíÔ±£¡");
-
+					loginResult.setMessage("ç™»å½•å¤±è´¥");
 					return loginResult;
 				}
 
@@ -106,12 +104,12 @@ public class AccountController {
 					currentOffset = currentOffset + (24 * 60 * 60 * 1000);
 				if (currentOffset > disabledStartOffset && currentOffset < disabledEndOffset) {
 					loginResult.setResult(0);
-					loginResult.setMessage("ÓÃ»§´¦ÓÚÃ¿Ìì±»½ûÓÃµÄÊ±¼ä¶ÎÄÚ£¡");
+					loginResult.setMessage("ç”¨æˆ·è´¦å·å¤„äºæ¯å¤©è¢«ç¦ç”¨çš„æ—¶æ®µå†…!");
 					return loginResult;
 				}
 			} else if (sysUser.getStatus() == 0 && !sysUser.getUserPwd().equals(Helper.getMD5(password))) {
 				loginResult.setResult(0);
-				loginResult.setMessage("ÃÜÂë´íÎó£¡");
+				loginResult.setMessage("ç”¨æˆ·åæˆ–å¯†ç æœ‰è¯¯!è¯·ç¡®è®¤!");
 				return loginResult;
 			}
 
@@ -150,11 +148,11 @@ public class AccountController {
 			// "sysadmin.company.update")));
 
 			loginResult.setResult(1);
-			loginResult.setMessage("ÓÃ»§µÇÂ¼³É¹¦£¡");
+			loginResult.setMessage("ç™»å½•æˆåŠŸ!");
 			loginResult.setUser(user);
-//			logService.writeInfoLog("ÓÃ»§[" + user.toString() + "]³É¹¦µÇÂ¼ÏµÍ³!");
-//			logService.writeLog(this.getClass().getCanonicalName(), "ÓÃ»§[" + user.toString() + "]³É¹¦µÇÂ¼ÏµÍ³!");
-			logger.info("ÓÃ»§[" + user.toString() + "]³É¹¦µÇÂ¼ÏµÍ³!");
+//			logService.writeInfoLog("ï¿½Ã»ï¿½[" + user.toString() + "]ï¿½É¹ï¿½ï¿½ï¿½Â¼ÏµÍ³!");
+//			logService.writeLog(this.getClass().getCanonicalName(), "ï¿½Ã»ï¿½[" + user.toString() + "]ï¿½É¹ï¿½ï¿½ï¿½Â¼ÏµÍ³!");
+			logger.info("ç”¨æˆ·[" + user.toString() + "]ç™»å½•ç³»ç»Ÿ!");
 			if (request.getParameter("redirectUrl") == null) {
 				loginResult.setRedirectUrl(request.getServletContext().getContextPath() + "/ui/user/desktop");
 			} else {
@@ -164,7 +162,7 @@ public class AccountController {
 		} else {
 
 			loginResult.setResult(0);
-			loginResult.setMessage("ÓÃ»§ÃûÊäÈë´íÎó£¬ÇëÈ·ÈÏ£¡");
+			loginResult.setMessage("ç”¨æˆ·è´¦å·ä¸å­˜åœ¨!è¯·ç¡®è®¤!");
 			return loginResult;
 		}
 	}
@@ -178,14 +176,14 @@ public class AccountController {
 		if (objectUserId != null) {
 			int userId = (Integer) objectUserId;
 			User user = new User(systemManageService.getModelOfSysUser(userId));
-			System.out.println("ÓÃ»§[" + user.toString() + "]ÍË³öÏµÍ³!");
+			System.out.println("ç”¨æˆ·[" + user.toString() + "]é€€å‡ºç³»ç»Ÿ!");
 //			System.out.println(logService);
-//			logService.writeInfoLog(this.getClass().getCanonicalName(),"ÓÃ»§[" + user.toString() + "]µÇ³öÏµÍ³!");
-			logger.info("ÓÃ»§[" + user.toString() + "]ÍË³öÏµÍ³!");
+//			logService.writeInfoLog(this.getClass().getCanonicalName(),"ï¿½Ã»ï¿½[" + user.toString() + "]ï¿½Ç³ï¿½ÏµÍ³!");
+			logger.info("ç”¨æˆ·[" + user.toString() + "]é€€å‡ºç³»ç»Ÿ!");
 			session.removeAttribute(AuthInterceptor.SESSION_USERID);
 			session.removeAttribute(AuthInterceptor.SESSION_USER);
 			jsonResult.setResult(1);
-			jsonResult.setMessage("³É¹¦µÇ³öÏµÍ³!");
+			jsonResult.setMessage("ç”¨æˆ·æˆåŠŸé€€å‡ºç³»ç»Ÿï¼");
 
 		}
 
@@ -203,10 +201,10 @@ public class AccountController {
 			data.put("user", AuthHelper.getUser(request));
 			jsonResult.setResult(1);
 			jsonResult.setData(data);
-			jsonResult.setMessage("ÒÑ¾­µÇÂ¼ÏµÍ³!");
+			jsonResult.setMessage("ï¿½Ñ¾ï¿½ï¿½ï¿½Â¼ÏµÍ³!");
 		} else {
 			jsonResult.setResult(0);
-			jsonResult.setMessage("ÒÑ¾­µÇÂ¼ÏµÍ³!");
+			jsonResult.setMessage("ï¿½Ñ¾ï¿½ï¿½ï¿½Â¼ÏµÍ³!");
 		}
 
 		return jsonResult;

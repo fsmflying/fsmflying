@@ -56,12 +56,11 @@ public class SqlBuilder {
 	}
 
 	/**
-	 * ÓÃÓÚ¹¹ÔìÒ»¸öSqlÓï¾ä´¦ÀíµÄÀà
 	 * 
-	 * @param tableName
-	 *            Êı¾İ¿â±íÃû
-	 * @param allFieldNames
-	 *            Ö¸¶¨Êı¾İ¿â±íÖĞËùÓĞ×Ö¶ÎÃû³Æ£¬ÒÔ','·Ö¸ô£¬ÀıÈç"bookid,bookno,bookname,author"
+	 * 
+	 * @param tableName æ•°æ®åº“è¡¨ååº“
+	 * @param allFieldNamesã€€æ‰€æœ‰å­—æ®µçš„åç§°ï¼Œä»¥é€—å·éš”å¼€ï¼Œæ¯”å¦‚"bookid,bookno,bookname,author"
+	 *           
 	 */
 	private SqlBuilder(String tableName, String allFieldNames) {
 		super();
