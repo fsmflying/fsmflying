@@ -2,6 +2,10 @@ package com.fsmflying.util;
 
 public class ThreeTuple<TFirst, TSecond, TThird> extends
 		TwoTuple<TFirst, TSecond> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TThird mThird;
 
 	

@@ -1,6 +1,12 @@
 package com.fsmflying.util;
 
-public class TwoTuple<TFirst, TSecond> {
+import java.io.Serializable;
+
+public class TwoTuple<TFirst, TSecond> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TFirst mFirst;
 	private TSecond mSecond;
 
