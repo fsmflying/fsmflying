@@ -25,7 +25,6 @@ import javax.persistence.Transient;
 	)
 public class SysTab extends AbstractBean{
 	
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int		mTabId;

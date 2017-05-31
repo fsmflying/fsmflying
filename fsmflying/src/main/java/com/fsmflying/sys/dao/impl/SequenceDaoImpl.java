@@ -34,6 +34,7 @@ public class SequenceDaoImpl implements ISequenceDao, IDataSourceDao {
 
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public int generateNextId(String keyName, int increment) {
 
@@ -124,6 +125,7 @@ public class SequenceDaoImpl implements ISequenceDao, IDataSourceDao {
 		return value;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public int[] generateNextIds(int generateCount, String keyName, int increment) {
 		int value = -1;

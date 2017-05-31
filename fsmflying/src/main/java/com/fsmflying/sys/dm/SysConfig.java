@@ -27,7 +27,6 @@ uniqueConstraints=@UniqueConstraint(columnNames = { "ConfigKey" }))
 		
 	)
 public class SysConfig extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	private int		mConfigId;
 	private String	mConfigName;

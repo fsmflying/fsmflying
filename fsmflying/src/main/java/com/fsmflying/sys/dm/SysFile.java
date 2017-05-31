@@ -21,7 +21,6 @@ import javax.persistence.Transient;
 	pkColumnValue = "sys.file", 
 	initialValue = 1)
 public class SysFile extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	private int 	mFileId;
 	private String 	mFileName;

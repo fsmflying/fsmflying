@@ -12,9 +12,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="Sys_Sequences")
 public class SysSequence extends AbstractBean {
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
-//	private int mSequenceId;
 	private String mKeyName;
 	private int mNextValue;
 	private Date mGeneratedTime;

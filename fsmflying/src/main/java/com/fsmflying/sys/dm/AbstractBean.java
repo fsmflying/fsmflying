@@ -3,7 +3,12 @@ package com.fsmflying.sys.dm;
 import java.util.Date;
 
 
-public abstract class AbstractBean {
+public abstract class AbstractBean implements java.io.Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private int 	mDbDeleted =  0;
 	private int 	mDbCreateBy = -1;

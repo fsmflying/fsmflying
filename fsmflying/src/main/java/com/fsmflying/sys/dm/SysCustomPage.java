@@ -24,7 +24,6 @@ import javax.persistence.Transient;
 		
 	)
 public class SysCustomPage extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
 	private	int		mCustomPageId;
@@ -93,10 +92,10 @@ public class SysCustomPage extends AbstractBean{
 	}
 	
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåÒ³ÃæµÄÌø×ª·½Ê½£¬µ±ÏµÍ³¼ì²âµ½·ÃÎÊÖ¸¶¨Ô´µØÖ·(SourceUrl)µÄÇëÇóÊ±£¬×Ô¶¯½«ÆäÌø×ªµ½Ò»¸öÐÂµÄÒ³Ãæ:<br/>
-	 * [0]:±íÊ¾ÖÇÄÜÌø×ª£¬Èç¹ûÓÐ·¢ÏòÔ´µØÖ·(SourceUrl)µÄÇëÇó£¬Ôò×Ô¶¯½«ÇëÇóÆäÌø×ªµ½"custom/{appname}/{SourceUrl}";<br/>
-	 * [1]:±íÊ¾Ö±½ÓÌø×ª£¬Èç¹ûÓÐ·¢ÏòÔ´µØÖ·(SourceUrl)µÄÇëÇó£¬ÔòÖ±½Ó½«ÆäÌø×ªµ½´Ë¼ÇÂ¼ÖÐÅäÖÃµÄÄ¿Â¼µØÖ·(DestinationUrl);<br/>
-	 * @return Ò³ÃæµÄÌø×ª·½Ê½
+	 * ï¿½ï¿½È¡ï¿½Ô¶ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Ò³ï¿½ï¿½:<br/>
+	 * [0]:ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½"custom/{appname}/{SourceUrl}";<br/>
+	 * [1]:ï¿½ï¿½Ê¾Ö±ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ë¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ä¿Â¼ï¿½ï¿½Ö·(DestinationUrl);<br/>
+	 * @return Ò³ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ê½
 	 */
 	@Column(name="TranslationType",nullable=false)
 	public int getTranslationType() {
@@ -104,9 +103,9 @@ public class SysCustomPage extends AbstractBean{
 	}
 	
 	/**
-	 * »ñÈ¡×Ô¶¨ÒåÒ³ÃæµÄÌø×ª·½Ê½£¬µ±ÏµÍ³¼ì²âµ½·ÃÎÊÖ¸¶¨Ô´µØÖ·(SourceUrl)µÄÇëÇóÊ±£¬×Ô¶¯½«ÆäÌø×ªµ½Ò»¸öÐÂµÄÒ³Ãæ:<br/>
-	 * [0]:±íÊ¾ÖÇÄÜÌø×ª£¬Èç¹ûÓÐ·¢ÏòÔ´µØÖ·(SourceUrl)µÄÇëÇó£¬Ôò×Ô¶¯½«ÇëÇóÆäÌø×ªµ½"custom/{appname}/{SourceUrl}"
-	 * [1]:±íÊ¾Ö±½ÓÌø×ª£¬Èç¹ûÓÐ·¢ÏòÔ´µØÖ·(SourceUrl)µÄÇëÇó£¬ÔòÖ±½Ó½«ÆäÌø×ªµ½´Ë¼ÇÂ¼ÖÐÅäÖÃµÄÄ¿Â¼µØÖ·(DestinationUrl)
+	 * ï¿½ï¿½È¡ï¿½Ô¶ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½Ò³ï¿½ï¿½:<br/>
+	 * [0]:ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½"custom/{appname}/{SourceUrl}"
+	 * [1]:ï¿½ï¿½Ê¾Ö±ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Ö·(SourceUrl)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ë¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ä¿Â¼ï¿½ï¿½Ö·(DestinationUrl)
 	 * @param translationType
 	 */
 	public void setTranslationType(int translationType) {

@@ -21,7 +21,6 @@ valueColumnName = "NextValue",
 pkColumnValue = "sys.dataauthitem", 
 initialValue = 1)
 public class SysDataAuthItem extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int		mAuthItemId;

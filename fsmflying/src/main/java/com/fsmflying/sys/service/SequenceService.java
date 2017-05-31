@@ -9,4 +9,5 @@ public interface SequenceService extends ISequenceService {
 	
 	
 	public void setSequenceDao(ISequenceDao sequenceDao);
+	
 }

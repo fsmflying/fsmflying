@@ -235,9 +235,7 @@ public class DBUtils {
 			getM = t.getFirst();
 			// setM = t.getSecond();
 			if (getM == null)
-//				System.out.println(key + "");
-			// if(setM==null)
-			// System.out.println(key+"");
+				System.out.println(key + "");
 			try {
 				value = getM.invoke(obj);
 			} catch (IllegalAccessException e) {

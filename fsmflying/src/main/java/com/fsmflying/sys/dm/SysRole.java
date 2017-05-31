@@ -17,7 +17,6 @@ import javax.persistence.UniqueConstraint;
 
 )
 public class SysRole extends AbstractBean {
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	private int mRoleId;
 	private String mRoleName;

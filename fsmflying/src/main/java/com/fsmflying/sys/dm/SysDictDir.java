@@ -30,7 +30,6 @@ import javax.persistence.UniqueConstraint;
 		initialValue=1
 	)
 public class SysDictDir extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
 	private int 	mDirId;

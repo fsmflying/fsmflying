@@ -23,7 +23,6 @@ import javax.persistence.Transient;
 		
 	)
 public class SysMenu extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	private int		mMenuId;
 	private String 	mMenuName;

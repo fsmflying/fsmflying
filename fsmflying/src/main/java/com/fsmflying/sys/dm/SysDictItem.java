@@ -18,7 +18,6 @@ import javax.persistence.Transient;
 @Table(name = "Sys_DictItems")
 @TableGenerator(name = "tableIdGenerator", table = "Sys_IdGenerators", pkColumnName = "KeyName", valueColumnName = "NextValue", pkColumnValue = "sys.edictitem", initialValue = 1)
 public class SysDictItem extends AbstractBean {
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int mItemId;

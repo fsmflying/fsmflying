@@ -28,7 +28,6 @@ import javax.persistence.Transient;
 	)
 public class SysCompany extends AbstractBean {
 
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
 	private int		mCompanyId;

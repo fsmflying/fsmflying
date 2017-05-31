@@ -19,7 +19,6 @@ import javax.persistence.Transient;
 @TableGenerator(name = "tableIdGenerator", table = "Sys_IdGenerators", pkColumnName = "KeyName", valueColumnName = "NextValue", pkColumnValue = "sys.edepartment", initialValue = 1)
 public class SysDepartment extends AbstractBean {
 
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int mDeptId;

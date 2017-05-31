@@ -23,7 +23,6 @@ valueColumnName = "NextValue",
 pkColumnValue = "sys.area", 
 initialValue = 1)
 public class SysArea extends AbstractBean {
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int mAreaId;

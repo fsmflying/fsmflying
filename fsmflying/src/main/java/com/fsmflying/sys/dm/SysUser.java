@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
@@ -34,7 +34,6 @@ uniqueConstraints=@UniqueConstraint(columnNames = { "Username" })
 	)
 public class SysUser extends AbstractBean/**/{
 	
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
 	private int 	userId;

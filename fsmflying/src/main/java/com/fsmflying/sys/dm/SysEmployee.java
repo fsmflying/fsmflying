@@ -15,7 +15,6 @@ import javax.persistence.Transient;
 @TableGenerator(name = "tableIdGenerator", table = "Sys_IdGenerators", pkColumnName = "KeyName", valueColumnName = "NextValue", pkColumnValue = "sys.eemployee", initialValue = 1)
 public class SysEmployee extends AbstractBean {
 
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int mEmplId;

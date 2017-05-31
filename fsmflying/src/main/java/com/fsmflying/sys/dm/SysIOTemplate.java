@@ -22,7 +22,6 @@ import javax.persistence.Transient;
 		
 	)
 public class SysIOTemplate extends AbstractBean{
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	private int mTemplateId;
