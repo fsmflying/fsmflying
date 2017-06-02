@@ -7,7 +7,15 @@
 #.project
 .settings
 
-/Fsmflying/
-/Fsmflying/bin/
+/fsmflying/
+/fsmflying/bin/
+/fsmflying-spring/
+/fsmflying-spring/bin/
+/fsmflying-mybatis/
+/fsmflying-mybatis/bin/
+/fsmflying-hibernate/
+/fsmflying-hibernate/bin/
+/fsmflying-jpa/
+/fsmflying-jpa/bin/
 
 *.jar
