@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysCustomPageMapper">
+
+	<resultMap id="SysCustomPageResultMap" type="SysCustomPage">
+	    <id property="customPageId" column="customPageId" />
+		<result property="customPageName" column="CustomPageName"/>
+		<result property="appName" column="AppName"/>
+		<result property="sourceUrl" column="SourceUrl"/>
+		<result property="destinationUrl" column="DestinationUrl"/>
+		<result property="translationType" column="TranslationType"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<result property="sysName" column="SysName"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysCustomPage">
+		insert into sys_custompages(CustomPageId,CustomPageName,AppName,SourceUrl,DestinationUrl,TranslationType,Memo,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime,SysName) values(#{customPageId},#{customPageName},#{appName},#{sourceUrl},#{destinationUrl},#{translationType},#{memo},#{dbDeleted},#{dbCreateBy},#{dbCreateTime},#{dbLastUpdateBy},#{dbLastUpdateTime},#{sysName})
+	</insert>
+	<insert id="save" parameterType="SysCustomPage">
+		update sys_custompages set CustomPageName=#{customPageName},AppName=#{appName},SourceUrl=#{sourceUrl},DestinationUrl=#{destinationUrl},TranslationType=#{translationType},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateBy=#{dbLastUpdateBy},DbLastUpdateTime=#{dbLastUpdateTime},SysName=#{sysName} where 1=1 and CustomPageId=#{customPageId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysCustomPage">
+		select * from Sys_CustomPages where customPageId=#{customPageId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_CustomPages where customPageId=#{customPageId}
+	</delete>
+	<select id="getAllList" resultType="SysCustomPage">
+		select * from Sys_CustomPages
+	</select>
+</mapper>
+		

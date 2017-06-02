@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysDataAuthItemMapper">
+
+	<resultMap id="SysDataAuthItemResultMap" type="SysDataAuthItem">
+	    <id property="authItemId" column="authItemId" />
+		<result property="authId" column="AuthId"/>
+		<result property="authItemName" column="AuthItemName"/>
+		<result property="transferCode" column="TransferCode"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<result property="dataAuthId" column="DataAuthId"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysDataAuthItem">
+		insert into sys_dataauthitems(AuthItemId,AuthId,AuthItemName,TransferCode,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime,DataAuthId) values(#{authItemId},#{authId},#{authItemName},#{transferCode},#{memo},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime},#{dataAuthId})
+	</insert>
+	<insert id="save" parameterType="SysDataAuthItem">
+		update sys_dataauthitems set AuthId=#{authId},AuthItemName=#{authItemName},TransferCode=#{transferCode},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime},DataAuthId=#{dataAuthId} where 1=1 and AuthItemId=#{authItemId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysDataAuthItem">
+		select * from Sys_DataAuthItems where authItemId=#{authItemId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_DataAuthItems where authItemId=#{authItemId}
+	</delete>
+	<select id="getAllList" resultType="SysDataAuthItem">
+		select * from Sys_DataAuthItems
+	</select>
+</mapper>
+		

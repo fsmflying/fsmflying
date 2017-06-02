@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysDepartmentMapper">
+
+	<resultMap id="SysDepartmentResultMap" type="SysDepartment">
+	    <id property="deptId" column="deptId" />
+		<result property="parentDeptId" column="ParentDeptId"/>
+		<result property="companyId" column="CompanyId"/>
+		<result property="deptNo" column="DeptNo"/>
+		<result property="deptName" column="DeptName"/>
+		<result property="autoNo" column="AutoNo"/>
+		<result property="showOrder" column="ShowOrder"/>
+		<result property="levelDepth" column="LevelDepth"/>
+		<result property="isLeaf" column="IsLeaf"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<result property="flag" column="Flag"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysDepartment">
+		insert into sys_departments(DeptId,ParentDeptId,CompanyId,DeptNo,DeptName,AutoNo,ShowOrder,LevelDepth,IsLeaf,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime,Flag) values(#{deptId},#{parentDeptId},#{companyId},#{deptNo},#{deptName},#{autoNo},#{showOrder},#{levelDepth},#{isLeaf},#{memo},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime},#{flag})
+	</insert>
+	<insert id="save" parameterType="SysDepartment">
+		update sys_departments set ParentDeptId=#{parentDeptId},CompanyId=#{companyId},DeptNo=#{deptNo},DeptName=#{deptName},AutoNo=#{autoNo},ShowOrder=#{showOrder},LevelDepth=#{levelDepth},IsLeaf=#{isLeaf},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime},Flag=#{flag} where 1=1 and DeptId=#{deptId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysDepartment">
+		select * from Sys_Departments where deptId=#{deptId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_Departments where deptId=#{deptId}
+	</delete>
+	<select id="getAllList" resultType="SysDepartment">
+		select * from Sys_Departments
+	</select>
+</mapper>
+		
