@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysMenuMapper">
+
+	<resultMap id="SysMenuResultMap" type="SysMenu">
+	    <id property="menuId" column="menuId" />
+		<result property="parentMenuId" column="ParentMenuId"/>
+		<result property="menuName" column="MenuName"/>
+		<result property="defaultUrl" column="DefaultUrl"/>
+		<result property="menuType" column="MenuType"/>
+		<result property="showOrder" column="ShowOrder"/>
+		<result property="levelDepth" column="LevelDepth"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysMenu">
+		insert into sys_menus(MenuId,ParentMenuId,MenuName,DefaultUrl,MenuType,ShowOrder,LevelDepth,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(#{menuId},#{parentMenuId},#{menuName},#{defaultUrl},#{menuType},#{showOrder},#{levelDepth},#{memo},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime})
+	</insert>
+	<insert id="save" parameterType="SysMenu">
+		update sys_menus set ParentMenuId=#{parentMenuId},MenuName=#{menuName},DefaultUrl=#{defaultUrl},MenuType=#{menuType},ShowOrder=#{showOrder},LevelDepth=#{levelDepth},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime} where 1=1 and MenuId=#{menuId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysMenu">
+		select * from Sys_Menus where menuId=#{menuId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_Menus where menuId=#{menuId}
+	</delete>
+	<select id="getAllList" resultType="SysMenu">
+		select * from Sys_Menus
+	</select>
+</mapper>
+		

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysFuncPointMapper">
+
+	<resultMap id="SysFuncPointResultMap" type="SysFuncPoint">
+	    <id property="funcPointId" column="funcPointId" />
+		<result property="funcPointName" column="FuncPointName"/>
+		<result property="keyCode" column="KeyCode"/>
+		<result property="showOrder" column="ShowOrder"/>
+		<result property="menuId" column="MenuId"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysFuncPoint">
+		insert into sys_funcpoints(FuncPointId,FuncPointName,KeyCode,ShowOrder,MenuId,Memo,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) values(#{funcPointId},#{funcPointName},#{keyCode},#{showOrder},#{menuId},#{memo},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime})
+	</insert>
+	<insert id="save" parameterType="SysFuncPoint">
+		update sys_funcpoints set FuncPointName=#{funcPointName},KeyCode=#{keyCode},ShowOrder=#{showOrder},MenuId=#{menuId},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime} where 1=1 and FuncPointId=#{funcPointId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysFuncPoint">
+		select * from Sys_FuncPoints where funcPointId=#{funcPointId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_FuncPoints where funcPointId=#{funcPointId}
+	</delete>
+	<select id="getAllList" resultType="SysFuncPoint">
+		select * from Sys_FuncPoints
+	</select>
+</mapper>
+		

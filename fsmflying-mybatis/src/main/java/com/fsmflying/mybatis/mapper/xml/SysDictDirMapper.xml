@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysDictDirMapper">
+
+	<resultMap id="SysDictDirResultMap" type="SysDictDir">
+	    <id property="dirId" column="dirId" />
+		<result property="dirName" column="DirName"/>
+		<result property="keyCode" column="KeyCode"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysDictDir">
+		insert into sys_dictdirs(DirId,DirName,KeyCode,Memo,DbDeleted,DbCreateBy,DbCreateTime,DbLastUpdateBy,DbLastUpdateTime,DictDirId) values(#{dirId},#{dirName},#{keyCode},#{memo},#{dbDeleted},#{dbCreateBy},#{dbCreateTime},#{dbLastUpdateBy},#{dbLastUpdateTime},#{dictDirId})
+	</insert>
+	<insert id="save" parameterType="SysDictDir">
+		update sys_dictdirs set DirName=#{dirName},KeyCode=#{keyCode},Memo=#{memo},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateBy=#{dbLastUpdateBy},DbLastUpdateTime=#{dbLastUpdateTime},DictDirId=#{dictDirId} where 1=1 and DirId=#{dirId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysDictDir">
+		select * from Sys_DictDirs where dirId=#{dirId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_DictDirs where dirId=#{dirId}
+	</delete>
+	<select id="getAllList" resultType="SysDictDir">
+		select * from Sys_DictDirs
+	</select>
+</mapper>
+		
