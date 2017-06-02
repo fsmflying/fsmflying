@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2009-2016 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fsmflying.mybatis.mapper.SysMapper">
+	<select id="getModelOfSysUser" parameterType="String"
+		resultType="SysUser">
+		select * from sys_users where username=#{username}
+	</select>
+
+	<select id="getUserRoles" resultType="SysRole">
+		select b.* from
+		sys_ruserrole r
+		inner join sys_roles b on r.roleId=b.roleId
+		where
+		b.dbDeleted=0 and a.userId=#{userId}
+	</select>
+
+	<select id="getUserTabs" resultType="SysTab">
+		select t.* from sys_tabs t
+		inner join (
+		select distinct tabid from sys_ruserrole a
+		inner join
+		sys_roles b on a.roleid=b.roleid
+		inner join sys_rroletab c on
+		a.roleid=c.roleid
+		where b.dbdeleted=0 and a.userid=#{userId}
+		) r on
+		t.tabid=r.tabid where dbdeleted=0
+	</select>
+
+	<select id="getUserMenus" resultType="SysMenu">
+		select t.* from sys_menus t
+		inner join (
+		select distinct menuid from sys_ruserrole a
+		inner join
+		sys_roles b on a.roleid=b.roleid
+		inner join sys_rrolemenu c on
+		a.roleid=c.roleid
+		where b.dbdeleted=0 and a.userid=#{userId}
+		) r on
+		t.menuid=r.menuid
+		where t.dbdeleted=0
+	</select>
+
+	<select id="getUserFuncPoints" resultType="SysFuncPoint">
+		select t.* from
+		sys_funcpoints t inner join (
+		select distinct funcPointId from
+		sys_ruserrole a inner join sys_roles b on
+		a.roleid=b.roleid
+		inner join
+		sys_rrolefuncpoint c on a.roleid=c.roleid
+		where b.dbdeleted=0 and
+		a.userid=#{userid}
+		) r on t.funcPointId=r.funcPointId where dbdeleted=0
+	</select>
+
+	<select id="getUserDataAuths" resultType="SysDataAuth">
+		select t.* from
+		sys_dataauths t inner join (
+		select distinct authId from sys_ruserrole a inner join sys_roles b on
+		a.roleid=b.roleid
+		inner join sys_rroledataauth c on a.roleid=c.roleid
+		where b.dbdeleted=0 and a.userid=#{userId}
+		) r on t.authId=r.authId where dbdeleted=0 and t.disabled=0
+	</select>
+
+	<select id="getUserDataAuthItems" resultType="SysDataAuthItem">
+		select t.* from
+		sys_dataauthitems t
+		inner join (
+		select distinct authId from sys_ruserrole a
+		inner join sys_roles b on a.roleid=b.roleid
+		inner join sys_rroledataauth c on a.roleid=c.roleid
+		where b.dbdeleted=0 and a.userid=#{userId}
+		) r on t.authItemId=r.authItemId
+		inner join sys_dataauths s on t.authId=s.authId
+		where t.dbdeleted=0 and
+		s.dbdeleted=0 and s.disabled=0
+	</select>
+
+	<select id="getTabMenus" resultType="SysMenu">
+		select t.* from sys_menus t
+		inner join sys_rtabmenu r on t.menuid=r.menuid
+		where dbdeleted=0 and
+		r.tabId=#{tabId}
+	</select>
+
+	<select id="getTabMenuTuples" resultType="TwoIntegerTuple">
+		select distinct r.tabId as first,r.menuId as second 
+		from sys_rtabmenu r
+		inner join sys_tabs t
+		on r.tabId=t.tabId
+		inner join sys_menus m on m.menuId=r.menuId
+		where
+		t.dbdeleted=0 and m.dbdeleted=0
+	</select>
+	<resultMap type="SysDictDir" id="cutomSysDictDirMap">
+		<id property="dirId" column="dirId" />
+		<result property="dirName" column="DirName"/>
+		<result property="keyCode" column="KeyCode"/>
+		<result property="memo" column="Memo"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<collection property="items" column="dirId" ofType="SysDictItem">
+			<id property="itemId" column="itemId" />
+			<result property="dirId" column="DirId" />
+			<result property="itemName" column="ItemName" />
+			<result property="itemValue" column="ItemValue" />
+			<result property="isDefault" column="IsDefault" />
+			<result property="showOrder" column="ShowOrder" />
+			<result property="memo" column="Memo" />
+			<result property="dbDeleted" column="bDbDeleted" />
+			<result property="dbCreateBy" column="bDbCreateBy" />
+			<result property="dbCreateTime" column="bDbCreateTime" />
+			<result property="dbLastUpdateBy" column="bDbLastUpdateBy" />
+			<result property="dbLastUpdateTime" column="bDbLastUpdateTime" />
+			<result property="displayName" column="DisplayName" />
+		</collection>
+	</resultMap>
+	<select id="getDictDirs" resultMap="cutomSysDictDirMap">
+		select
+		a.*,b.itemId,b.itemName,b.itemValue,b.isDefault,b.showOrder,b.memo,
+		b.DbDeleted as bDbDeleted,b.DbCreateBy as bDbCreateBy,b.DbLastUpdateBy
+		as bDbLastUpdateBy,
+		b.DbCreateTime as bDbCreateTime,b.DbLastUpdateTime
+		as bDbLastUpdateTime
+		from sys_dictdirs a inner join sys_dictitems b on
+		a.dirId=b.dirId
+		where a.dbDeleted=0 and b.dbDeleted=0 
+	</select>
+	<select id="getUserPermissioinIds" resultType="com.fsmflying.util.IntegerStringTuple">
+		
+		select first,second from 
+		(
+			select a.roleId as first,'role' as second,userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				where a.dbdeleted=0
+			union all
+			select distinct c.tabId as first,'tab' as second,userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				inner join sys_rroletab c on c.roleId=a.roleId
+				inner join sys_tabs d on d.tabId=c.tabId
+				where a.dbdeleted=0 and d.dbdeleted=0
+			union all
+			select distinct c.menuId,'menu',userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				inner join sys_rrolemenu c on c.roleId=a.roleId
+				inner join sys_menus d on d.menuId=c.menuId
+				where a.dbdeleted=0 and d.dbdeleted=0
+			union all
+			select c.funcPointId,'funcpoint',userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				inner join sys_rrolefuncpoint c on c.roleId=a.roleId
+				inner join sys_funcpoints d on d.funcPointId=c.funcPointId
+				where a.dbdeleted=0 and d.dbdeleted=0
+			union all
+			select c.authId,'auth',userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				  inner join sys_rroledataauth c on c.roleId=a.roleId
+				  inner join sys_dataauths d on d.authId=c.authId
+				  where a.dbdeleted=0 and d.disabled=0 and d.dbdeleted=0
+			union all
+			select c.authItemId,'authitem',b.userId from sys_roles a inner join sys_ruserrole b on a.roleId=b.roleId 
+				  inner join sys_rroledataauthitem c on c.roleId=a.roleId
+				  inner join sys_dataauthitems d on d.authItemId=c.authItemId
+				  inner join sys_dataauths e on e.authId=d.authId
+				  where a.dbdeleted=0 and e.disabled=0 and e.dbdeleted=0 and d.dbdeleted=0
+		) t
+		where t.userId=#{userId}
+	</select>
+	
+	<select id="getTestIds" resultType="int">
+		select tabId from sys_tabs
+	</select>
+
+
+</mapper>
