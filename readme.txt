@@ -1,0 +1,7 @@
+这是一个名为fsmflying的项目集合，
+fsmflying-project-parent是父项目，其它项目是这个项目的子项目
+fsmflying主要用于定义一些接口，实体类，辅助类和其它公共实现类．
+fsmflying-spring主要用于实现一些springmvc的Controller,spring数据访问相关的功能
+fsmflying-hibernate主要用于实现hibernate访问数据库的实现类．
+fsmfying-mybatis主要用于实现mybatis访问数据库的实现类
+fsmflying-jpa主要用于实现jpa访问数据库的实现类
