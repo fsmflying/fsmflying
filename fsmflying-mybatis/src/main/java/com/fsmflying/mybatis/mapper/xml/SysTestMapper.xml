@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2009-2016 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fsmflying.mybatis.mapper.SysTestMapper">
+
+	<resultMap id="SysUserResultMap" type="SysUser">
+		<id property="userId" column="userId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
+	</resultMap>
+
+	<resultMap id="userRoleResultMap" type="SysUser">
+		<id property="userId" column="userId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
+		<association property="roles" javaType="SysRole">
+			<id property="roleId" column="roleId" />
+			<result property="roleName" column="roleName" />
+			<result property="keyCode" column="keyCode" />
+			<result property="memo" column="memo" />
+			<result property="dbDeleted" column="bDbDeleted" />
+			<result property="dbCreateBy" column="bDbCreateBy" />
+			<result property="dbLastUpdateBy" column="bDbLastUpdateBy" />
+			<result property="dbCreateTime" column="bDbCreateTime" />
+			<result property="dbLastUpdateTime" column="bDbLastUpdateTime" />
+		</association>
+	</resultMap>
+
+	<resultMap id="userEmployeeResultMap" type="SysUser">
+		<id property="userId" column="userId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
+		<association property="employee" javaType="SysEmployee">
+			<id property="emplId" column="emplId" />
+			<result property="deptId" column="DeptId" />
+			<result property="companyId" column="CompanyId" />
+			<result property="emplNo" column="EmplNo" />
+			<result property="emplName_CN" column="EmplName_CN" />
+			<result property="emplName_EN" column="EmplName_EN" />
+			<result property="sex" column="Sex" />
+			<result property="showOrder" column="ShowOrder" />
+			<result property="autoNo" column="AutoNo" />
+			<result property="birthDate" column="BirthDate" />
+			<result property="cardId" column="CardId" />
+			<result property="nativePlace" column="NativePlace" />
+			<result property="contactPhone" column="ContactPhone" />
+			<result property="contactMPhone" column="ContactMPhone" />
+			<result property="contactAddress" column="ContactAddress" />
+			<result property="contactFax" column="ContactFax" />
+			<result property="contactEmail" column="ContactEmail" />
+			<result property="positionId" column="PositionId" />
+			<result property="positionName" column="PositionName" />
+			<result property="positionTitle" column="PositionTitle" />
+			<result property="field001" column="Field001" />
+			<result property="field002" column="Field002" />
+			<result property="field003" column="Field003" />
+			<result property="field004" column="Field004" />
+			<result property="field005" column="Field005" />
+			<result property="dbDeleted" column="bDbDeleted" />
+			<result property="dbCreateBy" column="bDbCreateBy" />
+			<result property="dbLastUpdateBy" column="bDbLastUpdateBy" />
+			<result property="dbCreateTime" column="bDbCreateTime" />
+			<result property="dbLastUpdateTime" column="bDbLastUpdateTime" />
+			<result property="flag" column="Flag" />
+		</association>
+		<association property="roles" column="userId" select="getRoles"></association>
+	</resultMap>
+	
+	<resultMap id="userEmployeeResultMap02" type="SysUser">
+		<id property="userId" column="userId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
+		<association property="employee" javaType="SysEmployee">
+			<id property="emplId" column="emplId" />
+			<result property="deptId" column="DeptId" />
+			<result property="companyId" column="CompanyId" />
+			<result property="emplNo" column="EmplNo" />
+			<result property="emplName_CN" column="EmplName_CN" />
+			<result property="emplName_EN" column="EmplName_EN" />
+			<result property="sex" column="Sex" />
+			<result property="showOrder" column="ShowOrder" />
+			<result property="autoNo" column="AutoNo" />
+			<result property="birthDate" column="BirthDate" />
+			<result property="cardId" column="CardId" />
+			<result property="nativePlace" column="NativePlace" />
+			<result property="contactPhone" column="ContactPhone" />
+			<result property="contactMPhone" column="ContactMPhone" />
+			<result property="contactAddress" column="ContactAddress" />
+			<result property="contactFax" column="ContactFax" />
+			<result property="contactEmail" column="ContactEmail" />
+			<result property="positionId" column="PositionId" />
+			<result property="positionName" column="PositionName" />
+			<result property="positionTitle" column="PositionTitle" />
+			<result property="field001" column="Field001" />
+			<result property="field002" column="Field002" />
+			<result property="field003" column="Field003" />
+			<result property="field004" column="Field004" />
+			<result property="field005" column="Field005" />
+			<result property="dbDeleted" column="bDbDeleted" />
+			<result property="dbCreateBy" column="bDbCreateBy" />
+			<result property="dbLastUpdateBy" column="bDbLastUpdateBy" />
+			<result property="dbCreateTime" column="bDbCreateTime" />
+			<result property="dbLastUpdateTime" column="bDbLastUpdateTime" />
+			<result property="flag" column="Flag" />
+		</association>
+		<collection property="roles" ofType="SysRole" column="userId" select="getRoles"></collection>
+	</resultMap>
+
+	<select id="get" parameterType="int" resultType="SysUser">
+		select * from
+		sys_users where userid=#{id}
+	</select>
+	<select id="getEmployee" parameterType="int" resultType="SysEmployee">
+		select * from sys_employees where emplId=#{id}
+	</select>
+	
+	<select id="getByUsername" parameterType="String" resultType="SysUser">
+		select * from sys_users where lower(username)=lower(#{username})
+	</select>
+	<select id="getForMap01" parameterType="int" resultType="hashmap">
+		select *
+		from
+		sys_users where userid=#{id}
+	</select>
+	<select id="getAllList" resultType="SysUser">
+		select *
+		from sys_users
+	</select>
+	<!-- -->
+	<resultMap type="SysUser" id="customUserResultMap">
+		<id property="userId" column="a" />
+		<result property="username" column="b" />
+		<result property="nickname" column="c" />
+	</resultMap>
+
+	<select id="getCustomUser01" parameterType="int" resultType="map">
+		select userId,username,nickname from sys_users where userId=#{id}
+	</select>
+	<select id="getCustomUser02" parameterType="int" resultType="map">
+		select 100 as userId,'wangliang' as username,'王亮' as nickname from
+		sys_users where userId=#{id}
+	</select>
+	<select id="getCustomUser03" parameterType="int" resultMap="customUserResultMap">
+		select 101 as a,'kkkkk' as b,'K王' as c from sys_users where
+		userId=#{id}
+	</select>
+	<select id="getCustomUser04" resultMap="customUserResultMap">
+		select
+		userId,username,nickname,dbdeleted from sys_users
+	</select>
+	<select id="getUserWithRoles" resultMap="userRoleResultMap">
+		select a.*,
+		b.roleId,b.roleName,b.keyCode,
+		b.DbDeleted as bDbDeleted,b.DbCreateBy as bDbCreateBy,b.DbLastUpdateBy as bDbLastUpdateBy,
+		b.DbCreateTime as bDbCreateTime,b.DbLastUpdateTime as bDbLastUpdateTime
+		from sys_users a
+		inner join sys_ruserrole r on a.userId=r.userId
+		inner join sys_roles b
+		on b.roleId=r.roleId
+		where a.dbdeleted=0 and b.dbdeleted=0
+	</select>
+
+
+	<resultMap type="SysUser" id="userRoleResultMap02">
+		<id property="userId" column="userId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
+		<association property="roles" column="userId" select="getRoles">
+		</association>
+	</resultMap>
+	<select id="getRoles" resultType="SysRole">
+		select a.* from sys_roles a
+		inner join sys_ruserrole r on a.roleId=r.roleId where a.dbdeleted=0
+		and r.userId=#{id}
+	</select>
+
+	<select id="getUserWithRoles02" resultMap="userRoleResultMap02">
+		select * from
+		sys_users
+	</select>
+
+	<select id="getUserWithEmployee" resultMap="userEmployeeResultMap">
+		select a.*,
+			b.EmplId,DeptId,CompanyId,EmplNo,EmplName_CN,EmplName_EN,Sex,ShowOrder,AutoNo,BirthDate,
+			CardId,NativePlace,ContactPhone,ContactMPhone,ContactAddress,ContactFax,ContactEmail,PositionId,
+			PositionName,PositionTitle,Field001,Field002,Field003,Field004,Field005,
+			b.DbDeleted as bDbDeleted,b.DbCreateBy as bDbCreateBy,b.DbLastUpdateBy as bDbLastUpdateBy,b.DbCreateTime as bDbCreateTime,b.DbLastUpdateTime as bDbLastUpdateTime,
+			Flag
+		from sys_users a 
+		inner join sys_ruserempl r on a.userId=r.userId
+		inner join sys_employees b on r.emplId=b.emplId
+		where a.dbdeleted=0 
+	</select>
+	
+	<select id="getUserWithEmployee02" resultMap="userEmployeeResultMap02">
+		select a.*,
+			b.EmplId,DeptId,CompanyId,EmplNo,EmplName_CN,EmplName_EN,Sex,ShowOrder,AutoNo,BirthDate,
+			CardId,NativePlace,ContactPhone,ContactMPhone,ContactAddress,ContactFax,ContactEmail,PositionId,
+			PositionName,PositionTitle,Field001,Field002,Field003,Field004,Field005,
+			b.DbDeleted as bDbDeleted,b.DbCreateBy as bDbCreateBy,b.DbLastUpdateBy as bDbLastUpdateBy,b.DbCreateTime as bDbCreateTime,b.DbLastUpdateTime as bDbLastUpdateTime,
+			Flag
+		from sys_users a 
+		inner join sys_ruserempl r on a.userId=r.userId
+		inner join sys_employees b on r.emplId=b.emplId
+		where a.dbdeleted=0 
+	</select>
+
+
+
+
+	<insert id="add">
+		insert into
+		sys_users(UserId,Username,UserPwd,Nickname,IpPolicy,IpAddress,
+		RegisterTime,LastLoginTime,Status,DisabledTime,DisabledMinutes,PwdPromptQuestion,
+		PwdProtectQuestion,PwdProtectAnswer,Email,DbDeleted,DbCreateBy,DbLastUpdateBy,
+		DbCreateTime,DbLastUpdateTime)
+		values(#{userId},#{username},#{userPwd},#{nickname},#{ipPolicy},#{ipAddress},
+		#{registerTime},#{lastLoginTime},#{status},#{disabledTime},#{disabledMinutes},#{pwdPromptQuestion},
+		#{pwdProtectQuestion},#{pwdProtectAnswer},#{email},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},
+		#{dbCreateTime},#{dbLastUpdateTime})
+	</insert>
+	<update id="save">
+		update sys_users
+		set
+		Username=#{username},UserPwd=#{userPwd},Nickname=#{nickname},IpPolicy=#{ipPolicy},
+		IpAddress=#{ipAddress},RegisterTime=#{registerTime},LastLoginTime=#{lastLoginTime},Status=#{status},DisabledTime=#{disabledTime},
+		DisabledMinutes=#{disabledMinutes},PwdPromptQuestion=#{pwdPromptQuestion},PwdProtectQuestion=#{pwdProtectQuestion},PwdProtectAnswer=#{pwdProtectAnswer},Email=#{email},
+		DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime}
+		where 1=1 and UserId=#{userId}
+	</update>
+
+</mapper>

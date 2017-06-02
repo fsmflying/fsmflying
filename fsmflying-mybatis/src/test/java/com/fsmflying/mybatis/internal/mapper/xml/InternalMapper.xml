@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.internal.mapper.InternalMapper">
+	
+	<insert id="addStudent" useGeneratedKeys="true" keyProperty="id">
+		insert into students(name,sex,birthDate) values(#{name},#{sex},#{birthDate})
+	</insert>
+	<insert id="addStudents" useGeneratedKeys="true" keyProperty="id">
+		insert into students(id,name,sex,birthDate) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.name},#{item.sex},#{item.birthDate})
+		</foreach>
+	</insert>
+	<select id="getStudent">
+		select * from students where id=#{id}
+	</select>
+	<select id="getAllStudents">
+		select * from students
+	</select>
+	<delete id="deleteStudent">
+		delete from students where id=#{id}
+	</delete>
+	<delete id="deleteAllStudents">
+		delete from students
+	</delete>
+	<select id="getStudentByName">
+		select * from students where name=#{name}
+	</select>
+	<select id="getStudentsByNames">
+		select * from students
+	</select>
+	<insert id="addStudentIfNotExists">
+		
+	</insert>
+	<select id="getAllStudentsByProperties"  resultType="Student">
+		select * from students where 1=1 
+		<if test="id &gt;= -10000">
+			and id=#{id}
+		</if>
+		<!--  
+		<if test="name != null">
+			and name=#{name}
+		</if>
+		-->
+		<choose>
+			<when test="sex == 0">
+				and sex=0
+			</when>
+			<when test="sex == 1">
+				and sex=1
+			</when>
+			<when test="sex == 2">
+				and sex=2
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+		<bind name="namePattern" value="'%'+_parameter.getName()+'%'"/>
+		<if test="name != null">
+			and lower(name) like lower(#{namePattern})
+		</if>
+	</select>
+	<select id="getAllStudentsByProperties02" parameterType="map" resultType="Student">
+		select * from students where 1=1 
+		<if test="id != null and id &gt;= -10000">
+			and id=#{id}
+		</if>
+		<if test="name != null">
+			and name=#{name}
+		</if>
+		<if test="sex != null and sex &gt;= -10000">
+			and sex=#{sex}
+		</if>
+	</select>
+	<select id="getAllStudentsByIds" resultType="Student">
+		select * from students where 1=1 and id in  
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	
+	
+	
+	<insert id="addSubject" useGeneratedKeys="true" keyProperty="id">
+		insert into subjects(name,memo) values(#{name},#{memo})
+	</insert>
+	<insert id="addSubjects" useGeneratedKeys="true" keyProperty="id">
+		insert into subjects(name,memo) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.name},#{item.memo})
+		</foreach>
+	</insert>
+	<select id="getSubject" resultType="Subject">
+		select * from subjects where id=#{id}
+	</select>
+	<select id="getAllSubjects">
+		select * from subjects
+	</select>
+	<delete id="deleteSubject">
+		delete from subjects where id=#{id}
+	</delete>
+	<delete id="deleteAllSubjects">
+		delete from subjects
+	</delete>
+	
+	
+	<insert id="addTeacher" useGeneratedKeys="true" keyProperty="id">
+		insert into teachers(name,sex,birthDate) values(#{name},#{sex},#{birthDate})
+	</insert>
+	<insert id="addTeachers" useGeneratedKeys="true" keyProperty="id">
+		insert into teachers(id,name,sex,birthDate) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.name},#{item.sex},#{item.birthDate})
+		</foreach>
+	</insert>
+	<select id="getTeacher">
+		select * from teachers where id=#{id}
+	</select>
+	<select id="getAllTeachers">
+		select * from teachers
+	</select>
+	<delete id="deleteTeacher">
+		delete from teachers where id=#{id}
+	</delete>
+	<delete id="deleteAllTeachers">
+		delete from teachers
+	</delete>
+	
+	
+	<insert id="addCourse" useGeneratedKeys="true" keyProperty="id">
+		insert into courses(name,sex,birthDate) values(#{name},#{sex},#{birthDate})
+	</insert>
+	<insert id="addCourses" useGeneratedKeys="true" keyProperty="id">
+		insert into courses(id,name,sex,birthDate) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.name},#{item.sex},#{item.birthDate})
+		</foreach>
+	</insert>
+	<select id="getCourse">
+		select * from courses where id=#{id}
+	</select>
+	<delete id="deleteCourse">
+		delete from courses where id=#{id}
+	</delete>
+	<delete id="deleteAllCourses">
+		delete from courses
+	</delete>
+	
+	
+	<update id="createTables">
+		<if test="_databaseId=='mysql'">
+			create table students(
+				id int primary key auto_increment not null,
+				name varchar(128) not null,
+				sex int not null default 0,
+				birthDate date not null
+			);
+			create table teachers(
+				id int primary key auto_increment not null,
+				name varchar(128) not null,
+				sex int not null default 0,
+				birthDate date not null
+			);
+			create table subjects(
+				id int primary key auto_increment not null,
+				name varchar(128) not null,
+				memo varchar(512)
+			);
+			create table courses(
+				id int primary key auto_increment not null,
+				name varchar(128) not null,
+				subjectId int not null,
+				teacherId int not null,
+				memo varchar(512)
+			);
+			create table if not exist sys_sequences(
+				KeyName varchar(64) primary key not null,
+				NextValue int(20) not null,
+				GeneratedTime datetime not null
+			);
+			create table if not exist sys_sequenceHistories(
+				KeyName varchar(64) not null,
+				GeneratedValue int(20) not null,
+				GeneratedTime datetime not null
+			);
+		</if>
+		<if test="_databaseId=='sqlserver'">
+			create table students(
+				id int primary key identity not null,
+				name varchar(128) not null,
+				sex int not null default 0,
+				birthDate date not null
+			);
+			create table teachers(
+				id int primary key identity not null,
+				name varchar(128) not null,
+				sex int not null default 0,
+				birthDate date not null
+			);
+			create table subjects(
+				id int primary key identity not null,
+				name varchar(128) not null,
+				memo varchar(512)
+			);
+			create table courses(
+				id int primary key identity not null,
+				name varchar(128) not null,
+				subjectId int not null,
+				teacherId int not null,
+				memo varchar(512)
+			);
+			create table sys_sequences(
+				KeyName varchar(64) primary key not null,
+				NextValue int not null,
+				GeneratedTime datetime not null
+			);	
+			create table sys_sequenceHistories(
+				KeyName varchar(64) not null,
+				GeneratedValue int not null,
+				GeneratedTime datetime not null
+			);	
+		</if>
+	</update>
+	
+	<select id="existsTables">
+		<if test="_databaseId == 'mysql'">
+			
+		</if>
+		<if test="_databaseId == 'sqlserver'">
+			
+		</if>
+	</select>
+	<select id="existsTable" resultType="map">
+		<if test="_databaseId == 'mysql'">
+			select count(1) as count from information_schema.tables 
+			where lower(table_schema) = lower(database()) 
+			and lower(table_name) = lower(#{name})
+		</if>
+		<if test="_databaseId == 'sqlserver'">
+			select count(1) as count from sys.tables 
+			where lower(name) = lower(#{name});
+		</if>
+		
+	</select>
+	
+</mapper>
+		

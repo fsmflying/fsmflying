@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fsmflying.mybatis.mapper.SysEmployeeMapper">
+
+	<resultMap id="SysEmployeeResultMap" type="SysEmployee">
+	    <id property="emplId" column="emplId" />
+		<result property="deptId" column="DeptId"/>
+		<result property="companyId" column="CompanyId"/>
+		<result property="emplNo" column="EmplNo"/>
+		<result property="emplName_CN" column="EmplName_CN"/>
+		<result property="emplName_EN" column="EmplName_EN"/>
+		<result property="sex" column="Sex"/>
+		<result property="showOrder" column="ShowOrder"/>
+		<result property="autoNo" column="AutoNo"/>
+		<result property="birthDate" column="BirthDate"/>
+		<result property="cardId" column="CardId"/>
+		<result property="nativePlace" column="NativePlace"/>
+		<result property="contactPhone" column="ContactPhone"/>
+		<result property="contactMPhone" column="ContactMPhone"/>
+		<result property="contactAddress" column="ContactAddress"/>
+		<result property="contactFax" column="ContactFax"/>
+		<result property="contactEmail" column="ContactEmail"/>
+		<result property="positionId" column="PositionId"/>
+		<result property="positionName" column="PositionName"/>
+		<result property="positionTitle" column="PositionTitle"/>
+		<result property="field001" column="Field001"/>
+		<result property="field002" column="Field002"/>
+		<result property="field003" column="Field003"/>
+		<result property="field004" column="Field004"/>
+		<result property="field005" column="Field005"/>
+		<result property="dbDeleted" column="DbDeleted"/>
+		<result property="dbCreateBy" column="DbCreateBy"/>
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
+		<result property="dbCreateTime" column="DbCreateTime"/>
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<result property="flag" column="Flag"/>
+
+	</resultMap>
+	<insert id="add" parameterType="SysEmployee">
+		insert into sys_employees(EmplId,DeptId,CompanyId,EmplNo,EmplName_CN,EmplName_EN,Sex,ShowOrder,AutoNo,BirthDate,CardId,NativePlace,ContactPhone,ContactMPhone,ContactAddress,ContactFax,ContactEmail,PositionId,PositionName,PositionTitle,Field001,Field002,Field003,Field004,Field005,DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime,Flag) values(#{emplId},#{deptId},#{companyId},#{emplNo},#{emplName_CN},#{emplName_EN},#{sex},#{showOrder},#{autoNo},#{birthDate},#{cardId},#{nativePlace},#{contactPhone},#{contactMPhone},#{contactAddress},#{contactFax},#{contactEmail},#{positionId},#{positionName},#{positionTitle},#{field001},#{field002},#{field003},#{field004},#{field005},#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime},#{flag})
+	</insert>
+	<insert id="save" parameterType="SysEmployee">
+		update sys_employees set DeptId=#{deptId},CompanyId=#{companyId},EmplNo=#{emplNo},EmplName_CN=#{emplName_CN},EmplName_EN=#{emplName_EN},Sex=#{sex},ShowOrder=#{showOrder},AutoNo=#{autoNo},BirthDate=#{birthDate},CardId=#{cardId},NativePlace=#{nativePlace},ContactPhone=#{contactPhone},ContactMPhone=#{contactMPhone},ContactAddress=#{contactAddress},ContactFax=#{contactFax},ContactEmail=#{contactEmail},PositionId=#{positionId},PositionName=#{positionName},PositionTitle=#{positionTitle},Field001=#{field001},Field002=#{field002},Field003=#{field003},Field004=#{field004},Field005=#{field005},DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime},Flag=#{flag} where 1=1 and EmplId=#{emplId}
+	</insert>
+	<select id="get" parameterType="int" resultType="SysEmployee">
+		select * from Sys_Employees where emplId=#{emplId}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from Sys_Employees where emplId=#{emplId}
+	</delete>
+	<select id="getAllList" resultType="SysEmployee">
+		select * from Sys_Employees
+	</select>
+</mapper>
+		
