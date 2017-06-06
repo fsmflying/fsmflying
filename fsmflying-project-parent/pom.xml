@@ -300,6 +300,6 @@
 		<module>../fsmflying-hibernate</module>
 		<module>../fsmflying-jpa</module>
 		<module>../fsmflying-mybatis</module>
-		<module>../Fsmflying-spring</module>
+		<module>../fsmflying-spring</module>
 	</modules>
 </project>
