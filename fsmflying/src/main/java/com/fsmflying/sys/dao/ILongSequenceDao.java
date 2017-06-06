@@ -3,19 +3,19 @@ package com.fsmflying.sys.dao;
 public interface ILongSequenceDao {
 
 	/**
-	 * 
-	 * @param keyName Ö¸¶¨µÄĞòÁĞµÄ¼üÖµ
-	 * @param increment ÏàÁÚĞòÁĞºÅÖ®¼äµÄÔöÁ¿
-	 * @return ÏÂÒ»¸öĞòÁĞºÅ
+	 * æ ¹æ®é”®åç§°ç”Ÿæˆä¸€ä¸ªåºåˆ—å·
+	 * @param keyName é”®åç§°
+	 * @param increment å¢é‡
+	 * @return ç”Ÿæˆçš„é”®å€¼ 
 	 */
 	long getNextId(String keyName, long increment);
 
 	/**
-	 * ÒÔkeyNameÎª¼üÖµµÄĞòÁĞ£¬Éú³ÉÒ»×éĞòÁĞºÅ£¬Ã»ÓĞ´ËĞòÁĞÔò´´½¨;ÏàÁÚĞòÁĞºÅÖ®¼äµÄÔöÁ¿Îªincrement;
-	 * @param generateCount Éú³ÉµÄĞòÁĞºÅÊıÁ¿
-	 * @param keyName Ö¸¶¨µÄĞòÁĞµÄ¼üÖµ
-	 * @param increment ÏàÁÚĞòÁĞºÅÖ®¼äµÄÔöÁ¿
-	 * @return ĞòÁĞºÅÊı×é
+	 * æ ¹æ®é”®åç§°ç”ŸæˆæŒ‡å®šæ•°é‡çš„åºåˆ—å·
+	 * @param generateCount ç”Ÿæˆæ•°é‡
+	 * @param keyName é”®åç§°
+	 * @param increment å¢é‡
+	 * @return ç”Ÿæˆçš„é”®å€¼æ•°ç»„
 	 */
 	long[] getNextId(long generateCount, String keyName, long increment);
 
