@@ -297,9 +297,9 @@
 	</build>
 	<modules>
 		<module>../fsmflying</module>
-		<module>../fsmflyingOfHibernate</module>
-		<module>../fsmflyingOfJpa</module>
-		<module>../fsmflyingOfMyBatis</module>
-		<module>../FsmflyingOfSpring</module>
+		<module>../fsmflying-hibernate</module>
+		<module>../fsmflying-jpa</module>
+		<module>../fsmflying-mybatis</module>
+		<module>../Fsmflying-spring</module>
 	</modules>
 </project>
