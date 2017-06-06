@@ -169,10 +169,11 @@ public class Helper {
 	}
 
 	/**
-	 * ·µ»ØÖ¸¶¨ÕûÊımodµÄÖ¸¶¨¶ş½øÖÆÎ»µÄÖµÎª1(·µ»Øtrue)£¬»¹ÊÇ0(·µ»Øfalse)
-	 * 
-	 * @param mod
-	 * @param index
+	 * è·å–æŒ‡å®šæ•´æ•°çš„äºŒè¿›åˆ¶ä½ï¼Œå¦‚æœä¸º1,åˆ™è¿”å›true;å¦‚æœä¸º0ï¼Œåˆ™è¿”å›false<br/>
+	 * æ³¨æ„ï¼šä½æ•°ç´¢å¼•æ˜¯ä»åˆå¼€å§‹è®¡ç®—çš„ï¼Œç´¢å¼•ä»0å¼€å§‹<br/>
+	 * æ¯”å¦‚ï¼Œæ•´æ•°121(0x79)çš„äºŒè¿›åˆ¶è¡¨ç¤ºä¸º"0111,1001",å®ƒçš„ç¬¬0ä½ä¸º1ï¼Œç¬¬1ä½ä¸º0ï¼Œç¬¬2ä½ä¸º0ï¼Œç¬¬1ä½ä¸º1<br/>
+	 * @param mod æŒ‡å®šæ•´æ•°
+	 * @param index ç´¢å¼•ä½
 	 * @return
 	 */
 	public static boolean getFlagBit(int mod, int index) {
@@ -183,15 +184,13 @@ public class Helper {
 	}
 
 	/**
-	 * ÉèÖÃÖ¸¶¨ÕûÊımodµÄ¶ş½øÖÆ±êÖ¾£¬×¢ÒâÖ»ÓĞ·µ»ØÖµÊÇĞŞ¸Ä¹ıµÄ£¬
-	 * 
-	 * @param mod
-	 *            ¡¡Ö¸¶¨ÒªĞŞ¸ÄµÄÕûÊıÖµ£¬µ÷ÓÃºó£¬´ËÖµ²»»á·¢Éú±ä»¯£¬·µ»ØÖµ¾ÍÊÇĞŞ¸ÄºóµÄÖµ
-	 * @param index
-	 *            Ö¸¶¨ÒªĞŞ¸ÄÄÄÒ»Î»¶ş½øÖÆ±êÖ¾
-	 * @param trueOrFalse
-	 *            ¡¡½«Ö¸¶¨µÄ¶ş½øÖÆÎ»ĞŞ¸ÄÎª´Ë0»ò1£¬ÔòÖ¸¶¨´Ë²ÎÊıtrue£¬Èç¹ûÒªĞŞ¸ÄÎª0£¬ÔòÖ¸¶¨´Ë²ÎÊıfalse
-	 * @return ĞŞ¸Ä¹ıºóµÄÖµ
+	 * è®¾ç½®æŒ‡å®šæ•´æ•°çš„äºŒè¿›åˆ¶ä½ï¼Œå¦‚æœä¸ºtrue,åˆ™è®¾å®šä¸º1;å¦‚æœä¸ºfalseï¼Œåˆ™è®¾å®šä¸º0<br/>
+	 * æ³¨æ„ï¼šä½æ•°ç´¢å¼•æ˜¯ä»åˆå¼€å§‹è®¡ç®—çš„ï¼Œç´¢å¼•ä»0å¼€å§‹<br/>
+	 * æ¯”å¦‚ï¼Œæ•´æ•°121(0x79)çš„äºŒè¿›åˆ¶è¡¨ç¤ºä¸º"0111,1001",å®ƒçš„ç¬¬0ä½ä¸º1ï¼Œç¬¬1ä½ä¸º0ï¼Œç¬¬2ä½ä¸º0ï¼Œç¬¬1ä½ä¸º1<br/>
+	 * @param mod æŒ‡å®šæ•´æ•°
+	 * @param index ç´¢å¼•ä½
+	 * @param trueOrFalse è®¾ç½®çŠ¶æ€
+	 * @return
 	 */
 	public static int setFlagBit(int mod, int index, boolean trueOrFalse) {
 		if (index < 0 || index > 31)
@@ -207,11 +206,11 @@ public class Helper {
 	}
 
 	/**
-	 * ¸ù¾İÖ¸¶¨ÕûÊıµÄ32Î»¶ş½øÖÆÎ»,·µ»ØÒ»¸öbooleanÊı×é£¬ÖµÎª0µÄ¶ş½øÖÆÎ»Ôò·µ»Øfalse£¬ÖµÎª1µÄÎ»Ôò·µ»Øtrue
-	 * 
-	 * @param mod
-	 *            Ö¸¶¨ÕûÊı
-	 * @return boolean[32]
+	 * è·å–æŒ‡å®šæ•´æ•°çš„æ‰€æœ‰äºŒè¿›åˆ¶ä½å¯¹åº”çš„booleanæ•°ç»„ï¼Œå¦‚æœä¸º1,åˆ™è¿”å›true;å¦‚æœä¸º0ï¼Œåˆ™è¿”å›false<br/>
+	 * æ³¨æ„ï¼šä½æ•°ç´¢å¼•æ˜¯ä»åˆå¼€å§‹è®¡ç®—çš„ï¼Œç´¢å¼•ä»0å¼€å§‹<br/>
+	 * æ¯”å¦‚ï¼Œæ•´æ•°121(0x79)çš„äºŒè¿›åˆ¶è¡¨ç¤ºä¸º"0111,1001",å®ƒçš„ç¬¬0ä½ä¸º1ï¼Œç¬¬1ä½ä¸º0ï¼Œç¬¬2ä½ä¸º0ï¼Œç¬¬1ä½ä¸º1<br/>
+	 * @param mod æŒ‡å®šæ•´æ•°
+	 * @return äºŒè¿›åˆ¶ä½å¯¹åº”çš„booleanæ•°ç»„
 	 */
 	public static boolean[] getFlagBits(int mod) {
 		// boolean[] flags = new boolean[32];
@@ -222,6 +221,15 @@ public class Helper {
 		return getFlagBits(mod, 0, 31);
 	}
 
+	/**
+	 * è·å–æŒ‡å®šæ•´æ•°çš„æŒ‡å®šèŒƒå›´çš„æ‰€æœ‰äºŒè¿›åˆ¶ä½å¯¹åº”çš„booleanæ•°ç»„ï¼Œå¦‚æœä¸º1,åˆ™è¿”å›true;å¦‚æœä¸º0ï¼Œåˆ™è¿”å›false<br/>
+	 * æ³¨æ„ï¼šä½æ•°ç´¢å¼•æ˜¯ä»åˆå¼€å§‹è®¡ç®—çš„ï¼Œç´¢å¼•ä»0å¼€å§‹<br/>
+	 * æ¯”å¦‚ï¼Œæ•´æ•°121(0x79)çš„äºŒè¿›åˆ¶è¡¨ç¤ºä¸º"0111,1001",å®ƒçš„ç¬¬0ä½ä¸º1ï¼Œç¬¬1ä½ä¸º0ï¼Œç¬¬2ä½ä¸º0ï¼Œç¬¬1ä½ä¸º1<br/>
+	 * @param mod æŒ‡å®šæ•´æ•°
+	 * @param startBit å¼€å§‹ä½ç´¢å¼•
+	 * @param endBit ç»“æŸä½ç´¢å¼•
+	 * @return äºŒè¿›åˆ¶ä½å¯¹åº”çš„booleanæ•°ç»„
+	 */
 	public static boolean[] getFlagBits(int mod, int startBit, int endBit) {
 		boolean[] flags = new boolean[endBit - startBit + 1];
 		for (int i = startBit; i <= endBit; i++) {
@@ -284,12 +292,10 @@ public class Helper {
 	}
 
 	/**
-	 * ´òÓ¡³öÖ¸¶¨ÕûÊıµÄËùÓĞ¶ş½øÖÆ±êÖ¾Î»
-	 * 
-	 * @param mod
-	 *            ¡¡Ò»¸öÕûÊı
-	 * @param allowln
-	 *            ¡¡ÊÇ·ñÔÊĞí»»ĞĞ
+	 * è¾“å‡ºæŒ‡å®šæ•´æ•°çš„æ‰€æœ‰äºŒè¿›åˆ¶ä½
+	 * @param mod æŒ‡å®šæ•´æ•°
+	 * @param allowln æ˜¯å¦æ‰“å°æ¢è¡Œ
+	 *          
 	 */
 	public static void printFlag(int mod, boolean allowln, boolean onlyTrueBit) {
 		boolean[] flags = getFlagBits(mod);
@@ -308,23 +314,17 @@ public class Helper {
 	}
 
 	/**
-	 * ¶Ô×Ö·û´®md5¼ÓÃÜ
-	 *
-	 * @param str
-	 * @return
+	 * MD5åŠ å¯†
+	 * @param str å¾…åŠ å¯†çš„å­—ç¬¦ä¸²
+	 * @return åŠ å¯†ç»“æœ
 	 */
 	public static String getMD5(String str) {
 		String result = null;
 		try {
-			// Éú³ÉÒ»¸öMD5¼ÓÃÜ¼ÆËãÕªÒª
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			// ¼ÆËãmd5º¯Êı
 			md.update(str.getBytes());
-			// digest()×îºóÈ·¶¨·µ»Ømd5 hashÖµ£¬·µ»ØÖµÎª8Îª×Ö·û´®¡£ÒòÎªmd5 hashÖµÊÇ16Î»µÄhexÖµ£¬Êµ¼ÊÉÏ¾ÍÊÇ8Î»µÄ×Ö·û
-			// BigIntegerº¯ÊıÔò½«8Î»µÄ×Ö·û´®×ª»»³É16Î»hexÖµ£¬ÓÃ×Ö·û´®À´±íÊ¾£»µÃµ½×Ö·û´®ĞÎÊ½µÄhashÖµ
 			result = new BigInteger(1, md.digest()).toString(16);
 		} catch (NoSuchAlgorithmException e) {
-			// throw new SpeedException("MD5¼ÓÃÜ³öÏÖ´íÎó");
 			e.printStackTrace();
 		}
 		return result;
