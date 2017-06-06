@@ -30,19 +30,13 @@
 				<groupId>com.fsmflying</groupId>
 				<artifactId>fsmflying</artifactId>
 				<version>${fsmflying.version}</version>
-				<!-- 
-				<scope>system</scope>
-				<systemPath>${project.basedir}/../fsmflying/target/fsmflying-1.0.0.jar</systemPath>
-				 -->
+				<!-- <scope>system</scope> <systemPath>${project.basedir}/../fsmflying/target/fsmflying-1.0.0.jar</systemPath> -->
 			</dependency>
 			<dependency>
 				<groupId>com.fsmflying</groupId>
 				<artifactId>fsmflying-spring</artifactId>
 				<version>${fsmflying.version}</version>
-				<!--
-				<scope>system</scope>
-				<systemPath>${project.basedir}/../fsmflyingOfSpring/target/fsmflying-spring-1.0.0.jar</systemPath>
-				-->
+				<!-- <scope>system</scope> <systemPath>${project.basedir}/../fsmflyingOfSpring/target/fsmflying-spring-1.0.0.jar</systemPath> -->
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -278,7 +272,7 @@
 
 	</dependencyManagement>
 	<build>
-                <defaultGoal>compile</defaultGoal>	
+		<defaultGoal>package</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
