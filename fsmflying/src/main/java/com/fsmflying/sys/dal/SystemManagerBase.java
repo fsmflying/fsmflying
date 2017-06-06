@@ -90,15 +90,6 @@ public class SystemManagerBase implements SystemManager {
 		return null;
 	}
 
-	/**
-	 * 从指定的数据集读取一个对象
-	 * 
-	 * @param rs
-	 *            从数据库中提取的数据集
-	 * @param isChecked
-	 *            是否调用rs.next()进行游标移动，如果已经在外部移动了，就不需要再在此方法内部再移动游标
-	 * @return　一个SysDataAuth对象
-	 */
 	protected SysDataAuth ReadForSysDataAuth(ResultSet rs, boolean isChecked) {
 		SysDataAuth model = null;
 
@@ -131,15 +122,6 @@ public class SystemManagerBase implements SystemManager {
 		return model;
 	}
 
-	/**
-	 * 从指定的数据集读取一个对象
-	 * 
-	 * @param rs
-	 *            从数据库中提取的数据集
-	 * @param requireMoveCursor
-	 *            是否调用rs.next()进行游标移动，如果已经在外部移动了，就不需要再在此方法内部再移动游标
-	 * @return　一个SysDataAuth对象
-	 */
 	protected SysMenu ReadForSysMenu(ResultSet rs, boolean requireMoveCursor) {
 		SysMenu model = null;
 		try {
