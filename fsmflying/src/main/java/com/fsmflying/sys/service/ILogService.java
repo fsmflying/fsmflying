@@ -41,16 +41,16 @@ public interface ILogService {
 	 * 0:[DEGUG];1:[INFO];2:[WARN];3:[ERROR];4:[FATAL];
 	 */
 	public int getDefaultLogLevel();
-	
+
 	/**
 	 * 0:[DEGUG];1:[INFO];2:[WARN];3:[ERROR];4:[FATAL];
-	 * @param logLevl 日志等级
+	 * @param logLevel 鏃ュ織绾у埆
 	 */
 	public void setDefaultLogLevel(int logLevel);
 	
 	public boolean getIsWriteDatabase();
+	
 	/**
-	 * 日志是否写向数据库
 	 * @param isWriteDatabase
 	 */
 	public void setIsWriteDatabase(boolean isWriteDatabase);
