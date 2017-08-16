@@ -7,7 +7,7 @@
 	<properties>
 		<fsmflying.version>1.0.0</fsmflying.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- jpa -->
 		<dependency>
@@ -19,8 +19,14 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
-	
+
 	<parent>
 		<groupId>com.fsmflying</groupId>
 		<artifactId>fsmflying-project-parent</artifactId>

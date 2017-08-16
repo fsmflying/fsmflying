@@ -13,54 +13,93 @@
 <mapper namespace="com.fsmflying.mybatis.mapper.SysUserMapper">
 
 	<resultMap id="SysUserResultMap" type="SysUser">
-	  	<id property="userId" column="userId" />
-		<result property="username" column="Username"/>
-		<result property="userPwd" column="UserPwd"/>
-		<result property="nickname" column="Nickname"/>
-		<result property="ipPolicy" column="IpPolicy"/>
-		<result property="ipAddress" column="IpAddress"/>
-		<result property="registerTime" column="RegisterTime"/>
-		<result property="lastLoginTime" column="LastLoginTime"/>
-		<result property="status" column="Status"/>
-		<result property="disabledTime" column="DisabledTime"/>
-		<result property="disabledMinutes" column="DisabledMinutes"/>
-		<result property="pwdPromptQuestion" column="PwdPromptQuestion"/>
-		<result property="pwdProtectQuestion" column="PwdProtectQuestion"/>
-		<result property="pwdProtectAnswer" column="PwdProtectAnswer"/>
-		<result property="email" column="Email"/>
-		<result property="dbDeleted" column="DbDeleted"/>
-		<result property="dbCreateBy" column="DbCreateBy"/>
-		<result property="dbLastUpdateBy" column="DbLastUpdateBy"/>
-		<result property="dbCreateTime" column="DbCreateTime"/>
-		<result property="dbLastUpdateTime" column="DbLastUpdateTime"/>
+		<id property="userId" column="userId" />
+		<id property="mainUserId" column="MainUserId" />
+		<result property="username" column="Username" />
+		<result property="userPwd" column="UserPwd" />
+		<result property="nickname" column="Nickname" />
+		<result property="ipPolicy" column="IpPolicy" />
+		<result property="ipAddress" column="IpAddress" />
+		<result property="registerTime" column="RegisterTime" />
+		<result property="lastLoginTime" column="LastLoginTime" />
+		<result property="pwdErrorTime" column="PwdErrorTime" />
+		<result property="pwdErrorCount" column="PwdErrorCount" />
+		<result property="requireChangePwd" column="RequireChangePwd" />
+		<result property="memo" column="Memo" />
+		<result property="mobileNo" column="MobileNo" />
+		<result property="userType" column="UserType" />
+		<result property="status" column="Status" />
+		<result property="disabledTime" column="DisabledTime" />
+		<result property="disabledMinutes" column="DisabledMinutes" />
+		<result property="pwdPromptQuestion" column="PwdPromptQuestion" />
+		<result property="pwdProtectQuestion" column="PwdProtectQuestion" />
+		<result property="pwdProtectAnswer" column="PwdProtectAnswer" />
+		<result property="email" column="Email" />
+		<result property="dbDeleted" column="DbDeleted" />
+		<result property="dbCreateBy" column="DbCreateBy" />
+		<result property="dbLastUpdateBy" column="DbLastUpdateBy" />
+		<result property="dbCreateTime" column="DbCreateTime" />
+		<result property="dbLastUpdateTime" column="DbLastUpdateTime" />
 	</resultMap>
-	
+
 	<select id="get" parameterType="int" resultType="SysUser">
-		select * from sys_users where userid=#{id}
+		select * from
+		sys_users where userid=#{id}
 	</select>
 	<select id="getByUsername" parameterType="String" resultType="SysUser">
 		select * from sys_users where lower(username)=lower(#{username})
 	</select>
 	<select id="getAllList" resultType="SysUser">
-		select * 
-		from sys_users 		
+		select *
+		from sys_users
 	</select>
-	
+
 	<insert id="add" parameterType="SysUser">
-		insert into sys_users(UserId,Username,UserPwd,Nickname,IpPolicy,IpAddress,RegisterTime,LastLoginTime,
+		insert into
+		sys_users(UserId,Username,UserPwd,Nickname,IpPolicy,IpAddress,RegisterTime,LastLoginTime,
 		Status,DisabledTime,DisabledMinutes,PwdPromptQuestion,PwdProtectQuestion,PwdProtectAnswer,Email,
-		DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime) 
+		DbDeleted,DbCreateBy,DbLastUpdateBy,DbCreateTime,DbLastUpdateTime,pwdErrorCount,pwdErrorTime,RequireChangePwd,Memo,MobileNo,UserType,MainUserId)
 		values(#{userId},#{username},#{userPwd},#{nickname},#{ipPolicy},#{ipAddress},#{registerTime},#{lastLoginTime},
 		#{status},#{disabledTime},#{disabledMinutes},#{pwdPromptQuestion},#{pwdProtectQuestion},#{pwdProtectAnswer},#{email},
-		#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime})
+		#{dbDeleted},#{dbCreateBy},#{dbLastUpdateBy},#{dbCreateTime},#{dbLastUpdateTime},#{pwdErrorCount},#{pwdErrorTime},#{requireChangePwd},#{memo},#{mobileNo},#{userType},#{mainUserId})
 	</insert>
 	<update id="save" parameterType="SysUser">
-		update sys_users 
-		set Username=#{username},UserPwd=#{userPwd},Nickname=#{nickname},IpPolicy=#{ipPolicy},
+		update sys_users
+		set
+		Username=#{username},UserPwd=#{userPwd},Nickname=#{nickname},IpPolicy=#{ipPolicy},
 		IpAddress=#{ipAddress},RegisterTime=#{registerTime},LastLoginTime=#{lastLoginTime},Status=#{status},DisabledTime=#{disabledTime},
 		DisabledMinutes=#{disabledMinutes},PwdPromptQuestion=#{pwdPromptQuestion},PwdProtectQuestion=#{pwdProtectQuestion},PwdProtectAnswer=#{pwdProtectAnswer},Email=#{email},
-		DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime}
+		DbDeleted=#{dbDeleted},DbCreateBy=#{dbCreateBy},DbLastUpdateBy=#{dbLastUpdateBy},DbCreateTime=#{dbCreateTime},DbLastUpdateTime=#{dbLastUpdateTime},
+		pwdErrorCount=#{pwdErrorCount},pwdErrorTime=#{pwdErrorTime},RequireChangePwd=#{requireChangePwd},Memo=#{memo},MobileNo=#{mobileNo},UserType=#{userType},MainUserId=#{mainUserId}
 		where 1=1 and UserId=#{userId}
 	</update>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="username != null and username != ''"> and username like CONCAT(CONCAT('%', #{username}), '%')
+		</if>
+		<if test="nickname != null and nickname != ''"> and nickname like CONCAT(CONCAT('%', #{nickname}), '%')
+		</if>
+		-->
+		<if test="status != null and status != ''"> and status = #{status}</if>
+		<!-- Like query -->
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="SysUserResultMap">
+		select * from sys_users
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by userId desc
+		limit #{pageFirst} , #{pageSize}
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from sys_users
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
 
 </mapper>

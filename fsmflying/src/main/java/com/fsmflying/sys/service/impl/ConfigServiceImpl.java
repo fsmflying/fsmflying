@@ -12,13 +12,13 @@ import com.fsmflying.sys.service.ConfigService;
 
 public class ConfigServiceImpl implements ConfigService {
 
-	//@Resource
+	// @Resource
 	ISystemManageDao systemManageDao;
 
 	Map<String, String> configMap;
 
 	List<SysConfig> configList;
-	
+
 	@Resource
 	@Override
 	public void setSystemManageDao(ISystemManageDao systemManageDao) {
@@ -35,10 +35,9 @@ public class ConfigServiceImpl implements ConfigService {
 		}
 
 	}
-	
+
 	@Override
-	public Map<String,String> getAllConfigs()
-	{
+	public Map<String, String> getAllConfigs() {
 		if (configMap == null)
 			initService();
 		return configMap;
@@ -118,6 +117,34 @@ public class ConfigServiceImpl implements ConfigService {
 		return getConfigValue("AppName");
 	}
 
-	
+	@Override
+	public int getPasswordErrorMaxCount() {
+		String value = getConfigValue("PasswordErrorMaxCount");
+		if ("".equals(value) || !value.matches("[1-9][0-9]*"))
+			return 5;
+		else {
+			int val = Integer.parseInt(value);
+			if (val < 0)
+				return 1;
+			else if (val > 10)
+				return 10;
+			return val;
+		}
+	}
+
+	@Override
+	public int getPasswordErrorDisableMinutes() {
+		String value = getConfigValue("PasswordErrorDisableMinutes");
+		if ("".equals(value) || !value.matches("[1-9][0-9]*"))
+			return 30;
+		else {
+			int val = Integer.parseInt(value);
+			if (val < 1)
+				return 1;
+			// else if (val > 10)
+			// return 10;
+			return val;
+		}
+	}
 
 }

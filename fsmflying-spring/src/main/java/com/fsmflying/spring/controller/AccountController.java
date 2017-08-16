@@ -52,7 +52,7 @@ public class AccountController {
 			String username, String password) {
 		System.out.println("username=" + username);
 		System.out.println("password=" + password);
-
+		
 		LoginResult loginResult = new LoginResult();
 		int userId = AuthHelper.getUserId(request);
 		if (userId != -1) {
@@ -201,10 +201,10 @@ public class AccountController {
 			data.put("user", AuthHelper.getUser(request));
 			jsonResult.setResult(1);
 			jsonResult.setData(data);
-			jsonResult.setMessage("�Ѿ���¼ϵͳ!");
+			jsonResult.setMessage("用户已经登录!");
 		} else {
 			jsonResult.setResult(0);
-			jsonResult.setMessage("�Ѿ���¼ϵͳ!");
+			jsonResult.setMessage("用户未登录!");
 		}
 
 		return jsonResult;

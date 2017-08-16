@@ -127,4 +127,34 @@ public class DefaultConfigServiceImpl implements IConfigService {
 	public String getAppName() {
 		return getConfigValue("AppName");
 	}
+
+	@Override
+	public int getPasswordErrorMaxCount() {
+		String value = getConfigValue("PasswordErrorMaxCount");
+		if ("".equals(value) || !value.matches("[1-9][0-9]*"))
+			return 5;
+		else {
+			int val = Integer.parseInt(value);
+			if (val < 0)
+				return 1;
+			else if (val > 10)
+				return 10;
+			return val;
+		}
+	}
+
+	@Override
+	public int getPasswordErrorDisableMinutes() {
+		String value = getConfigValue("PasswordErrorDisableMinutes");
+		if ("".equals(value) || !value.matches("[1-9][0-9]*"))
+			return 30;
+		else {
+			int val = Integer.parseInt(value);
+			if (val < 0)
+				return 1;
+//			else if (val > 10)
+//				return 10;
+			return val;
+		}
+	}
 }
